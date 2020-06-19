@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>Upload an image</h1>
+        <hr>
+        <!--Create form for uploading images-->
+        <form action="/upload-image" method="POST" enctype="multipart/form-data">
+  
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Flower Images</legend>
+
+                <div class="form-group">
+                    <!--Upload Image-->
+                    {{ form.image.label() }}
+                    {{ form.image(class="form-control-file") }}
+                    {% if form.image.errors %}
+                        {% for error in form.image.errors %}
+                            <span class="text-danger"> {{ error }} </span><br/>
+                        {% endfor %}
+                    {% endif %}
+
+                    <!--Upload JSON-->
+                    {{ form.json.label() }}
+                    {{ form.json(class="form-control-file") }}
+                    {% if form.json.errors %}
+                        {% for error in form.json.errors %}
+                            <span class="text-danger"> {{ error }} </span><br/>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+  
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+                

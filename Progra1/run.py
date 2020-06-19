@@ -1,4 +1,3 @@
-from app import app
-
+from controllers import routes
 if __name__ == '__main__':
-    app.run(debug=True)
+    routes.app.run(debug=True)
