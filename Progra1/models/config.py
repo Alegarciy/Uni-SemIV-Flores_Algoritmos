@@ -1,7 +1,17 @@
 class Config:
 
-    DATADIRECTORY = "D:/Documentos/GitHub/Flores_Algoritmos/Progra1/data/"
+    DATADIRECTORY = ""
     USERINPUTFOLDER = "userInput"
-    FLOWERFOLDER = "flower"
-    JSONFILENAME = "json"
+    STATICFOLDER = "static"
+
     IMAGEFILENAME = "image"
+    JSONFILENAME = "json"
+    IMAGEEXTENSION = ".png"
+    JSONEXTENSION = ".json"
+
+    EXTENSIONSALLOWED = ["PNG", "JPEG", "JPG"]
+
+    MAXUSERINPUT = 3
+
+
+

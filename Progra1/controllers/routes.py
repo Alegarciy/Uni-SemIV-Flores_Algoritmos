@@ -4,6 +4,7 @@ from models.fileManager import FileManager
 #from controllers import app
 from controllers.controller import Controller
 import os
+from models.config import Config
 import secrets
 
 
@@ -12,12 +13,16 @@ template_dir = os.path.join(template_dir, 'Progra1')
 template_dir = os.path.join(template_dir, 'app')
 template_dir = os.path.join(template_dir, 'templates')
 template_view_dir = os.path.join(template_dir, 'view')
-static_dir = os.path.join(template_dir, "static")
+static_dir = os.path.join(template_dir, Config.STATICFOLDER)
 
 app = Flask(__name__, template_folder=template_view_dir, static_folder=static_dir)
 app.config['SECRET_KEY'] = 'eb289e8e6629dd79004bf93963dc2933'
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+uploads_dir = os.path.join(template_dir, Config.STATICFOLDER)
+uploads_dir = os.path.join(uploads_dir, Config.USERINPUTFOLDER)
+
+Config.DATADIRECTORY = uploads_dir
 
 @app.route("/")
 @app.route("/home")
@@ -28,19 +33,26 @@ def home():
 def about():
     return render_template('about.html')
 
-
-@app.route("/loadImage", methods=['GET', 'POST'])
+#POST Method. El usuario carga una imagen/json de la flor
+@app.route("/loadImage", methods = ["POST"])
 def loadImage():
-    pass
-    
-@app.route("/upload-image", methods=['GET', 'POST'])
-def upload_image():
-    form = ImageForm()
-    userImages = Controller.getListLoadedImages()
+    if request.files:
+        image = request.files["image"]
+        json = request.files["json"]
+        filename_ext = image.filename.rsplit(".", 1)
+        ext = filename_ext[1]
+        filename = filename_ext[0]
+        if filename_ext[1].upper() in Config.EXTENSIONSALLOWED:
+            Controller.loadImage(image, json, filename, ext)
+        return redirect(url_for("upload"), code=302)
 
-    if request.method == "POST" and form.image.data and form.json:
-        Controller.loadImage(form.image.data, form.json.data)
-        #FileManager.save_image(form.image.data, "imagen_000.png")
-        #FileManager.save_json(form.json.data, "data.json")
+#El usuario elimina una imagen/json cargada anteriormente
+@app.route("/deleteImage/<int:position>")
+def deleteImage(position):
+    Controller.deleteImage(position)
+    return redirect(url_for("upload"), code=302)
 
-    return render_template("upload_image.html", form=form, userImages=userImages)
+#GET Pagina para que el usuario cargue las imagenes y datos
+@app.route("/upload", methods=['GET'])
+def upload():
+    return render_template("upload_image.html", form=ImageForm(), userImages=Controller.getListLoadedImages(), maxInput=Config.MAXUSERINPUT)

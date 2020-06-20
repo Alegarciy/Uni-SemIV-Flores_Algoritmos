@@ -1,44 +1,65 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container">
-    <div class="row">
-      <div class="col">
-        <h1>Upload an image</h1>
-        <hr>
-        <!--Create form for uploading images-->
-        <form action="/upload-image" method="POST" enctype="multipart/form-data">
-  
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Flower Images</legend>
+    <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1>Suba una imagen</h1>
+            <h3>Imagenes cargadas: {{ userImages | length }}</h3>
+            <hr>
+            <!--Create form for uploading images-->
+            {% if not userImages | length >= maxInput%}
+                <form action="/loadImage" method="POST" enctype="multipart/form-data">
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Flower Images</legend>
 
-                <div class="form-group">
-                    <!--Upload Image-->
-                    {{ form.image.label() }}
-                    {{ form.image(class="form-control-file") }}
-                    {% if form.image.errors %}
-                        {% for error in form.image.errors %}
-                            <span class="text-danger"> {{ error }} </span><br/>
-                        {% endfor %}
-                    {% endif %}
+                        <div class="form-group">
+                            <!--Upload Image-->
+                            {{ form.image.label() }}
+                            {{ form.image(class="form-control-file", id = "image") }}
+                            {% if form.image.errors %}
+                                {% for error in form.image.errors %}
+                                    <span class="text-danger"> {{ error }} </span><br/>
+                                {% endfor %}
+                            {% endif %}
 
-                    <!--Upload JSON-->
-                    {{ form.json.label() }}
-                    {{ form.json(class="form-control-file") }}
-                    {% if form.json.errors %}
-                        {% for error in form.json.errors %}
-                            <span class="text-danger"> {{ error }} </span><br/>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-                
-            </fieldset>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
+                            <!--Upload JSON-->
+                            {{ form.json.label() }}
+                            {{ form.json(class="form-control-file", id = "json") }}
+                            {% if form.json.errors %}
+                                {% for error in form.json.errors %}
+                                    <span class="text-danger"> {{ error }} </span><br/>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                    </fieldset>
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-outline-info") }}
+                    </div>
+                </form>
+            {% else %}
+                <h4>Ha llegado al máximo de imagenes</h4>
+            {% endif %}
+
+            <!--Show images-->
+            <div class="container">
+              <h2>Imagenes cargadas</h2>
+              <div class = "d-flex flex-row">
+              {% for flowerImage in userImages %}
+                  <div class="card " style="width: 18rem;">
+                      <img class="card-img-top" src="{{ flowerImage.getFlowerImagePathFront()}}" alt="Card image cap">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ flowerImage.getFlowerName() }}</h5>
+                        <a class = "btn btn-primary" href={{ url_for('deleteImage', position = userImages.index(flowerImage))}}>Eliminar</a>
+                      </div>
+                   </div>
+              {% endfor %}
+              </div>
             </div>
-  
-        </form>
-      </div>
+
+
+          </div>
+        </div>
     </div>
-  </div>
 {% endblock content %}
                 

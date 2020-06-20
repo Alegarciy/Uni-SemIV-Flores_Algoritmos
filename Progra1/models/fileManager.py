@@ -1,6 +1,6 @@
 
 import os
-import sys
+import shutil
 import json
 from models.config import Config
 
@@ -56,8 +56,10 @@ class FileManager:
 
         fileTemp = open("D:/jsonFlores.txt", "w", encoding="utf-8")
         json.dump(information, fileTemp, ensure_ascii=False)
-    
 
+    @staticmethod
+    def removeDirectory(directory):
+        shutil.rmtree(directory, ignore_errors=True)
 
 
 

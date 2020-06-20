@@ -5,8 +5,12 @@ class Controller:
         imageConverter = ImageConverter()
 
         @staticmethod
-        def loadImage(image, jsonData):
-            Controller.imageConverter.addImage(image, jsonData)
+        def loadImage(image, jsonData, filename, ext):
+            Controller.imageConverter.addImage(image, jsonData, filename, ext)
+
+        @staticmethod
+        def deleteImage(position):
+            Controller.imageConverter.deleteImage(position)
 
         @staticmethod
         def getListLoadedImages():
