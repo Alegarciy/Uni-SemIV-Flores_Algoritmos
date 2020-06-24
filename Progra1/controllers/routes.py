@@ -56,3 +56,8 @@ def deleteImage(position):
 @app.route("/upload", methods=['GET'])
 def upload():
     return render_template("upload_image.html", form=ImageForm(), userImages=Controller.getListLoadedImages(), maxInput=Config.MAXUSERINPUT)
+
+@app.route("/test", methods=["GET"])
+def test():
+    Controller.startProcess()
+    return render_template('home.html')

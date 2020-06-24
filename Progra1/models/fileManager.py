@@ -1,4 +1,3 @@
-
 import os
 import shutil
 import json
@@ -39,6 +38,12 @@ class FileManager:
         print(destination)
         form_picture.save(destination)
         return destination
+
+    @staticmethod
+    def read_json(filename):
+        with open(filename) as f:
+            data = json.load(f)
+        return data
 
     #Pruebas para generar un json
     def create_json(self):

@@ -15,3 +15,7 @@ class Controller:
         @staticmethod
         def getListLoadedImages():
             return Controller.imageConverter.userImages
+
+        @staticmethod
+        def startProcess():
+            Controller.imageConverter.convert()
