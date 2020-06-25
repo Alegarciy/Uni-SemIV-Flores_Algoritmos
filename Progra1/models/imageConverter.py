@@ -121,11 +121,11 @@ class ImageConverter:
         for ax, image, title in zip(axs, images, titles):
             ax.imshow(image)
             ax.set_title(title)
+
+
         img = i_o.BytesIO()
         plt.savefig(img, format = "png")
         img.seek(0)
-        plot_url = "alv"
-
         base64_plot = base64.b64encode(img.getvalue()).decode()
 
         return base64_plot

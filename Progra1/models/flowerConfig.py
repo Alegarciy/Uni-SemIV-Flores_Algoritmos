@@ -1,5 +1,4 @@
 class FlowerConfig:
-
     #(R,G,B)
     COLOR_PETAL_PREF = "colorPetaloPreferido"
     COLOR_PETAL_NO_PREF = "colorPetaloMasPreferido"

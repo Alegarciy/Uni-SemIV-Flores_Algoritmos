@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class= "convertProcess">
-        <h2>Convertir imagenes
-            <span class="badge badge-secondary convertProgress">voraz</span>
+        <h2 class="my-2">Convertir imagenes
+            <span class="badge badge-primary convertProgress">voraz</span>
         </h2>
-        <div class="convertProcessInfo">
+        <div class="convertProcessInfo my-3">
             <div class="convertProgressImage"></div>
         </div>
-        <a class = "btn btn-danger startConvertProcess" methodUrl={{ url_for('startConvertProcess')}}>Iniciar voraz</a>
+        <a class = "my-2 text-white btn btn-primary startConvertProcess" methodUrl={{ url_for('startConvertProcess')}}>Iniciar voraz</a>
     </div>
 {% endblock content %}
 

@@ -11,7 +11,8 @@
             type: "get", //request type,
             success:function(plot_model){
                 if(plot_model === "False"){
-                    stopConvertProcess()
+                    stopConvertProcess();
+                    $(".startConvertProcess").show();
                 }
                 else{
                     processImageDiv.empty();
@@ -36,7 +37,7 @@
 
     function stopConvertProcess(){
         clearInterval(window.processInterval);
-        consoler.log("Ciclo detenido");
+        console.log("Ciclo detenido");
     }
 
     function startConvertProcess(){
@@ -49,6 +50,7 @@
         function () {
             url = $(this).attr("methodUrl");
             var processImageDiv = $(".convertProgressImage");
+            $(this).hide();
             startConvertProcess();
             $.ajax({
                 url: url, //the page containing python script
