@@ -1,5 +1,20 @@
-  
 {% extends "layout.html" %}
 {% block content %}
-    <a class = "btn btn-danger" href="{{ url_for('test') }}">No presionar</a>
+    <div class= "convertProcess">
+        <h2>Convertir imagenes
+            <span class="badge badge-secondary convertProgress">voraz</span>
+        </h2>
+        <div class="convertProcessInfo">
+            <div class="convertProgressImage"></div>
+        </div>
+        <a class = "btn btn-danger startConvertProcess" methodUrl={{ url_for('startConvertProcess')}}>Iniciar voraz</a>
+    </div>
 {% endblock content %}
+
+{% block scripts  %}
+        <script src="{{url_for('static', filename='convertProcess.js')}}"></script>
+{% endblock %}
+
+
+
+

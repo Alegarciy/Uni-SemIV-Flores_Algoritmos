@@ -2,6 +2,8 @@
 from matplotlib import pyplot as plt
 import numpy as np
 from skimage import io
+import io as i_o
+import base64
 from models.config import Config
 from models.fileManager import FileManager
 from models.flowerImage import FlowerImage
@@ -9,12 +11,18 @@ from models.flowerConfig import FlowerConfig
 from models.color import Color
 class ImageConverter:
 
-
-
     def __init__(self):
         self.userImages = []
-        self.I = 0;
-        self.J = 1;
+        self.I = 0
+        self.J = 1
+        self.imageIndex = 0
+        self.progress = 0
+
+    def isReadyToConvert(self):
+        if(len(self.userImages)  >= 1):
+            return True
+        return False
+
 
     def addImage(self, image, jsonData, filename, extension):
         numberFlower = len(self.userImages)
@@ -45,23 +53,22 @@ class ImageConverter:
         #Add flower image to userInput list
         self.userImages.append(flowerImage)
 
-        #Just for debug
-        plt.imshow(image)
-        plt.show()
-
     def deleteImage(self, position):
         flower = self.userImages[position]
         FileManager.removeDirectory(flower.getFlowerDirectory())
         self.userImages.remove(flower)
 
     #Recorre las imagenes del usuario (numpy arrays) y llama al voraz
+
     def convert(self):
+        self.imageIndex = 0
         for flowerImage in self.userImages:
             self.convertImage(flowerImage)
-            plt.imshow(flowerImage.getPetal())
-            plt.show()
+            self.imageIndex += 1
+
 
     #Algoritmo voraz
+
     def convertImage(self, flowerImage):
         info = flowerImage.getJsonData()
         flowerPixels = flowerImage.getFlower() #Subestructura
@@ -69,6 +76,7 @@ class ImageConverter:
         size_j = flowerImage.getSize_J()
         for i in range(0,size_i-1):
             for j in range(0, size_j-1):
+                self.progress = ((i*size_i + (j+1)) / (size_i*size_j))*100
                 if(self.isInCenter(i,j,info)):
                     if(self.isCenterColor(flowerPixels[i,j], info)):
                         center = flowerImage.getCenter()
@@ -79,6 +87,7 @@ class ImageConverter:
                         petal[i,j] = flowerPixels[i,j]
 
     #Criterios
+
     def isInCenter(self, i, j, info):
         minI = info[FlowerConfig.PIXEL_CENTRAL][self.I] - info[FlowerConfig.PIXEL_CENTER_LIMIT][self.I]
         maxI = info[FlowerConfig.PIXEL_CENTRAL][self.I] + info[FlowerConfig.PIXEL_CENTER_LIMIT][self.I]
@@ -101,22 +110,26 @@ class ImageConverter:
     def isCenterColor(self, pixel, info):
         return Color.colorDifference(pixel, info[FlowerConfig.COLOR_CENTER_PREF]) <= FlowerConfig.DIFFERENCE_COLOR_LIMIT
 
-    
+    def getConvertProcess(self):
+        if(self.imageIndex >= len(self.userImages)):
+            return "False"
 
+        flowerImage = self.userImages[self.imageIndex]
+        images = [flowerImage.getFlower(), flowerImage.getPetal(), flowerImage.getCenter()]
+        titles = ["Flower", "Petal", "Center"]
+        fig, axs = plt.subplots(1, 3, figsize=(7, 4), constrained_layout=True)
+        for ax, image, title in zip(axs, images, titles):
+            ax.imshow(image)
+            ax.set_title(title)
+        img = i_o.BytesIO()
+        plt.savefig(img, format = "png")
+        img.seek(0)
+        plot_url = "alv"
 
-    '''
-img = cv2.imread("../app/images/imagen_01.png", cv2.IMREAD_GRAYSCALE)
-lap = cv2.Laplacian(img, cv2.CV_64F, ksize=1)
-lap = np.uint8(np.absolute(lap))
+        base64_plot = base64.b64encode(img.getvalue()).decode()
 
-titles = ['image', 'Laplacian']
-images = [img, lap]
+        return base64_plot
 
-for i in range(2):
-    plt.subplot(1, 2, i+1), plt.imshow(images[i], 'gray')
-    plt.title(titles[i])
-    plt.xticks([]), plt.yticks([])
+    def getProgress(self):
+        return str(int(self.progress))
 
-plt.show()
-
-'''

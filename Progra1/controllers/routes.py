@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, flash, redirect, request
+from flask import Flask, render_template, url_for, flash, Markup, redirect, request
 from models.forms import ImageForm
 from models.fileManager import FileManager
 #from controllers import app
@@ -57,7 +57,24 @@ def deleteImage(position):
 def upload():
     return render_template("upload_image.html", form=ImageForm(), userImages=Controller.getListLoadedImages(), maxInput=Config.MAXUSERINPUT)
 
-@app.route("/test", methods=["GET"])
-def test():
-    Controller.startProcess()
-    return render_template('home.html')
+@app.route("/convert", methods=["GET"])
+def startConvertProcess():
+    if Controller.isReadyToConvert():
+        Controller.startProcess()
+        return "True"
+    return "False"
+
+
+@app.route("/convertProcess", methods=["GET"])
+def showConvertProcess():
+    plot_url = Controller.getConvertProcess()
+    if(plot_url == "False") :
+        return "False"
+
+    model_plot = Markup('<img src="data:image/png;base64,{}" class="img-fluid" alt="Responsive image" width: 360px; height: 288px>'.format(plot_url))
+    return model_plot
+
+@app.route("/convertProgress", methods=["GET"])
+def showConvertProgressBar():
+    progress = Controller.getConvertProgress()
+    return progress

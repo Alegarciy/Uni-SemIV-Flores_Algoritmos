@@ -19,3 +19,15 @@ class Controller:
         @staticmethod
         def startProcess():
             Controller.imageConverter.convert()
+
+        @staticmethod
+        def getConvertProcess():
+            return Controller.imageConverter.getConvertProcess()
+
+        @staticmethod
+        def isReadyToConvert():
+            return Controller.imageConverter.isReadyToConvert()
+
+        @staticmethod
+        def getConvertProgress():
+            return Controller.imageConverter.getProgress()
