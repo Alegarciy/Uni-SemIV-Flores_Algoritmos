@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+          <div class="col">
+            <h3>Imagenes cargadas:
+                <span class="badge badge-info">{{ userImages | length }}</span>
+            </h3>
+            <hr>
+            <!--Create form for uploading images-->
+            {% if not userImages | length >= maxInput%}
+              <div class="form-group mb-3">
+                <form action="/loadImage" method="POST" enctype="multipart/form-data">
+                    <fieldset>
+                        <legend class="border-bottom mb-4">Flower Images</legend>
+
+                        <div class="form-group">
+                            <!--Upload Image-->
+                            <div class="my-1">
+                                <span class="font-weight-bold badge badge-success my-2">{{ form.image.label() }}</span>
+                                {{ form.image(class="form-control-file", id = "image") }}
+                                {% if form.image.errors %}
+                                    {% for error in form.image.errors %}
+                                        <span class="text-danger"> {{ error }} </span><br/>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <!--Upload JSON-->
+                            <div class="my-1">
+                                <span class="font-weight-bold badge badge-success my-2">{{ form.json.label() }}</span>
+                                {{ form.json(class="form-control-file", id = "json") }}
+                                {% if form.json.errors %}
+                                    {% for error in form.json.errors %}
+                                        <span class="text-danger"> {{ error }} </span><br/>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </fieldset>
+                    <div class="form-group">
+                        {{ form.submit(class="btn- btn-primary") }}
+                    </div>
+                </form>
+                {% else %}
+                    <h4>Ha llegado al máximo de imagenes</h4>
+                {% endif %}
+            </div>
+            <!--Show images-->
+            <div class="container">
+            <h3>
+                <span class="badge badge-info">Imagenes</span>
+            </h3>
+              <div class = "d-flex flex-row">
+              {% for flowerImage in userImages %}
+                  <div class="card " style="width: 12rem;">
+                      <img class="card-img-top embed-responsive-item" src="{{ flowerImage.getFlowerImagePathFront()}}" alt="Card image cap">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ flowerImage.getFlowerName() }}</h5>
+                        <a class = "btn-sm  btn-primary" href={{ url_for('deleteImage', position = userImages.index(flowerImage))}}>Eliminar</a>
+                      </div>
+                   </div>
+              {% endfor %}
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+    </div>
+{% endblock content %}
+                
