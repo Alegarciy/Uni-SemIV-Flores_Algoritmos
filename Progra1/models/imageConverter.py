@@ -8,7 +8,7 @@ from models.config import Config
 from models.fileManager import FileManager
 from models.flowerImage import FlowerImage
 from models.flowerConfig import FlowerConfig
-from models.color import Color
+from models.genetic.chromosome.color import Color
 class ImageConverter:
 
     def __init__(self):

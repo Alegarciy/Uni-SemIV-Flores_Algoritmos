@@ -1,0 +1,3 @@
+class ChromosomeConfig:
+
+    COLOR = "color"

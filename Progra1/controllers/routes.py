@@ -33,6 +33,7 @@ def home():
 def about():
     return render_template('about.html')
 
+# ----- IMAGE UPLOAD ---------
 #POST Method. El usuario carga una imagen/json de la flor
 @app.route("/loadImage", methods = ["POST"])
 def loadImage():
@@ -57,6 +58,8 @@ def deleteImage(position):
 def upload():
     return render_template("upload_image.html", form=ImageForm(), userImages=Controller.getListLoadedImages(), maxInput=Config.MAXUSERINPUT)
 
+
+# ----- IMAGE CONVERT ---------
 @app.route("/convert", methods=["GET"])
 def startConvertProcess():
     if Controller.isReadyToConvert():
@@ -78,3 +81,11 @@ def showConvertProcess():
 def showConvertProgressBar():
     progress = Controller.getConvertProgress()
     return progress
+
+# ----- IMAGE ANALYZER ---------
+
+@app.route("/analyze", methods=["GET"])
+def analyze():
+    print("ANALYZEEEEEEE")
+    Controller.setImageAnayzer()
+    return render_template('home.html')
