@@ -8,5 +8,4 @@ class Center(FlowerPart):
             self.flowerPartImages.append(flower.getCenter())
 
     def analyzeChromosome(self, chromosome):
-        print("SOY UN CENTRO")
         self.chromosomes[chromosome].analyzeDistribution(self.flowerPartImages)

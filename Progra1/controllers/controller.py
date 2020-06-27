@@ -32,6 +32,14 @@ class Controller:
             return Controller.imageConverter.getConvertProcess()
 
         @staticmethod
+        def isConvertRunning():
+            return Controller.imageConverter.isRunning
+
+        @staticmethod
+        def isConvertFinished():
+            return Controller.imageConverter.finished
+
+        @staticmethod
         def isReadyToConvert():
             return Controller.imageConverter.isReadyToConvert()
 

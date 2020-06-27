@@ -20,7 +20,7 @@ class Color(Chromosome):
 
     #define abstract method
     def analyzeDistribution(self, flowerPartsImages): #Como creo la tabla de distribucion para los coleres
-        print("analyze COLOR")
+        print("Soy color :o")
 
     def fitness(self):
         pass

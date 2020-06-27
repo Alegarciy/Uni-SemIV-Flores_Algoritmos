@@ -1,9 +1,45 @@
-    /*
+
     $(document).ready(function(){
-        var milliseconds = 5000;
-        var processInterval = setInterval("convertProcess()",milliseconds);
+        isRunning();
     });
-    */
+
+    function isRunning(){
+        $.ajax({
+            url:"/isConvertRunning", //the page containing python script
+            type: "get", //request type,
+            success:function(isRunning){
+                console.log("IsRunning: " + isRunning);
+                if(isRunning === "True"){
+                    $(".convertProgress").text("voraz: iniciando...");
+                    startConvertProcess();
+                }
+                else{
+                    stopConvertProcess();
+                }
+            }
+        });
+    }
+
+    function isFinished(){
+        var finished = false;
+        $.ajax({
+            url:"/isConvertFinished", //the page containing python script
+            type: "get", //request type,
+            success:function(isFinished){
+                console.log("isFinished: " + isFinished);
+                if(isFinished === "True"){
+                    finished = isFinished;
+                    $(".convertProgress").text("voraz: finalizado");
+                }
+                else{
+                    $(".convertProgress").text("voraz: iniciando...");
+                }
+            }
+        });
+        return finished;
+    }
+
+
     function convertProcess() {
         var processImageDiv = $(".convertProgressImage");
         $.ajax({
@@ -12,7 +48,6 @@
             success:function(plot_model){
                 if(plot_model === "False"){
                     stopConvertProcess();
-                    $(".startConvertProcess").show();
                 }
                 else{
                     processImageDiv.empty();
@@ -37,12 +72,14 @@
 
     function stopConvertProcess(){
         clearInterval(window.processInterval);
+        $(".startConvertProcess").show();
         console.log("Ciclo detenido");
     }
 
     function startConvertProcess(){
         var milliseconds = 5000;
         window.processInterval = setInterval("convertProcess()",milliseconds);
+        $(".startConvertProcess").show();
         console.log("Ciclo iniciado");
     }
 
@@ -52,12 +89,18 @@
             var processImageDiv = $(".convertProgressImage");
             $(this).hide();
             startConvertProcess();
+
             $.ajax({
                 url: url, //the page containing python script
                 type: "get", //request type,
                 success: function (t) {
-                    console.log(t);
+                    if(t === "False"){
+                        stopConvertProcess();
+                        $(".convertProgress").text("voraz: no!");
+                    }
                 }
             });
+
+
         });
 

@@ -60,6 +60,14 @@ def upload():
 
 
 # ----- IMAGE CONVERT ---------
+@app.route("/isConvertRunning", methods=["GET"])
+def isConvertRunning():
+    return str(Controller.isConvertRunning())
+
+@app.route("/isConvertFinished", methods=["GET"])
+def isConvertFinished():
+    return str(Controller.isConvertFinished())
+
 @app.route("/convert", methods=["GET"])
 def startConvertProcess():
     if Controller.isReadyToConvert():

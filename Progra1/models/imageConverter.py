@@ -17,9 +17,11 @@ class ImageConverter:
         self.J = 1
         self.imageIndex = 0
         self.progress = 0
+        self.isRunning = False
+        self.finished = False
 
     def isReadyToConvert(self):
-        if(len(self.userImages)  >= 1):
+        if(len(self.userImages)  >= 1 and not self.isRunning):
             return True
         return False
 
@@ -53,18 +55,28 @@ class ImageConverter:
         #Add flower image to userInput list
         self.userImages.append(flowerImage)
 
+        self.finished = False
+
     def deleteImage(self, position):
         flower = self.userImages[position]
         FileManager.removeDirectory(flower.getFlowerDirectory())
         self.userImages.remove(flower)
+        self.finished = False
 
     #Recorre las imagenes del usuario (numpy arrays) y llama al voraz
 
     def convert(self):
+        self.isRunning = True
         self.imageIndex = 0
         for flowerImage in self.userImages:
             self.convertImage(flowerImage)
             self.imageIndex += 1
+
+        if(self.imageIndex>=len(self.userImages)>0):
+            self.finished = True
+        else:
+            self.finished = False
+        self.isRunning = False
 
 
     #Algoritmo voraz
@@ -75,6 +87,7 @@ class ImageConverter:
         size_i = flowerImage.getSize_I()
         size_j = flowerImage.getSize_J()
         for i in range(0,size_i-1):
+            print("isRunning")
             for j in range(0, size_j-1):
                 self.progress = ((i*size_i + (j+1)) / (size_i*size_j))*100
                 if(self.isInCenter(i,j,info)):

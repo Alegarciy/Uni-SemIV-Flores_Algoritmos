@@ -9,5 +9,4 @@ class Petal(FlowerPart):
             self.flowerPartImages.append(flower.getPetal())
 
     def analyzeChromosome(self, chromosome):
-        print("SOY UN PETALO")
         self.chromosomes[chromosome].analyzeDistribution(self.flowerPartImages)
