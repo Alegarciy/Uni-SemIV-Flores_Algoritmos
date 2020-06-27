@@ -16,6 +16,8 @@ class ImageConverter:
         self.I = 0
         self.J = 1
         self.imageIndex = 0
+        self.step = 0
+        self.total = 0
         self.progress = 0
         self.isRunning = False
         self.finished = False
@@ -77,6 +79,7 @@ class ImageConverter:
         else:
             self.finished = False
         self.isRunning = False
+        plt.close('all')
 
 
     #Algoritmo voraz
@@ -86,10 +89,11 @@ class ImageConverter:
         flowerPixels = flowerImage.getFlower() #Subestructura
         size_i = flowerImage.getSize_I()
         size_j = flowerImage.getSize_J()
+        self.total = size_j*size_i
         for i in range(0,size_i-1):
-            print("isRunning")
             for j in range(0, size_j-1):
-                self.progress = ((i*size_i + (j+1)) / (size_i*size_j))*100
+                self.step = (i*size_i + (j+1))
+                self.progress = (self.step / self.total)*100
                 if(self.isInCenter(i,j,info)):
                     if(self.isCenterColor(flowerPixels[i,j], info)):
                         center = flowerImage.getCenter()
@@ -130,7 +134,7 @@ class ImageConverter:
         flowerImage = self.userImages[self.imageIndex]
         images = [flowerImage.getFlower(), flowerImage.getPetal(), flowerImage.getCenter()]
         titles = ["Flower", "Petal", "Center"]
-        fig, axs = plt.subplots(1, 3, figsize=(7, 4), constrained_layout=True)
+        fig, axs = plt.subplots(1, 3, figsize=(10, 6), constrained_layout=True)
         for ax, image, title in zip(axs, images, titles):
             ax.imshow(image)
             ax.set_title(title)
@@ -140,9 +144,16 @@ class ImageConverter:
         plt.savefig(img, format = "png")
         img.seek(0)
         base64_plot = base64.b64encode(img.getvalue()).decode()
+        plt.clf()
 
         return base64_plot
 
     def getProgress(self):
+        print(str(self.progress))
         return str(int(self.progress))
 
+    def getTotal(self):
+        return self.total
+
+    def getCurrentStep(self):
+        return self.step

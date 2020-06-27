@@ -75,7 +75,6 @@ def startConvertProcess():
         return "True"
     return "False"
 
-
 @app.route("/convertProcess", methods=["GET"])
 def showConvertProcess():
     plot_url = Controller.getConvertProcess()
@@ -89,6 +88,15 @@ def showConvertProcess():
 def showConvertProgressBar():
     progress = Controller.getConvertProgress()
     return progress
+
+@app.route("/totalSteps", methods=["GET"])
+def showTotalSteps():
+    return str(Controller.getTotalSteps())
+
+@app.route("/currentStep", methods=["GET"])
+def showCurrentStep():
+    return str(Controller.getCurrentStep())
+
 
 # ----- IMAGE ANALYZER ---------
 

@@ -20,6 +20,7 @@
         });
     }
 
+    /*
     function isFinished(){
         var finished = false;
         $.ajax({
@@ -38,6 +39,7 @@
         });
         return finished;
     }
+    */
 
 
     function convertProcess() {
@@ -95,8 +97,11 @@
                 type: "get", //request type,
                 success: function (t) {
                     if(t === "False"){
-                        stopConvertProcess();
+                        //stopConvertProcess();
                         $(".convertProgress").text("voraz: no!");
+                    }
+                    else{
+                        $(".convertProgress").text("voraz: finalizado!");
                     }
                 }
             });

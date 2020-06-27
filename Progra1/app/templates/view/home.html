@@ -1,14 +1,20 @@
 {% extends "layout.html" %}
 {% block content %}
     <!--ALGORITMO VORAZ-->
-    <div class= "convertProcess">
-        <h2 class="my-2">Convertir imagenes
-            <span class="badge badge-primary convertProgress">voraz</span>
-        </h2>
-        <div class="convertProcessInfo my-3">
-            <div class="convertProgressImage"></div>
+    <div class= "convertProcess d-flex">
+        <div class=" flex-fill">
+            <h2 class="my-2">Convertir imagenes
+                <span class="badge badge-primary convertProgress">voraz</span>
+            </h2>
+            <div class="convertProcessInfo my-3">
+                <div class="convertProgressImage"></div>
+            </div>
+            <a class = "my-2 text-white btn btn-primary startConvertProcess" methodUrl={{ url_for('startConvertProcess')}}>Iniciar voraz</a>
         </div>
-        <a class = "my-2 text-white btn btn-primary startConvertProcess" methodUrl={{ url_for('startConvertProcess')}}>Iniciar voraz</a>
+        <div class="flex-fill align-self-center mx-4">
+            <h4 class="">Etapa: 12651 </h4>
+            <h4 class="">Total: 4891981</h4>
+        </div>
     </div>
     <a class = "my-2 text-white btn btn-primary startConvertProcess" href={{ url_for('analyze') }}>NO TOCAR</a>
     <!-- ALGORTIMO DE ANALISIS DE DISTRIBUCION DE PIXELES-->

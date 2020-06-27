@@ -47,6 +47,14 @@ class Controller:
         def getConvertProgress():
             return Controller.imageConverter.getProgress()
 
+        @staticmethod
+        def getTotalSteps():
+            return Controller.imageConverter.getTotal()
+
+        @staticmethod
+        def getCurrentStep():
+            return Controller.imageConverter.getCurrentStep()
+
         #Image analyzer method
         @staticmethod
         def setImageAnayzer():
