@@ -20,27 +20,6 @@
         });
     }
 
-    /*
-    function isFinished(){
-        var finished = false;
-        $.ajax({
-            url:"/isConvertFinished", //the page containing python script
-            type: "get", //request type,
-            success:function(isFinished){
-                console.log("isFinished: " + isFinished);
-                if(isFinished === "True"){
-                    finished = isFinished;
-                    $(".convertProgress").text("voraz: finalizado");
-                }
-                else{
-                    $(".convertProgress").text("voraz: iniciando...");
-                }
-            }
-        });
-        return finished;
-    }
-    */
-
 
     function convertProcess() {
         var processImageDiv = $(".convertProgressImage");
@@ -72,15 +51,38 @@
         });
     }
 
+    function getCurrentStep(){
+        var currentStepText = $(".currentStep");
+        $.ajax({
+            url:"/currentStep", //the page containing python script
+            type: "get", //request type,
+            success:function(step){
+                currentStepText.text("Etapa: " + step);
+            }
+        });
+        var totalSteps = $(".totalSteps");
+        $.ajax({
+            url:"/totalSteps", //the page containing python script
+            type: "get", //request type,
+            success:function(total){
+                totalSteps.text("Total: " + total);
+            }
+        });
+    }
+
     function stopConvertProcess(){
-        clearInterval(window.processInterval);
+        clearInterval(window.processIntervalProcess);
+        clearInterval(window.millisecondsCurrentStep);
         $(".startConvertProcess").show();
         console.log("Ciclo detenido");
     }
 
     function startConvertProcess(){
-        var milliseconds = 5000;
-        window.processInterval = setInterval("convertProcess()",milliseconds);
+        var millisecondsProcess = 5000;
+        window.processIntervalProcess = setInterval("convertProcess()",millisecondsProcess);
+        var millisecondsCurrentStep = 1000;
+        window.processIntervalCurrentStep = setInterval("getCurrentStep()",millisecondsCurrentStep);
+
         $(".startConvertProcess").show();
         console.log("Ciclo iniciado");
     }
@@ -101,6 +103,7 @@
                         $(".convertProgress").text("voraz: no!");
                     }
                     else{
+                        stopConvertProcess();
                         $(".convertProgress").text("voraz: finalizado!");
                     }
                 }

@@ -97,7 +97,6 @@ def showTotalSteps():
 def showCurrentStep():
     return str(Controller.getCurrentStep())
 
-
 # ----- IMAGE ANALYZER ---------
 
 @app.route("/analyze", methods=["GET"])
