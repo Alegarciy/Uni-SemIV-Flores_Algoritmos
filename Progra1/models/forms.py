@@ -3,7 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 from flask_wtf.file import FileField, FileAllowed
-from models.config import Config
+from models.fileManager.config import Config
 class ImageForm(FlaskForm):
 
         image = FileField('Upload flower image', validators=[DataRequired(), FileAllowed([Config.IMAGEEXTENSION])])

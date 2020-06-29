@@ -1,10 +1,10 @@
 from flask import Flask, render_template, url_for, flash, Markup, redirect, request
 from models.forms import ImageForm
-from models.fileManager import FileManager
+from models.fileManager.fileManager import FileManager
 #from controllers import app
 from controllers.controller import Controller
 import os
-from models.config import Config
+from models.fileManager.config import Config
 import secrets
 
 

@@ -1,7 +1,7 @@
 import os
 import shutil
 import json
-from models.config import Config
+from models.fileManager.config import Config
 
 class FileManager:
 
