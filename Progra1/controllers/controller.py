@@ -63,3 +63,7 @@ class Controller:
             Controller.imageAnalyzer.setChromosomeToAnalyze(ChromosomeConfig.COLOR)
             Controller.imageAnalyzer.setFlowerPartToAnalyze(FlowerPartConfig.PETAL)
             Controller.imageAnalyzer.analyze()
+
+        @staticmethod
+        def outline():
+            Controller.imageConverter.outline()

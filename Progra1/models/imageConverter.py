@@ -65,6 +65,66 @@ class ImageConverter:
         self.userImages.remove(flower)
         self.finished = False
 
+    '''
+    def normalizeCenterPoint(self, flowers):
+        listSize_i = []
+        listSize_j = []
+        for flower in flowers:
+            listSize_i.append(flower.getSize_I())
+            listSize_j.append(flower.getSize_J())
+
+        maxSize_i = max(listSize_i)
+        maxSize_j = max(listSize_j)
+        center = [maxSize_i/2, maxSize_j/2]
+        allFlowers = np.zeros([maxSize_i, maxSize_j, 3], dtype=np.uint8)
+
+        for flower in flowers:
+            info = flower.getJsonData()
+            flowerCenter = info[FlowerConfig.PIXEL_CENTRAL]
+            differenceCenter = [center[self.I]-flowerCenter[self.I], center[self.J]-flowerCenter[self.J]]
+            petal = flower.getPetal()
+            size_i = flower.getSize_I()
+            size_j = flower.getSize_J()
+            for i in range(0, size_i - 1):
+                for j in range(0, size_j - 1):
+                    newI = (i + differenceCenter[self.I])
+                    newJ = (j + differenceCenter[self.J])
+                    print(str(newI) + " " + str(newJ))
+                    if(np.all(petal[i, j] != FlowerConfig.BACKGROUND_COLOR) and newI < size_i-1 and newJ < size_j-1):
+                        allFlowers[newI, newJ] = petal[i, j]
+
+            plt.imshow(allFlowers)
+            plt.show()
+
+        return allFlowers
+    '''
+
+    def outline(self):
+        #allFlowers = self.normalizeCenterPoint(self.userImages)
+        for flower in self.userImages:
+            outlineFlower = self.outlineProcess(flower)
+            plt.imshow(outlineFlower)
+            plt.show()
+            plt.imsave("contorno2.png", outlineFlower)
+
+    #Temporalmente situado en esta clase
+    def outlineProcess(self, flower):
+        info = flower.getJsonData()
+        petal = flower.getPetal()
+        size_i = flower.getSize_I()
+        size_j = flower.getSize_J()
+        outlineImage = np.zeros([size_i, size_j, 3], dtype=np.uint8)
+        for i in range(0, size_i - 1):
+            for j in range(0, size_j - 1):
+                if(self.isInPetal(i,j,info) and np.all(petal[i,j] != FlowerConfig.BACKGROUND_COLOR)):
+                    if ((i - 1 >= 0 and np.all(petal[i - 1, j] == FlowerConfig.BACKGROUND_COLOR)) or
+                        (i + 1 <= size_i and np.all(petal[i + 1, j] == FlowerConfig.BACKGROUND_COLOR)) or
+                        (j - 1 >= 0 and np.all(petal[i, j-1] == FlowerConfig.BACKGROUND_COLOR)) or
+                        (j + 1 <= size_j and np.all(petal[i, j+1] == FlowerConfig.BACKGROUND_COLOR))):
+                            outlineImage[i, j] = FlowerConfig.OUTLINE_COLOR
+        return outlineImage
+
+
     #Recorre las imagenes del usuario (numpy arrays) y llama al voraz
 
     def convert(self):
