@@ -4,17 +4,22 @@ import numpy as np
 from skimage import io
 import io as i_o
 import base64
-from models.config import Config
-from models.fileManager import FileManager
-from models.flowerImage import FlowerImage
-from models.flowerConfig import FlowerConfig
+from models.fileManager.config import Config
+from models.fileManager.fileManager import FileManager
+from models.converter.flowerImage import FlowerImage
+from models.converter.flowerConfig import FlowerConfig
 from models.genetic.chromosome.color import Color
+from models.converter.pixelFlower import PixelFlower
+import math
+
 class ImageConverter:
 
-    def __init__(self):
+    def __init__(self): 
+        # Array de flower images
         self.userImages = []
         self.I = 0
         self.J = 1
+        # Current image analized
         self.imageIndex = 0
         self.step = 0
         self.total = 0
@@ -155,15 +160,20 @@ class ImageConverter:
                 self.step = (i*size_i + (j+1))
                 self.progress = (self.step / self.total)*100
                 if(self.isInCenter(i,j,info)):
+
                     if(self.isCenterColor(flowerPixels[i,j], info)):
                         center = flowerImage.getCenter()
                         center[i,j] = flowerPixels[i,j]
-                elif(self.isInPetal(i,j,info)):
-                    if(self.isPetalColor(flowerPixels[i,j], info)):
+                elif(self.isInPetal(i,j,info)): #Criterio
+                    petalColorDif = self.getPetalColor(flowerPixels[i,j], info)
+                    if(petalColorDif <= FlowerConfig.DIFFERENCE_COLOR_LIMIT):
                         petal = flowerImage.getPetal()
+                        petalPixels = flowerImage.getPetalPixels()
                         petal[i,j] = flowerPixels[i,j]
-
-    #Criterios
+                        pixelPetalFlower = PixelFlower(flowerPixels[i,j], math.floor(petalColorDif), (i,j))
+                        petalPixels.append(pixelPetalFlower)
+        flowerImage.sortByDifference()
+    #Criterios espcificacion 
 
     def isInCenter(self, i, j, info):
         minI = info[FlowerConfig.PIXEL_CENTRAL][self.I] - info[FlowerConfig.PIXEL_CENTER_LIMIT][self.I]
@@ -181,8 +191,8 @@ class ImageConverter:
 
         return (minI < i < maxI and minJ < j < maxJ)
 
-    def isPetalColor(self, pixel, info):
-        return Color.colorDifference(pixel, info[FlowerConfig.COLOR_PETAL_PREF]) <= FlowerConfig.DIFFERENCE_COLOR_LIMIT
+    def getPetalColor(self, pixel, info):
+        return Color.colorDifference(pixel, info[FlowerConfig.COLOR_PETAL_PREF])
 
     def isCenterColor(self, pixel, info):
         return Color.colorDifference(pixel, info[FlowerConfig.COLOR_CENTER_PREF]) <= FlowerConfig.DIFFERENCE_COLOR_LIMIT

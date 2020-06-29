@@ -1,6 +1,6 @@
-from models.imageConverter import ImageConverter
-from models.flowerImage import FlowerImage
-from models.imageAnalyzer import ImageAnalyzer
+from models.converter.imageConverter import ImageConverter
+from models.converter.flowerImage import FlowerImage
+from models.analyzer.imageAnalyzer import ImageAnalyzer
 from models.genetic.chromosome.chromosomeConfig import ChromosomeConfig
 from models.genetic.flowerParts.flowerPartConfig import FlowerPartConfig
 

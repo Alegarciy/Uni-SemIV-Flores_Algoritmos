@@ -6,7 +6,7 @@ class Petal(FlowerPart):
 
     def setFlowerPartImages(self, flowerImages):
         for flower in flowerImages:
-            self.flowerPartImages.append(flower.getPetal())
+            self.flowerPartImages.append(flower.getPetalPixels())
 
     def analyzeChromosome(self, chromosome):
         self.chromosomes[chromosome].analyzeDistribution(self.flowerPartImages)

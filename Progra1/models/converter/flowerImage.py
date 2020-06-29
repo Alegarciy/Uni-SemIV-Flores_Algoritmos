@@ -1,5 +1,8 @@
 import numpy as np
-from models.flowerConfig import FlowerConfig
+from models.converter.flowerConfig import FlowerConfig
+from operator import attrgetter
+from models.converter.pixelFlower import PixelFlower
+
 
 class FlowerImage:
 
@@ -9,11 +12,19 @@ class FlowerImage:
         self.__flower = flower
         self.__jsonData = jsonData
         self.__petal = np.full((self.__size_i, self.__size_j, 3), FlowerConfig.BACKGROUND_COLOR)
+        self.__petalPixelFlower = []                                                 
         self.__center = np.full((self.__size_i, self.__size_j, 3), FlowerConfig.BACKGROUND_COLOR)
+        self.__centerPixelFlower = []  
         self.__flowerImagePathFront = flowerPathFront
         self.__flowerImagePathBack = flowerImagePathBack
         self.__flowerDirectory = flowerDirectory
         self.__flowerName = filename
+
+
+    def sortByDifference(self):
+        self.__petalPixelFlower = sorted(self.__petalPixelFlower, key=attrgetter('idealDiference'))
+        #for i in range(0,2000):
+            #print(self.__petalPixelFlower[i].getIdealDiference(), end =",")
 
     #Setter
 
@@ -63,5 +74,11 @@ class FlowerImage:
 
     def getFlower(self):
         return self.__flower
+
+    def getPetalPixels(self):
+        return self.__petalPixelFlower
+
+    def getCenterPixel(self):
+        return self.__centerPixelFlower
 
 

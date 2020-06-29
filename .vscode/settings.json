@@ -1,3 +1,10 @@
 {
-    "python.pythonPath": "C:\\Users\\Personal\\AppData\\Local\\Programs\\Python\\Python38\\python.exe"
+    "terminal.integrated.env.windows": {
+    
+    },
+    "terminal.integrated.env.osx": {
+    
+    },
+    "python.pythonPath": "C:\\Users\\alega\\AppData\\Local\\Programs\\Python\\Python38\\python.exe"
+
 }
