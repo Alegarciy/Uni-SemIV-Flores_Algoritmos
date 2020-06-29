@@ -39,3 +39,5 @@ class ImageAnalyzer:
     def analyze(self):
         self.__flowerPartToAnalyze.analyzeChromosome(self.__chromosomeToAnalyze)
 
+    def getFlowerParts(self):
+        return self.__flowerParts

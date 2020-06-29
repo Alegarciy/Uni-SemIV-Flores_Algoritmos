@@ -1,14 +1,18 @@
 from abc import ABC, abstractmethod
 from models.genetic.chromosome.chromosomeConfig import ChromosomeConfig
 from models.genetic.chromosome.color import Color
+from models.genetic.chromosome.shape import Shape
+
 
 class FlowerPart(ABC):
 
     def __init__(self):
-        self.flowerPartImages = []
+        self.flowerPartPixels = []
+        self.flowerPartImageInfo = []
         self.chromosomes = \
         {
-            ChromosomeConfig.COLOR: Color()
+            ChromosomeConfig.COLOR: Color(),
+            ChromosomeConfig.SHAPE: Shape()
         }
 
     @abstractmethod

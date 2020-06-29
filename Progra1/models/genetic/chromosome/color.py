@@ -2,13 +2,15 @@ from colormath.color_objects import sRGBColor, LabColor
 from colormath.color_conversions import convert_color
 from colormath.color_diff import delta_e_cie2000
 from models.genetic.chromosome.Chromosome import Chromosome
+from models.genetic.chromosome.GeneticChromosome import GeneticChromosome
+
 from abc import ABC, abstractmethod
 import matplotlib
 import webcolors
 import math
 from models.genetic.chromosome.Distribution import Distribution
 
-class Color(Chromosome):
+class Color(GeneticChromosome):
 
     def __init__(self):
         super().__init__()
@@ -78,12 +80,12 @@ class Color(Chromosome):
 
 
     #define abstract method
-    def analyzeDistribution(self, flowerPartsImages): #Como creo la tabla de distribucion para los coleres
+    def analyzeDistribution(self, flowerPartPixels, flowerPartImageInfo): #Como creo la tabla de distribucion para los coleres
 
         print("analyze COLOR")
         floweNumber = 0
         numElements = 0
-        for pixelList in flowerPartsImages:
+        for pixelList in flowerPartPixels:
             #Store data in variable self.__averageColorList
             self.analyzeDistributionList(pixelList, floweNumber)
             numElements += len(pixelList)
@@ -98,15 +100,13 @@ class Color(Chromosome):
            element[1].print()
         #print(len(self.__representationTable))
         print('TACO MAXIMO')   
-        
-        
-        
-        
+
         
         #print('TACO MAXIMO')
         #for element in self.__averageColorList:
             #print(element[0], element[1], element[2], element[3])
         #print(self.chromosomeDistribution)
 
+    #Define abstract method
     def fitness(self):
         pass

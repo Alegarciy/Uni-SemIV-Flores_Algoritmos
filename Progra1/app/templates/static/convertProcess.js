@@ -72,7 +72,7 @@
 
     function stopConvertProcess(){
         clearInterval(window.processIntervalProcess);
-        clearInterval(window.millisecondsCurrentStep);
+        clearInterval(window.processIntervalCurrentStep);
         $(".startConvertProcess").show();
         console.log("Ciclo detenido");
     }

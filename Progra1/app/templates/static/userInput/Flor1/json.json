@@ -3,5 +3,11 @@
   "pixelPetaloMasAlejado":[400,400],
   "colorPetaloPreferido":[202,24,122],
   "colorCentroPreferido":[171,134,2],
-  "pixelCentroMasAlejado":[50,50]
+  "pixelCentroMasAlejado":[50,50],
+  "outlineIncreaseY" :  -1,
+  "petalOutlineInitPos": [731, 351],
+  "centerOutlineInitPos": [],
+  "petalOutlineEndPos": [535, 443],
+  "centerOutlineEndPos": [],
+  "numeroPetalos": 6
 }

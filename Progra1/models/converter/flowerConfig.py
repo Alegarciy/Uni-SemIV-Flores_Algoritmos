@@ -9,7 +9,17 @@ class FlowerConfig:
     PIXEL_CENTER_LIMIT = "pixelCentroMasAlejado"
     PIXEL_CENTRAL = "pixelCentral"
 
+    #outline positions init
+    PETAL_OUTLINE_INIT_POS = "petalOutlineInitPos"
+    CENTER_OUTLINE_INIT_POS = "centerOutlineInitPos"
+
+    #outline positions end
+    PETAL_OUTLINE_END_POS = "petalOutlineEndPos"
+    CENTER_OUTLINE_END_POS = "centerOutlineEndPos"
+    OUTLINE_INCREASEY = "outlineIncreaseY"
+
     #Convert image
     BACKGROUND_COLOR = (0,0,0) #Black
     OUTLINE_COLOR = (255,255,255) #White
-    DIFFERENCE_COLOR_LIMIT = 35
+    HIGHLIGHT_COLOR = (235, 64, 52)
+    DIFFERENCE_COLOR_LIMIT = 45

@@ -3,12 +3,12 @@ from models.converter.flowerImage import FlowerImage
 from models.analyzer.imageAnalyzer import ImageAnalyzer
 from models.genetic.chromosome.chromosomeConfig import ChromosomeConfig
 from models.genetic.flowerParts.flowerPartConfig import FlowerPartConfig
-
+from models.genetic.genetic import Genetic
 class Controller:
 
         imageConverter = ImageConverter()
         imageAnalyzer = ImageAnalyzer()
-
+        genetic = Genetic()
 
         #Image Converted methods
         @staticmethod
@@ -60,10 +60,14 @@ class Controller:
         def setImageAnayzer():
             Controller.imageAnalyzer.setAnalyzer(Controller.imageConverter.userImages)
             #POR EL MOMENTO PARA PRUEBA
-            Controller.imageAnalyzer.setChromosomeToAnalyze(ChromosomeConfig.COLOR)
+            Controller.imageAnalyzer.setChromosomeToAnalyze(ChromosomeConfig.SHAPE)
             Controller.imageAnalyzer.setFlowerPartToAnalyze(FlowerPartConfig.PETAL)
             Controller.imageAnalyzer.analyze()
 
+            Controller.setGenetic()
+
         @staticmethod
-        def outline():
-            Controller.imageConverter.outline()
+        def setGenetic():
+            Controller.genetic.setGenetic(Controller.imageAnalyzer.getFlowerParts())
+
+            Controller.genetic.draw()

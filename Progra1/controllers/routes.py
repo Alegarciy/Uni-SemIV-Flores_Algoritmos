@@ -103,5 +103,4 @@ def showCurrentStep():
 def analyze():
     print("ANALYZEEEEEEE")
     Controller.setImageAnayzer()
-    Controller.outline()
     return render_template('home.html')

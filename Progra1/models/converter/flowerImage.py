@@ -78,7 +78,7 @@ class FlowerImage:
     def getPetalPixels(self):
         return self.__petalPixelFlower
 
-    def getCenterPixel(self):
+    def getCenterPixels(self):
         return self.__centerPixelFlower
 
 
