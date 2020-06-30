@@ -94,6 +94,7 @@ class ImageConverter:
         flowerPixels = flowerImage.getFlower() #Subestructura
         size_i = flowerImage.getSize_I()
         size_j = flowerImage.getSize_J()
+        indexDic = {}
         self.total = size_j*size_i
         for i in range(0,size_i-1):
             for j in range(0, size_j-1):
@@ -115,10 +116,15 @@ class ImageConverter:
                     if(petalColorDif <= FlowerConfig.DIFFERENCE_COLOR_LIMIT):
                         petal = flowerImage.getPetal()
                         petal[i, j] = flowerPixels[i, j]
-
                         petalPixels = flowerImage.getPetalPixels()
-                        petalPixels.append(PixelFlower(flowerPixels[i, j], math.floor(petalColorDif), (i, j)))
 
+                        if  math.floor(petalColorDif) not in indexDic:
+                            petalPixels.append(PixelFlower(flowerPixels[i, j], math.floor(petalColorDif), (i, j)))
+                            indexDic[math.floor(petalColorDif)] = len(petalPixels) - 1 #last item inserted
+                        else : # if key is inserted
+                            index = indexDic[math.floor(petalColorDif)]
+                            petalPixels[index].incrementQuantity()
+                            
         flowerImage.sortByDifference()
     #Criterios espcificacion 
 

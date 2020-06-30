@@ -43,7 +43,7 @@ class Color(GeneticChromosome):
         return resultRGB
 
     
-    def analyzeDistributionList(self, pixelList, flowerNumber):
+    def analyzeDistributionList2(self, col, flowerNumber):
         
         currentDifference = 0
         currentList = []
@@ -56,27 +56,31 @@ class Color(GeneticChromosome):
             currentList.append(pixel.getRGB())
         print(len(self.__averageColorList))
 
+    def analyzeDistributionList(self, colorList, flowerNumber):
+        
+        for colorPixel in colorList:
+            self.__averageColorList.append([colorPixel.getRGB(),colorPixel.getQuantity(),flowerNumber,colorPixel.getIdealDiference()])
 
     def createDistributionTable(self, avergeColorList, numElements, binaryRepresentation):
-        # Average color list compostion: [RGB Subgroup, times it appears, currentFlower, currentDifference]
+        # Average color list compostion: [RGB Subgroup, times it appears, currentFlower,   ((x)) currentDifference]
         # distributionTable : [RGB Subgroup, Distribution]
         minimun = 0
         distributionTable = []
         currentDistribution = None
-        for subgroup in avergeColorList:
+        for color in avergeColorList:
             # Set distribution
             currentDistribution = Distribution()
             currentDistribution.setTotal(binaryRepresentation)
-            currentDistribution.setQuantity(subgroup[1]) # subgroup size
+            currentDistribution.setQuantity(color[1]) # color size
             print(minimun)
             currentDistribution.setPercentage(numElements) # %
             print(minimun)
             currentDistribution.setRange(minimun) 
             print(minimun)
-            minimun = math.floor((currentDistribution.getRangeMax()))
+            minimun = math.floor((currentDistribution.getRangeMax())) + 1
             print(minimun)
             # Append to distribution table
-            distributionTable.append([subgroup[0], currentDistribution])
+            distributionTable.append([color[0], currentDistribution])
         return distributionTable
 
 
@@ -87,10 +91,11 @@ class Color(GeneticChromosome):
         print("analyze COLOR")
         floweNumber = 0
         numElements = 0
-        for pixelList in flowerPartPixels:
+        for colorList in flowerPartPixels:
             #Store data in variable self.__averageColorList
-            self.analyzeDistributionList(pixelList, floweNumber)
-            numElements += len(pixelList)
+            self.analyzeDistributionList(colorList, floweNumber)
+            for colorPixels in colorList:
+                numElements += colorPixels.getQuantity()
             floweNumber += 1
 
         #Create a distribution table 
@@ -99,6 +104,7 @@ class Color(GeneticChromosome):
         self.__representationTable = self.createDistributionTable(self.__averageColorList, numElements, 65535) #Numero magico
         print('TACO MEDIO')   
         for element in self.__representationTable:
+           print("Color:", element[0], end=" ")
            element[1].print()
         #print(len(self.__representationTable))
         print('TACO MAXIMO')   

@@ -7,6 +7,15 @@ class PixelFlower:
         self.__rgb = rgb
         self.idealDiference = idealDiferences
         self.__position = position
+        self.__quantity = 1
+
+    #Functions
+
+    def incrementQuantity(self):
+        self.__quantity += 1
+
+    # Setter
+
 
 
     # Getter
@@ -19,3 +28,6 @@ class PixelFlower:
    
     def getPosition(self):
         return self.__position
+
+    def getQuantity(self):
+        return self.__quantity
