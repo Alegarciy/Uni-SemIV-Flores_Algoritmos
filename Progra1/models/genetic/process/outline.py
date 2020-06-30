@@ -38,11 +38,6 @@ class Outline:
                         (j - 1 >= 0 and np.all(flowerPart[i, j-1] == FlowerConfig.BACKGROUND_COLOR)) or
                         (j + 1 <= size_j and np.all(flowerPart[i, j+1] == FlowerConfig.BACKGROUND_COLOR))):
                             outlineImage[i, j] = FlowerConfig.OUTLINE_COLOR
-                '''
-                if not self.isInflowerPart(i, j, info):
-                    outlineImage[i, j] = FlowerConfig.HIGHLIGHT_COLOR
-                '''
-
         plt.imshow(outlineImage)
         plt.show()
         return outlineImage

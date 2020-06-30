@@ -2,7 +2,8 @@ from models.genetic.flowerParts.petal import Petal
 from models.genetic.flowerParts.center import Center
 from models.genetic.chromosome.chromosomeConfig import ChromosomeConfig
 from models.genetic.flowerParts.flowerPartConfig import FlowerPartConfig
-
+from models.genetic.chromosome.analyzeInfoConfig import AnalyzeInfoConfig
+from models.plotModelDrawer import PlotModelDrawer
 
 class ImageAnalyzer:
 
@@ -13,6 +14,7 @@ class ImageAnalyzer:
         self.__chromosomeToAnalyze = ""
         self.__colorDistribution = {}
         self.__totalPixels = 0
+        self.__markup = ""
 
     def getUserImages(self):
         return self.__userImages
@@ -37,7 +39,26 @@ class ImageAnalyzer:
         self.__chromosomeToAnalyze = CHROMOSOME
 
     def analyze(self):
-        self.__flowerPartToAnalyze.analyzeChromosome(self.__chromosomeToAnalyze)
+        for flowerKey in self.__flowerParts:
+            flowerObject = self.__flowerParts[flowerKey]
+            for chromosome in flowerObject.chromosomes:
+                analysisInfo = flowerObject.analyzeChromosome(chromosome)
+                self.cratePlotModels(analysisInfo, str(flowerKey+"-"+chromosome), flowerKey)
+
+        return self.__markup
+
+    def cratePlotModels(self, analysisInfo, classname, flowerPart):
+        base64_plots = []
+        for image_title in analysisInfo[AnalyzeInfoConfig.IMAGES]:
+            base64_plots.append(PlotModelDrawer.draw(
+                image_title[AnalyzeInfoConfig.IMAGE_PIXELS],
+                image_title[AnalyzeInfoConfig.IMAGE_TITLE]))
+
+        self.__markup += \
+            PlotModelDrawer.createMarkup(
+            base64_plots,
+            analysisInfo[AnalyzeInfoConfig.DESCRIPTION] + flowerPart,
+            classname)
 
     def getFlowerParts(self):
         return self.__flowerParts

@@ -16,10 +16,10 @@ class Center(FlowerPart):
                     FlowerPartConfig.FLOWERPART_LIMIT: jsonData[FlowerConfig.PIXEL_CENTER_LIMIT],
                     FlowerPartConfig.FLOWERPART_OUTLINE_INIT_POS: jsonData[FlowerConfig.CENTER_OUTLINE_INIT_POS],
                     FlowerPartConfig.FLOWERPART_OUTLINE_END_POS: jsonData[FlowerConfig.CENTER_OUTLINE_END_POS],
-                    FlowerPartConfig.FLOWERPART_OUTLINE_INCREASEY: jsonData[FlowerConfig.OUTLINE_INCREASEY]
+                    FlowerPartConfig.FLOWERPART_OUTLINE_INCREASEY: jsonData[FlowerConfig.CENTER_OUTLINE_INCREASEY]
                 }
 
-            self.flowerPartImageInfo.append([flower.getPetal(), info])
+            self.flowerPartImageInfo.append([flower.getCenter(), info])
 
     def analyzeChromosome(self, chromosome):
-        self.chromosomes[chromosome].analyzeDistribution(self.flowerPartPixels, self.flowerPartImageInfo)
+        return self.chromosomes[chromosome].analyzeDistribution(self.flowerPartPixels, self.flowerPartImageInfo)

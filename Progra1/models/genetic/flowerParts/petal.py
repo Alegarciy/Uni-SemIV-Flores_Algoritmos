@@ -17,7 +17,7 @@ class Petal(FlowerPart):
                     FlowerPartConfig.FLOWERPART_LIMIT: jsonInfo[FlowerConfig.PIXEL_PETAL_LIMIT],
                     FlowerPartConfig.FLOWERPART_OUTLINE_INIT_POS: jsonInfo[FlowerConfig.PETAL_OUTLINE_INIT_POS],
                     FlowerPartConfig.FLOWERPART_OUTLINE_END_POS: jsonInfo[FlowerConfig.PETAL_OUTLINE_END_POS],
-                    FlowerPartConfig.FLOWERPART_OUTLINE_INCREASEY: jsonInfo[FlowerConfig.OUTLINE_INCREASEY],
+                    FlowerPartConfig.FLOWERPART_OUTLINE_INCREASEY: jsonInfo[FlowerConfig.PETAL_OUTLINE_INCREASEY],
                     FlowerPartConfig.QUANTITY_FLOWERPART: jsonInfo[FlowerConfig.CTD_PETALOS]
                 }
             self.flowerPartImageInfo.append([flower.getPetal(), info])
@@ -31,5 +31,6 @@ class Petal(FlowerPart):
 
 
     def analyzeChromosome(self, chromosome):
-        self.chromosomes[chromosome].analyzeDistribution(self.flowerPartPixels, self.flowerPartImageInfo)
+        analysisInfo = self.chromosomes[chromosome].analyzeDistribution(self.flowerPartPixels, self.flowerPartImageInfo)
         self.analyzeQuantityOfPetals()
+        return analysisInfo

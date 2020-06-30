@@ -1,4 +1,6 @@
 from models.genetic.chromosome.Chromosome import Chromosome
+from models.genetic.chromosome.analyzeInfoConfig import AnalyzeInfoConfig
+
 from models.genetic.process.outline import Outline
 from models.genetic.flowerParts.flowerPartConfig import FlowerPartConfig
 from models.converter.flowerConfig import FlowerConfig
@@ -7,6 +9,7 @@ import numpy as np
 
 class Shape(Chromosome):
     def __init__(self):
+        super().__init__()
         self.outline = Outline()
         self.outlineImages = []
         self.flowersPartArea = []
@@ -61,8 +64,6 @@ class Shape(Chromosome):
 
             area.append(pixelsInY)
 
-        plt.imshow(image)
-        plt.show()
 
         return area
 
@@ -82,6 +83,16 @@ class Shape(Chromosome):
 
             self.combinationOfAreas = self.combineFlowerPartArea(self.flowersPartArea)
 
-            for outlineImage in self.outlineImages:
-                plt.imshow(outlineImage)
-                plt.show()
+        self.setAnalyzeInfo()
+        return self.analyzeInfo
+
+    def setAnalyzeInfo(self):
+        images = []
+        index = 1
+        for outlineImage in self.outlineImages:
+            images.append([outlineImage, "Forma "+str(index)])
+            index += 1
+
+        self.analyzeInfo[AnalyzeInfoConfig.DESCRIPTION] = "Forma del area del "
+        self.analyzeInfo[AnalyzeInfoConfig.IMAGES] = images
+

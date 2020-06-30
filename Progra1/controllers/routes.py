@@ -101,6 +101,5 @@ def showCurrentStep():
 
 @app.route("/analyze", methods=["GET"])
 def analyze():
-    print("ANALYZEEEEEEE")
-    Controller.setImageAnayzer()
-    return render_template('home.html')
+    markup = Controller.setImageAnayzer()
+    return render_template('home.html', analysisInfo=markup)

@@ -16,7 +16,9 @@ class FlowerConfig:
     #outline positions end
     PETAL_OUTLINE_END_POS = "petalOutlineEndPos"
     CENTER_OUTLINE_END_POS = "centerOutlineEndPos"
-    OUTLINE_INCREASEY = "outlineIncreaseY"
+    PETAL_OUTLINE_INCREASEY = "petalOutlineIncreaseY"
+    CENTER_OUTLINE_INCREASEY = "centerOutlineIncreaseY"
+
 
     #Convert image
     BACKGROUND_COLOR = (0,0,0) #Black

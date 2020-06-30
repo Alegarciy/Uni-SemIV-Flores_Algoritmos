@@ -100,19 +100,24 @@ class ImageConverter:
                 self.step = (i*size_i + (j+1))
                 self.progress = (self.step / self.total)*100
                 if(self.isInCenter(i,j,info)):
+                    centerColorDif = self.getCenterColorDif(flowerPixels[i, j], info)
 
-                    if(self.isCenterColor(flowerPixels[i,j], info)):
+                    if(centerColorDif <= FlowerConfig.DIFFERENCE_COLOR_LIMIT):
                         center = flowerImage.getCenter()
-                        center[i,j] = flowerPixels[i,j]
+                        center[i, j] = flowerPixels[i, j]
+
+                        centerPixels = flowerImage.getCenterPixels()
+                        centerPixels.append(PixelFlower(flowerPixels[i, j], math.floor(centerColorDif), (i, j)))
 
                 elif(self.isInPetal(i,j,info)): #Criterio
-                    petalColorDif = self.getPetalColor(flowerPixels[i,j], info)
+                    petalColorDif = self.getPetalColorDif(flowerPixels[i, j], info)
+
                     if(petalColorDif <= FlowerConfig.DIFFERENCE_COLOR_LIMIT):
                         petal = flowerImage.getPetal()
+                        petal[i, j] = flowerPixels[i, j]
+
                         petalPixels = flowerImage.getPetalPixels()
-                        petal[i,j] = flowerPixels[i,j]
-                        pixelPetalFlower = PixelFlower(flowerPixels[i,j], math.floor(petalColorDif), (i,j))
-                        petalPixels.append(pixelPetalFlower)
+                        petalPixels.append(PixelFlower(flowerPixels[i, j], math.floor(petalColorDif), (i, j)))
 
         flowerImage.sortByDifference()
     #Criterios espcificacion 
@@ -133,11 +138,11 @@ class ImageConverter:
 
         return (minI < i < maxI and minJ < j < maxJ)
 
-    def getPetalColor(self, pixel, info):
+    def getPetalColorDif(self, pixel, info):
         return Color.colorDifference(pixel, info[FlowerConfig.COLOR_PETAL_PREF])
 
-    def isCenterColor(self, pixel, info):
-        return Color.colorDifference(pixel, info[FlowerConfig.COLOR_CENTER_PREF]) <= FlowerConfig.DIFFERENCE_COLOR_LIMIT
+    def getCenterColorDif(self, pixel, info):
+        return Color.colorDifference(pixel, info[FlowerConfig.COLOR_CENTER_PREF])
 
     def getConvertProcess(self):
         if(self.imageIndex >= len(self.userImages)):

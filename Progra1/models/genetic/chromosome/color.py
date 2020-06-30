@@ -3,6 +3,8 @@ from colormath.color_conversions import convert_color
 from colormath.color_diff import delta_e_cie2000
 from models.genetic.chromosome.Chromosome import Chromosome
 from models.genetic.chromosome.GeneticChromosome import GeneticChromosome
+from models.genetic.chromosome.analyzeInfoConfig import AnalyzeInfoConfig
+import numpy as np
 
 from abc import ABC, abstractmethod
 import matplotlib
@@ -46,12 +48,12 @@ class Color(GeneticChromosome):
         currentDifference = 0
         currentList = []
         for pixel in pixelList:
-                if(currentDifference != pixel.getIdealDiference()):
-                    #averageColor = self.calculateAverageColor(currentList)
-                    self.__averageColorList.append([currentList,len(currentList),flowerNumber, currentDifference]) 
-                    currentList = []
-                    currentDifference += 1
-                currentList.append(pixel.getRGB())
+            if(currentDifference != pixel.getIdealDiference()):
+                #averageColor = self.calculateAverageColor(currentList)
+                self.__averageColorList.append([currentList,len(currentList),flowerNumber, currentDifference])
+                currentList = []
+                currentDifference += 1
+            currentList.append(pixel.getRGB())
         print(len(self.__averageColorList))
 
 
@@ -104,8 +106,19 @@ class Color(GeneticChromosome):
         
         #print('TACO MAXIMO')
         #for element in self.__averageColorList:
-            #print(element[0], element[1], element[2], element[3])
+        #print(element[0], element[1], element[2], element[3])
         #print(self.chromosomeDistribution)
+
+        self.setAnalyzeInfo()
+        return self.analyzeInfo
+
+    def setAnalyzeInfo(self):
+        images = []
+        index = 1
+        images.append([np.zeros([1000, 1000, 3], dtype=np.uint8), "Colors"])
+        self.analyzeInfo[AnalyzeInfoConfig.DESCRIPTION] = "Colores del "
+        self.analyzeInfo[AnalyzeInfoConfig.IMAGES] = images
+
 
     #Define abstract method
     def fitness(self):

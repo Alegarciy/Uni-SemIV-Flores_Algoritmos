@@ -55,19 +55,18 @@ class Controller:
         def getCurrentStep():
             return Controller.imageConverter.getCurrentStep()
 
+        #--------------------------------------------------------#
         #Image analyzer method
         @staticmethod
         def setImageAnayzer():
             Controller.imageAnalyzer.setAnalyzer(Controller.imageConverter.userImages)
-            #POR EL MOMENTO PARA PRUEBA
-            Controller.imageAnalyzer.setChromosomeToAnalyze(ChromosomeConfig.SHAPE)
-            Controller.imageAnalyzer.setFlowerPartToAnalyze(FlowerPartConfig.PETAL)
-            Controller.imageAnalyzer.analyze()
+            markup = Controller.imageAnalyzer.analyze()
+            return markup
 
-            Controller.setGenetic()
+            #Controller.setGenetic()
 
         @staticmethod
         def setGenetic():
             Controller.genetic.setGenetic(Controller.imageAnalyzer.getFlowerParts())
 
-            Controller.genetic.draw()
+            #Controller.genetic.draw()

@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <!--ALGORITMO VORAZ-->
-    <div class= "convertProcess d-flex">
+    <div class= "convertProcess d-flex my-3">
         <div class=" flex-fill">
             <h2 class="my-2">Convertir imagenes
                 <span class="badge badge-primary convertProgress">voraz</span>
@@ -16,9 +16,20 @@
             <h4 class="totalSteps"></h4>
         </div>
     </div>
-    <a class = "my-2 text-white btn btn-primary startConvertProcess" href={{ url_for('analyze') }}>NO TOCAR</a>
+    <hr />
     <!-- ALGORTIMO DE ANALISIS DE DISTRIBUCION DE PIXELES-->
-
+    <div class ="analysisProcess my-3">
+        <h2 class="my-2">
+            <span class="badge badge-primary ">Analizar</span>
+            datos del voraz
+        </h2>
+        <div class="analysisProcessInfo my-3">
+            {% if analysisInfo %}
+                {{analysisInfo}}
+            {%endif%}
+        </div>
+        <a class = "my-2 text-white btn btn-primary startAnalysisProcess" href={{ url_for('analyze') }}>Analizar</a>
+    </div>
 
     <!--ALGORITMO GENETICO-->
 
