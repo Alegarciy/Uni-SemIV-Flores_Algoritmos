@@ -1,33 +1,21 @@
-    function stopAnalysisProcess(){
-        clearInterval(window.analysisProcessInterval);
-        console.log("Ciclo analisis detenido");
-    }
-
-    function startAnalysisProcess(){
-        var millisecondsAnalyse = 1000;
-        window.analysisProcessInterval = setInterval("", millisecondsAnalyse);
-
-        $(".startConvertProcess").show();
-        console.log("Ciclo analisis iniciado");
-    }
-
-
     $(".analysisProcess").on("click", ".startAnalysisProcess",
         function () {
             url = $(this).attr("methodUrl");
-            startConvertProcess();
-
+            var status  = $('.status-AnalysisiProcess');
+            var analysisInfo = $('.analysisProcessInfo');
+            status.text('Analizando datos...');
             $.ajax({
                 url: url, //the page containing python script
                 type: "get", //request type,
-                success: function (t) {
-                    if(t === "False"){
-                        //stopConvertProcess();
-                        $(".convertProgress").text("voraz: no!");
+
+                success: function (markup) {
+                    if(markup === "False"){
+                        status.text("¿Qué haces? Ocupamos los datos del voraz");
                     }
                     else{
-                        stopConvertProcess();
-                        $(".convertProgress").text("voraz: finalizado!");
+                        status.text("Listo!");
+                        analysisInfo.empty();
+                        analysisInfo.append(markup);
                     }
                 }
             });
