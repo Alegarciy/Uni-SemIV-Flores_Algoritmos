@@ -72,13 +72,11 @@ class Color(GeneticChromosome):
             currentDistribution = Distribution()
             currentDistribution.setTotal(binaryRepresentation)
             currentDistribution.setQuantity(color[1]) # color size
-            print(minimun)
             currentDistribution.setPercentage(numElements) # %
-            print(minimun)
             currentDistribution.setRange(minimun) 
-            print(minimun)
             minimun = math.floor((currentDistribution.getRangeMax())) + 1
-            print(minimun)
+            if(color is avergeColorList[-1]):
+                currentDistribution.setMaxRange(binaryRepresentation)
             # Append to distribution table
             distributionTable.append([color[0], currentDistribution])
         return distributionTable

@@ -55,18 +55,50 @@ class Controller:
         def getCurrentStep():
             return Controller.imageConverter.getCurrentStep()
 
-        #--------------------------------------------------------#
+        #------ANALYZER-------
         #Image analyzer method
         @staticmethod
         def setImageAnayzer():
-            Controller.imageAnalyzer.setAnalyzer(Controller.imageConverter.userImages)
-            markup = Controller.imageAnalyzer.analyze()
-            return markup
+            if(Controller.imageConverter.finished):
+                Controller.imageAnalyzer.setAnalyzer(Controller.imageConverter.userImages)
+                markup = Controller.imageAnalyzer.analyze()
+                return markup
 
-            #Controller.setGenetic()
+            else:
+                return "False"
+
 
         @staticmethod
-        def setGenetic():
-            Controller.genetic.setGenetic(Controller.imageAnalyzer.getFlowerParts())
+        def getMarkup():
+            return Controller.imageAnalyzer.getMarkup()
 
-            #Controller.genetic.draw()
+
+        #------GENETIC-------
+        @staticmethod
+        def setGenetic():
+            if Controller.imageAnalyzer.finished:
+                Controller.genetic.setGenetic(Controller.imageAnalyzer.getFlowerParts())
+                return "True"
+            else:
+                return "False"
+
+        @staticmethod
+        def startGenetic(flowerPartId):
+            if flowerPartId == FlowerPartConfig.PETAL_ID:
+               return Controller.genetic.start(FlowerPartConfig.PETAL, ChromosomeConfig.COLOR)
+            if flowerPartId == FlowerPartConfig.CENTER_ID:
+                return Controller.genetic.start(FlowerPartConfig.CENTER, ChromosomeConfig.COLOR)
+            else:
+                return "False"
+
+        @staticmethod
+        def pauseGenetic(flowerPartId):
+            if flowerPartId == FlowerPartConfig.PETAL_ID:
+                return Controller.genetic.pause(FlowerPartConfig.PETAL)
+            if flowerPartId == FlowerPartConfig.CENTER_ID:
+                return Controller.genetic.pause(FlowerPartConfig.CENTER)
+            else:
+                return "False"
+
+
+

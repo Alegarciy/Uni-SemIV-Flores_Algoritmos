@@ -12,15 +12,16 @@ class ImageAnalyzer:
         self.__flowerParts = {}
         self.__flowerPartToAnalyze = None
         self.__chromosomeToAnalyze = ""
-        self.__colorDistribution = {}
-        self.__totalPixels = 0
         self.__markup = ""
+        self.finished = False
 
     def getUserImages(self):
         return self.__userImages
 
     def setAnalyzer(self, userImages): #Reinicia los datos
+        self.finished = False
         self.__userImages = userImages
+        self.__markup = ""
         petal = Petal()
         petal.setFlowerPartImages(userImages)
         center = Center()
@@ -45,6 +46,7 @@ class ImageAnalyzer:
                 analysisInfo = flowerObject.analyzeChromosome(chromosome)
                 self.cratePlotModels(analysisInfo, str(flowerKey+"-"+chromosome), flowerKey)
 
+        self.finished = True
         return self.__markup
 
     def cratePlotModels(self, analysisInfo, classname, flowerPart):
@@ -62,3 +64,6 @@ class ImageAnalyzer:
 
     def getFlowerParts(self):
         return self.__flowerParts
+
+    def getMarkup(self):
+        return self.__markup

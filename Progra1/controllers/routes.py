@@ -27,7 +27,8 @@ Config.DATADIRECTORY = uploads_dir
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html')
+    markup_ = Controller.getMarkup()
+    return render_template('home.html', markup=markup_)
 
 @app.route("/about")
 def about():
@@ -102,4 +103,17 @@ def showCurrentStep():
 @app.route("/analyze", methods=["GET"])
 def analyze():
     markup = Controller.setImageAnayzer()
-    return render_template('home.html', analysisInfo=markup)
+    return markup
+
+# ------ GENETIC ALGORITHM -----
+@app.route("/genetic", methods=["GET"])
+def genetic():
+    return Controller.setGenetic()
+
+@app.route("/startGenetic/<int:flowerPartId>")
+def startGenetic(flowerPartId):
+    return Controller.startGenetic(flowerPartId)
+
+@app.route("/pauseGenetic/<int:flowerPartId>", methods=["GET"])
+def pauseGenetic(flowerPartId):
+    return Controller.pauseGenetic(flowerPartId)

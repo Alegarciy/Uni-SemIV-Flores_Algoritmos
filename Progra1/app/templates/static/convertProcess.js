@@ -83,7 +83,7 @@
         var millisecondsCurrentStep = 1000;
         window.processIntervalCurrentStep = setInterval("getCurrentStep()",millisecondsCurrentStep);
 
-        $(".startConvertProcess").show();
+        //$(".startConvertProcess").show();
         console.log("Ciclo iniciado");
     }
 
@@ -100,7 +100,7 @@
                 success: function (t) {
                     if(t === "False"){
                         //stopConvertProcess();
-                        $(".convertProgress").text("voraz: no!");
+                        $(".convertProgress").text("voraz: ¿Qué intentas hacer?");
                     }
                     else{
                         stopConvertProcess();
@@ -110,5 +110,5 @@
             });
 
 
-        });
+    });
 

@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <!--ALGORITMO VORAZ-->
-    <div class= "convertProcess d-flex my-3">
+    <div class= "convertProcess d-flex mb-5">
         <div class=" flex-fill">
             <h2 class="my-2">Convertir imagenes
                 <span class="badge badge-primary convertProgress">voraz</span>
@@ -18,26 +18,66 @@
     </div>
     <hr />
     <!-- ALGORTIMO DE ANALISIS DE DISTRIBUCION DE PIXELES-->
-    <div class ="analysisProcess my-3">
-        <h2 class="my-2">
+    <div class ="analysisProcess my-5">
+        <h2 class="my-4">
             <span class="badge badge-primary ">Analizar</span>
             datos del voraz
+            <span class="badge badge-warning text-dark status-AnalysisiProcess"></span>
         </h2>
         <div class="analysisProcessInfo my-3">
-            {% if analysisInfo %}
-                {{analysisInfo}}
+            {%if markup%}
+            {{markup}}
             {%endif%}
         </div>
-        <a class = "my-2 text-white btn btn-primary startAnalysisProcess" href={{ url_for('analyze') }}>Analizar</a>
+        <a class = "my-2 text-white btn badge-primary startAnalysisProcess" methodUrl={{ url_for('analyze') }}>Analizar</a>
     </div>
-
+    <hr />
     <!--ALGORITMO GENETICO-->
+    <div class ="geneticProcess my-5">
+        <h2 class="status my-4">
+            Algoritmo
+            <span class="badge badge-primary ">Genetico</span>
+            <span class="badge badge-warning text-dark status-createGenetic"></span>
+        </h2>
+        <a class = "my-2 text-white btn badge-primary createGenetic" methodUrl={{ url_for('genetic') }}>Crear Estructura</a>
 
+        <div class="geneticProcessInfo my-3">
+
+            <div class="geneticFlowerPart my-4">
+                <h3 class="info my-4">
+                   Genetico del color del pétalo
+                    <span class="badge badge-warning text-dark status-geneticProcess"></span>
+                </h3>
+                <div class = "geneticInfo"></div>
+                <div class="d-flex justify-content-start">
+                    <a class = "text-white btn badge-primary startGeneticProcess" flowerPartId="1" methodUrl="/startGenetic">Iniciar</a>
+                    <a class = "text-white btn badge-primary pauseGeneticProcess" flowerPartId="1" methodUrl="/pauseGenetic">Pausar</a>
+                </div>
+            </div>
+
+            <div class="geneticFlowerPart my-4">
+                <h3 class="info my-4">
+                   Genetico del color del centro
+                    <span class="badge badge-warning text-dark status-geneticProcess"></span>
+                </h3>
+                <div class = "geneticInfo"></div>
+                <div class="d-flex justify-content-start">
+                    <a class = "text-white btn badge-primary startGeneticProcess" flowerPartId="2" methodUrl="/startGenetic">Iniciar</a>
+                    <a class = "text-white btn badge-primary pauseGeneticProcess" flowerPartId="2" methodUrl="/pauseGenetic">Pausar</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 
 {% endblock content %}
 
 {% block scripts  %}
         <script src="{{url_for('static', filename='convertProcess.js')}}"></script>
+        <script src="{{url_for('static', filename='analysisProcess.js')}}"></script>
+        <script src="{{url_for('static', filename='geneticProcess.js')}}"></script>
+
 {% endblock %}
 
 

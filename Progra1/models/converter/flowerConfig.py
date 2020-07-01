@@ -23,5 +23,5 @@ class FlowerConfig:
     #Convert image
     BACKGROUND_COLOR = (0,0,0) #Black
     OUTLINE_COLOR = (255,255,255) #White
-    HIGHLIGHT_COLOR = (235, 64, 52)
+    HIGHLIGHT_COLOR = (75, 119, 115)
     DIFFERENCE_COLOR_LIMIT = 45

@@ -20,6 +20,8 @@ class Distribution:
         self.range[0] = min
         self.range[1] = math.floor(min + self.totalBits*(self.percentage/100) - 1)
 
+    def setMaxRange(self, max):
+        self.range[1] = max
         
     def setTotal(self, total):
         self.totalBits = total
