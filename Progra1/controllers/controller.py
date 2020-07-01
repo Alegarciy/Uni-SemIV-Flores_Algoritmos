@@ -68,6 +68,11 @@ class Controller:
                 return "False"
 
 
+        @staticmethod
+        def getMarkup():
+            return Controller.imageAnalyzer.getMarkup()
+
+
         #------GENETIC-------
         @staticmethod
         def setGenetic():
@@ -89,11 +94,9 @@ class Controller:
         @staticmethod
         def pauseGenetic(flowerPartId):
             if flowerPartId == FlowerPartConfig.PETAL_ID:
-                Controller.genetic.pause(FlowerPartConfig.PETAL)
-                return "True"
+                return Controller.genetic.pause(FlowerPartConfig.PETAL)
             if flowerPartId == FlowerPartConfig.CENTER_ID:
-                Controller.genetic.pause(FlowerPartConfig.CENTER)
-                return "True"
+                return Controller.genetic.pause(FlowerPartConfig.CENTER)
             else:
                 return "False"
 

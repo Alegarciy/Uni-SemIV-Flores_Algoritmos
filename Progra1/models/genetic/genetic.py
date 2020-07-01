@@ -31,8 +31,11 @@ class Genetic:
             return "False"
 
     def pause(self, flowerPart):
-        if flowerPart in self.GAs:
+        if flowerPart in self.GAs and self.GAs[flowerPart].isStarted():
             self.GAs[flowerPart].pause()
+            return "True"
+        else:
+            return "False"
 
     def draw(self):
         petal = self.flowerParts[FlowerPartConfig.PETAL]

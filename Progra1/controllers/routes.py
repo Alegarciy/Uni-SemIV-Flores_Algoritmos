@@ -27,7 +27,8 @@ Config.DATADIRECTORY = uploads_dir
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html')
+    markup_ = Controller.getMarkup()
+    return render_template('home.html', markup=markup_)
 
 @app.route("/about")
 def about():

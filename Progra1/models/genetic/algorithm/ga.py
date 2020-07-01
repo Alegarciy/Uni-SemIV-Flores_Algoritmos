@@ -10,14 +10,23 @@ class GA:
         self.__mutations = 0
         self.__generation = 0
         self.__isRunning = False
+        self.__started = False
 
     def run(self):
         self.__isRunning = True
+        self.__started = True
         while(self.__isRunning):
             print("I am running" + self.__flowerPart)
+            #select
+            #cross-over
+            #mutate
+            #evaluate
 
     def isRunning(self):
         return self.__isRunning
+
+    def isStarted(self):
+        return self.__started
 
     def pause(self):
         self.__isRunning = not self.__isRunning

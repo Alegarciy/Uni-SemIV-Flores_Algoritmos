@@ -16,7 +16,6 @@
                         console.log("False");
                     }
                     else{
-                        stopConvertProcess();
                         geneticStatus.text("Estructura creada");
                         console.log("True");
                     }
@@ -30,18 +29,17 @@
         function () {
             url = $(this).attr("methodUrl");
             flowerPartId = $(this).attr("flowerPartId");
-            processStatus = $(this).parent('.geneticFlowerPart').children(".info").children('.status-geneticProcess');
+            processStatus = $(this).parent().parent().children(".info").children('.status-geneticProcess');
             $.ajax({
                 url: url + "/" + flowerPartId, //the page containing python script
                 type: "get", //request type,
                 success: function (status) {
                     if(status === "False"){
-                        processStatus.text("Algo extraño sucedio...");
+                        processStatus.text("¿Ya creaste la estuctura?");
                         $(this).show();
                         console.log("False");
                     }
                     else{
-                        stopConvertProcess();
                         processStatus.text("en ejecucion");
                         console.log("True");
                     }
@@ -54,22 +52,27 @@
         function () {
             url = $(this).attr("methodUrl");
             flowerPartId = $(this).attr("flowerPartId");
-            processStatus = $(this).parent('.geneticFlowerPart').children('.status-geneticProcess');
+            processStatus = $(this).parent().parent().children('.info').children('.status-geneticProcess');
             $.ajax({
                 url: url + "/" + flowerPartId, //the page containing python script
                 type: "get", //request type,
                 success: function (status) {
                     if(status === "False"){
-                        processStatus.text("Algo extraño sucedio...");
+                        processStatus.text("Primero inicia el genético");
                         $(this).show();
                         console.log("False");
                     }
                     else{
-                        stopConvertProcess();
-                        processStatus.text("en ejecucion");
+                        if($(this).getText() === "Pausar"){
+                            $(this).text("Continuar");
+                        }
+                        else{
+                           $(this).text("Pausar");
+                        }
+                        $(this).text("");
+                        processStatus.text("En ejecucion");
                         console.log("True");
                     }
-
                 }
             });
     });
