@@ -38,5 +38,6 @@ class Distribution:
     def getPercentage(self):
         return self.percentage
 
+
     def print(self):
         print("[", self.getQuantity(), " ", "%",  self.getPercentage(), " (" , self.getRangeMin(), self.getRangeMax(), ")", "]")

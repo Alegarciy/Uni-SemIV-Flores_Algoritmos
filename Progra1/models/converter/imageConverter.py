@@ -1,4 +1,6 @@
 from matplotlib import pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
 import numpy as np
 from skimage import io
 import io as i_o
@@ -94,7 +96,8 @@ class ImageConverter:
         flowerPixels = flowerImage.getFlower() #Subestructura
         size_i = flowerImage.getSize_I()
         size_j = flowerImage.getSize_J()
-        indexDic = {}
+        indexDicPetals = {}
+        indexDicCenter = {}
         self.total = size_j*size_i
         for i in range(0,size_i-1):
             for j in range(0, size_j-1):
@@ -106,9 +109,14 @@ class ImageConverter:
                     if(centerColorDif <= FlowerConfig.DIFFERENCE_COLOR_LIMIT):
                         center = flowerImage.getCenter()
                         center[i, j] = flowerPixels[i, j]
-
                         centerPixels = flowerImage.getCenterPixels()
-                        centerPixels.append(PixelFlower(flowerPixels[i, j], math.floor(centerColorDif), (i, j)))
+
+                        if  math.floor(centerColorDif) not in indexDicCenter:
+                            centerPixels.append(PixelFlower(flowerPixels[i, j], math.floor(centerColorDif), (i, j)))
+                            indexDicCenter[math.floor(centerColorDif)] = len(centerPixels) - 1 #last item inserted
+                        else : # if key is inserted
+                            index = indexDicCenter[math.floor(centerColorDif)]
+                            centerPixels[index].incrementQuantity()
 
                 elif(self.isInPetal(i,j,info)): #Criterio
                     petalColorDif = self.getPetalColorDif(flowerPixels[i, j], info)
@@ -118,11 +126,11 @@ class ImageConverter:
                         petal[i, j] = flowerPixels[i, j]
                         petalPixels = flowerImage.getPetalPixels()
 
-                        if  math.floor(petalColorDif) not in indexDic:
+                        if  math.floor(petalColorDif) not in indexDicPetals:
                             petalPixels.append(PixelFlower(flowerPixels[i, j], math.floor(petalColorDif), (i, j)))
-                            indexDic[math.floor(petalColorDif)] = len(petalPixels) - 1 #last item inserted
+                            indexDicPetals[math.floor(petalColorDif)] = len(petalPixels) - 1 #last item inserted
                         else : # if key is inserted
-                            index = indexDic[math.floor(petalColorDif)]
+                            index = indexDicPetals[math.floor(petalColorDif)]
                             petalPixels[index].incrementQuantity()
                             
         flowerImage.sortByDifference()

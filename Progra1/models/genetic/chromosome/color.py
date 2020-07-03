@@ -28,34 +28,6 @@ class Color(GeneticChromosome):
         d = delta_e_cie2000(color_lab_1, color_lab_2)
         return d
 
-    def calculateAverageColor(self, colorList):
-        size = len(colorList)
-        accumulatedR = 0
-        accumulatedG = 0
-        accumulatedB = 0
-        resultRGB = 0
-        for color in colorList:
-            accumulatedR += color[0]
-            accumulatedG += color[1]
-            accumulatedB += color[2]
-        
-        resultRGB = [math.floor(accumulatedR/size), math.floor(accumulatedG/size), math.floor(accumulatedB/size)]
-        return resultRGB
-
-    
-    def analyzeDistributionList2(self, col, flowerNumber):
-        
-        currentDifference = 0
-        currentList = []
-        for pixel in pixelList:
-            if(currentDifference != pixel.getIdealDiference()):
-                #averageColor = self.calculateAverageColor(currentList)
-                self.__averageColorList.append([currentList,len(currentList),flowerNumber, currentDifference])
-                currentList = []
-                currentDifference += 1
-            currentList.append(pixel.getRGB())
-        print(len(self.__averageColorList))
-
     def analyzeDistributionList(self, colorList, flowerNumber):
         
         for colorPixel in colorList:
@@ -85,7 +57,6 @@ class Color(GeneticChromosome):
 
     #define abstract method
     def analyzeDistribution(self, flowerPartPixels, flowerPartImageInfo): #Como creo la tabla de distribucion para los coleres
-
         print("analyze COLOR")
         floweNumber = 0
         numElements = 0
@@ -97,29 +68,41 @@ class Color(GeneticChromosome):
             floweNumber += 1
 
         #Create a distribution table 
-        print('TACO MINIMO') 
-        print(numElements)     
-        self.__representationTable = self.createDistributionTable(self.__averageColorList, numElements, 65535) #Numero magico
-        print('TACO MEDIO')   
+        #print(numElements)     
+        self.__representationTable = self.createDistributionTable(self.__averageColorList, numElements, 65535) #Numero magico  
         for element in self.__representationTable:
            print("Color:", element[0], end=" ")
            element[1].print()
-        #print(len(self.__representationTable))
-        print('TACO MAXIMO')   
-
-        
-        #print('TACO MAXIMO')
-        #for element in self.__averageColorList:
-        #print(element[0], element[1], element[2], element[3])
-        #print(self.chromosomeDistribution)
 
         self.setAnalyzeInfo()
         return self.analyzeInfo
 
     def setAnalyzeInfo(self):
-        images = []
+        images = [] #array
         index = 1
-        images.append([np.zeros([1000, 1000, 3], dtype=np.uint8), "Colors"])
+        images.append([np.zeros([1000, 1000, 3], dtype=np.uint8), "Colors"]) #images[0]
+        distributionTemp = self.__representationTable
+        paintDistribution = []
+        totalLength = 1000 * 1000
+
+        for element in distributionTemp:
+            paintDistribution.append([element[0],math.floor(totalLength * element[1].getPercentage() / 100)])
+            print(element[0], " Cantidad para llenar imagen: ",totalLength * element[1].getPercentage())
+
+        paintDistributionIndx = 0
+
+        # Fill with color      
+        for x in range(0,1000):
+            for y in range(0, 1000):
+                if(paintDistributionIndx < len(paintDistribution) - 1 and paintDistribution[paintDistributionIndx][1] <= 0):
+                    print(paintDistribution[paintDistributionIndx][1])
+                    print('PAIN')
+                    paintDistributionIndx += 1
+                images[0][0][y][x] = paintDistribution[paintDistributionIndx][0] #Blue
+                paintDistribution[paintDistributionIndx][1] -= 1
+                
+                
+
         self.analyzeInfo[AnalyzeInfoConfig.DESCRIPTION] = "Colores del "
         self.analyzeInfo[AnalyzeInfoConfig.IMAGES] = images
 
