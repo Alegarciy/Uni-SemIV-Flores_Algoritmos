@@ -4,6 +4,7 @@ from colormath.color_diff import delta_e_cie2000
 from models.genetic.chromosome.Chromosome import Chromosome
 from models.genetic.chromosome.GeneticChromosome import GeneticChromosome
 from models.genetic.chromosome.analyzeInfoConfig import AnalyzeInfoConfig
+from models.genetic.algorithm.individual import Individual
 import numpy as np
 
 from abc import ABC, abstractmethod
@@ -74,7 +75,31 @@ class Color(GeneticChromosome):
             indexTemp += 1
         for element in self.__dominantColors:
             print("Dominant color:", element[0])
+
+    #Get data from distribution table
+    def findRange(self, value):
+        for rangedValue in self.__representationTable:
+            if(rangedValue[1].getRangeMin() <= value and rangedValue[1].getRangeMax() >= value):
+                return rangedValue[0]
+        print('No se encontro rango')
+        return self.__representationTable[0][0]
         
+
+    #Calcultated the fitness of an individual
+    #Stores the resullt on individual
+    def fitness(self, individual):
+        range = individual.getIntValue()
+        print('Gene: ',individual.getGene())
+        print('Gene value: ',range)
+        color = self.findRange(range)
+        print('Gene color: ',color)
+        fitnessValue = 0
+        for dominantColor in self.__dominantColors:
+            print('Dominant color: ',dominantColor[0])
+            fitnessValue += Color.colorDifference(color,dominantColor[0])
+        print('Fitness value: ', fitnessValue)
+        individual.setFitness(fitnessValue)
+
 
     #define abstract method
     def analyzeDistribution(self, flowerPartPixels, flowerPartImageInfo): #Como creo la tabla de distribucion para los coleres
@@ -96,10 +121,16 @@ class Color(GeneticChromosome):
            print("Color:", element[0], end=" ")
            element[1].print()
 
+        #Get dominant colors or color
         print("BROWN KNEE")
         self.defineDominantColors(ChromosomeConfig.DOMINANT_COLORS)
 
-        #Set ideal fitness based on color distribution table
+        #Test individual
+        individual = Individual()
+        print('LET FITNESS BEGIN')
+        self.fitness(individual)
+        print('LET FITNESS END')
+        
 
         self.setAnalyzeInfo()
         return self.analyzeInfo
@@ -135,6 +166,4 @@ class Color(GeneticChromosome):
         self.analyzeInfo[AnalyzeInfoConfig.IMAGES] = images
 
 
-    #Define abstract method
-    def fitness(self):
-        pass
+
