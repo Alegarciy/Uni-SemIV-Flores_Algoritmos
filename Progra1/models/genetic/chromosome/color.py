@@ -12,12 +12,16 @@ import webcolors
 import math
 from models.genetic.chromosome.Distribution import Distribution
 
+from models.genetic.chromosome.chromosomeConfig import ChromosomeConfig
+
 class Color(GeneticChromosome):
 
     def __init__(self):
         super().__init__()
         self.__averageColorList = [] # [0,0,0] list of rgb
         self.__representationTable = None #Distribution type
+        self.__idealFitness = None # Needed for fitness comparison
+        self.__dominantColors = [] #it can be just one color [[RGB], Quantity]
 
     @staticmethod
     def colorDifference(color_rgb_1, color_rgb_2):
@@ -28,14 +32,14 @@ class Color(GeneticChromosome):
         d = delta_e_cie2000(color_lab_1, color_lab_2)
         return d
 
+    #Give formated information to class vatiable "averageColorList"
     def analyzeDistributionList(self, colorList, flowerNumber):
-        
         for colorPixel in colorList:
             self.__averageColorList.append([colorPixel.getRGB(),colorPixel.getQuantity(),flowerNumber,colorPixel.getIdealDiference()])
 
+    # Average color list compostion: [RGB Subgroup, times it appears, currentFlower,   ((x)) currentDifference]
+    # distributionTable : [RGB Subgroup, Distribution]
     def createDistributionTable(self, avergeColorList, numElements, binaryRepresentation):
-        # Average color list compostion: [RGB Subgroup, times it appears, currentFlower,   ((x)) currentDifference]
-        # distributionTable : [RGB Subgroup, Distribution]
         minimun = 0
         distributionTable = []
         currentDistribution = None
@@ -53,7 +57,24 @@ class Color(GeneticChromosome):
             distributionTable.append([color[0], currentDistribution])
         return distributionTable
 
-
+    # Get dominant colors on the chromosome color
+    def defineDominantColors(self, dominantColorQuantity):
+        distributionTable = []
+        indexTemp = 0
+	    #Read desired data from representation table
+        for element in self.__representationTable:
+            distributionTable.append([element[0], element[1].getQuantity()])
+	    #Sort base on second row(quantity)
+        quantity = lambda distributionTable: distributionTable[1]
+        distributionTable.sort(key=quantity, reverse =True)
+	    #Set desired colors of dominance
+        while(dominantColorQuantity > 0):
+            dominantColorQuantity -= 1
+            self.__dominantColors.append(distributionTable[indexTemp])
+            indexTemp += 1
+        for element in self.__dominantColors:
+            print("Dominant color:", element[0])
+        
 
     #define abstract method
     def analyzeDistribution(self, flowerPartPixels, flowerPartImageInfo): #Como creo la tabla de distribucion para los coleres
@@ -67,16 +88,25 @@ class Color(GeneticChromosome):
                 numElements += colorPixels.getQuantity()
             floweNumber += 1
 
-        #Create a distribution table 
-        #print(numElements)     
+        #Create distribution table
         self.__representationTable = self.createDistributionTable(self.__averageColorList, numElements, 65535) #Numero magico  
+
+        #Print the distribution table  
         for element in self.__representationTable:
            print("Color:", element[0], end=" ")
            element[1].print()
 
+        print("BROWN KNEE")
+        self.defineDominantColors(ChromosomeConfig.DOMINANT_COLORS)
+
+        #Set ideal fitness based on color distribution table
+
         self.setAnalyzeInfo()
         return self.analyzeInfo
 
+
+
+    # Give the browser a representation of the flowerPart color
     def setAnalyzeInfo(self):
         images = [] #array
         index = 1
@@ -85,18 +115,16 @@ class Color(GeneticChromosome):
         paintDistribution = []
         totalLength = 1000 * 1000
 
+        #Make color distribution table for image
         for element in distributionTemp:
             paintDistribution.append([element[0],math.floor(totalLength * element[1].getPercentage() / 100)])
-            print(element[0], " Cantidad para llenar imagen: ",totalLength * element[1].getPercentage())
 
         paintDistributionIndx = 0
 
-        # Fill with color      
+        # Fill with color mathplot representation      
         for x in range(0,1000):
             for y in range(0, 1000):
                 if(paintDistributionIndx < len(paintDistribution) - 1 and paintDistribution[paintDistributionIndx][1] <= 0):
-                    print(paintDistribution[paintDistributionIndx][1])
-                    print('PAIN')
                     paintDistributionIndx += 1
                 images[0][0][y][x] = paintDistribution[paintDistributionIndx][0] #Blue
                 paintDistribution[paintDistributionIndx][1] -= 1
