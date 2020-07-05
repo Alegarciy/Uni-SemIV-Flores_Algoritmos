@@ -23,6 +23,7 @@ class Color(GeneticChromosome):
         self.__representationTable = None #Distribution type
         self.__idealFitness = None # Needed for fitness comparison
         self.__dominantColors = [] #it can be just one color [[RGB], Quantity]
+        self.__blendDominantColor = [0,0,0] #RGB
 
     @staticmethod
     def colorDifference(color_rgb_1, color_rgb_2):
@@ -33,10 +34,26 @@ class Color(GeneticChromosome):
         d = delta_e_cie2000(color_lab_1, color_lab_2)
         return d
 
+    @staticmethod
+    # https://www.colorhexa.com (formula)
+    def blendColors(colorList):
+        size = len(colorList)
+        accumulatedR = 0
+        accumulatedG = 0
+        accumulatedB = 0
+        resultRGB = 0
+        for color in colorList:
+            accumulatedR += color[0]
+            accumulatedG += color[1]
+            accumulatedB += color[2]
+
+        resultRGB = [math.floor(accumulatedR/size), math.floor(accumulatedG/size), math.floor(accumulatedB/size)]
+        return resultRGB
+
     #Give formated information to class vatiable "averageColorList"
-    def analyzeDistributionList(self, colorList, flowerNumber):
+    def analyzeDistributionList(self, colorList):
         for colorPixel in colorList:
-            self.__averageColorList.append([colorPixel.getRGB(),colorPixel.getQuantity(),flowerNumber,colorPixel.getIdealDiference()])
+            self.__averageColorList.append([colorPixel.getRGB(),colorPixel.getQuantity(),colorPixel.getFlowerNumber(),colorPixel.getIdealDiference()])
 
     # Average color list compostion: [RGB Subgroup, times it appears, currentFlower,   ((x)) currentDifference]
     # distributionTable : [RGB Subgroup, Distribution]
@@ -50,6 +67,7 @@ class Color(GeneticChromosome):
             currentDistribution.setTotal(binaryRepresentation)
             currentDistribution.setQuantity(color[1]) # color size
             currentDistribution.setPercentage(numElements) # %
+            currentDistribution.setFlowerNumber(color[2]) #Flower number of color
             currentDistribution.setRange(minimun) 
             minimun = math.floor((currentDistribution.getRangeMax())) + 1
             if(color is avergeColorList[-1]):
@@ -59,22 +77,38 @@ class Color(GeneticChromosome):
         return distributionTable
 
     # Get dominant colors on the chromosome color
-    def defineDominantColors(self, dominantColorQuantity):
+    def defineDominantColors(self, dominantColorQuantity, flowerNumber):
         distributionTable = []
+        colorList = []
         indexTemp = 0
+        dominantsQuantity = dominantColorQuantity * flowerNumber
+        memoryDic = {}
 	    #Read desired data from representation table
         for element in self.__representationTable:
-            distributionTable.append([element[0], element[1].getQuantity()])
+            distributionTable.append([element[0], element[1].getQuantity(), element[1].getFloweNumber()])
 	    #Sort base on second row(quantity)
         quantity = lambda distributionTable: distributionTable[1]
         distributionTable.sort(key=quantity, reverse =True)
-	    #Set desired colors of dominance
-        while(dominantColorQuantity > 0):
-            dominantColorQuantity -= 1
-            self.__dominantColors.append(distributionTable[indexTemp])
+	    #Set desired colors of dominance for each flower
+        while(dominantsQuantity > 0):
+
+            if distributionTable[indexTemp][2] not in memoryDic:
+                memoryDic[distributionTable[indexTemp][2]] = 1 #index = floweNumber
+                self.__dominantColors.append(distributionTable[indexTemp])
+                dominantsQuantity -= 1
+            elif memoryDic[distributionTable[indexTemp][2]] < dominantColorQuantity:
+                memoryDic[distributionTable[indexTemp][2]] += 1
+                self.__dominantColors.append(distributionTable[indexTemp])
+                dominantsQuantity -= 1
+            
             indexTemp += 1
+        #Get only dominant color
         for element in self.__dominantColors:
+            colorList.append(element[0])
             print("Dominant color:", element[0])
+        #Blend color
+        self.__blendDominantColor = self.blendColors(colorList)
+        print("Dominant blend color:", self.__blendDominantColor)
 
     #Get data from distribution table
     def findRange(self, value):
@@ -94,9 +128,8 @@ class Color(GeneticChromosome):
         color = self.findRange(range)
         print('Gene color: ',color)
         fitnessValue = 0
-        for dominantColor in self.__dominantColors:
-            print('Dominant color: ',dominantColor[0])
-            fitnessValue += Color.colorDifference(color,dominantColor[0])
+        # Calculate fitness from dominant blend color
+        fitnessValue = Color.colorDifference(color,self.__blendDominantColor)
         print('Fitness value: ', fitnessValue)
         individual.setFitness(fitnessValue)
 
@@ -108,7 +141,7 @@ class Color(GeneticChromosome):
         numElements = 0
         for colorList in flowerPartPixels:
             #Store data in variable self.__averageColorList
-            self.analyzeDistributionList(colorList, floweNumber)
+            self.analyzeDistributionList(colorList)
             for colorPixels in colorList:
                 numElements += colorPixels.getQuantity()
             floweNumber += 1
@@ -123,7 +156,7 @@ class Color(GeneticChromosome):
 
         #Get dominant colors or color
         print("BROWN KNEE")
-        self.defineDominantColors(ChromosomeConfig.DOMINANT_COLORS)
+        self.defineDominantColors(ChromosomeConfig.DOMINANT_COLORS, floweNumber)
 
         #Test individual
         individual = Individual()

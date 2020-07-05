@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8e0719f0-2ea9-41f6-8e3b-dece70138e1b" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/Progra1/models/genetic/algorithm/individual.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Progra1/models/genetic/algorithm/poblation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Progra1/models/genetic/algorithm/population.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ImagenesDePrueba/flor1.json" beforeDir="false" afterPath="$PROJECT_DIR$/ImagenesDePrueba/flor1.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ImagenesDePrueba/flor3.json" beforeDir="false" afterPath="$PROJECT_DIR$/ImagenesDePrueba/flor3.json" afterDir="false" />
@@ -87,7 +87,7 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/algorithm/poblation.py">
+        <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/algorithm/population.py">
           <provider selected="true" editor-type-id="text-editor">
             <state>
               <caret column="12" selection-start-column="12" selection-end-column="12" />
@@ -222,7 +222,7 @@
         <option value="$PROJECT_DIR$/Progra1/models/genetic/algorithm/ga.py" />
         <option value="$PROJECT_DIR$/Progra1/models/genetic/algorithm/GAConfig.py" />
         <option value="$PROJECT_DIR$/Progra1/models/genetic/algorithm/individual.py" />
-        <option value="$PROJECT_DIR$/Progra1/models/genetic/algorithm/poblation.py" />
+        <option value="$PROJECT_DIR$/Progra1/models/genetic/algorithm/population.py" />
       </list>
     </option>
   </component>
@@ -883,7 +883,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/algorithm/poblation.py">
+    <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/algorithm/population.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="12" selection-start-column="12" selection-end-column="12" />

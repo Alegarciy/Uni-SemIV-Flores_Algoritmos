@@ -6,9 +6,12 @@ class Distribution:
         self.percentage = 0
         self.range = [0,0]
         self.totalBits = 0
+        self.flowerNumber = 0
 
     def add(self):
         self.quantity += 1
+
+    #Setter
 
     def setQuantity(self, total):
         self.quantity = total
@@ -26,6 +29,11 @@ class Distribution:
     def setTotal(self, total):
         self.totalBits = total
 
+    def setFlowerNumber(self, num):
+        self.flowerNumber = num
+
+    #Getter
+
     def getRangeMin(self):
         return self.range[0]
 
@@ -38,6 +46,9 @@ class Distribution:
     def getPercentage(self):
         return self.percentage
 
+    def getFloweNumber(self):
+        return self.flowerNumber
+
 
     def print(self):
-        print("[", self.getQuantity(), " ", "%",  self.getPercentage(), " (" , self.getRangeMin(), self.getRangeMax(), ")", "]")
+        print("[", self.getQuantity(), " ", "%",  self.getPercentage(), " (" , self.getRangeMin(), self.getRangeMax(), ")", " #", self.getFloweNumber(), "]")

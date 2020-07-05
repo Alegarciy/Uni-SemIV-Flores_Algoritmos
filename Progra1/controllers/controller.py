@@ -77,6 +77,7 @@ class Controller:
         @staticmethod
         def setGenetic():
             if Controller.imageAnalyzer.finished:
+                print('ahoyyyyy')
                 Controller.genetic.setGenetic(Controller.imageAnalyzer.getFlowerParts())
                 return "True"
             else:
@@ -85,8 +86,10 @@ class Controller:
         @staticmethod
         def startGenetic(flowerPartId):
             if flowerPartId == FlowerPartConfig.PETAL_ID:
-               return Controller.genetic.start(FlowerPartConfig.PETAL, ChromosomeConfig.COLOR)
+                print('PRA PRA')
+                return Controller.genetic.start(FlowerPartConfig.PETAL, ChromosomeConfig.COLOR)
             if flowerPartId == FlowerPartConfig.CENTER_ID:
+                print('PRRRRR')
                 return Controller.genetic.start(FlowerPartConfig.CENTER, ChromosomeConfig.COLOR)
             else:
                 return "False"

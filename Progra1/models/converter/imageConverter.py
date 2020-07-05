@@ -77,9 +77,11 @@ class ImageConverter:
     def convert(self):
         self.isRunning = True
         self.imageIndex = 0
+        flowerNumber = 0
         for flowerImage in self.userImages:
-            self.convertImage(flowerImage)
+            self.convertImage(flowerImage, flowerNumber)
             self.imageIndex += 1
+            flowerNumber += 1
 
         if(self.imageIndex>=len(self.userImages)>0):
             self.finished = True
@@ -91,7 +93,7 @@ class ImageConverter:
 
     #Algoritmo voraz
 
-    def convertImage(self, flowerImage):
+    def convertImage(self, flowerImage, flowerNumber):
         info = flowerImage.getJsonData()
         flowerPixels = flowerImage.getFlower() #Subestructura
         size_i = flowerImage.getSize_I()
@@ -112,7 +114,7 @@ class ImageConverter:
                         centerPixels = flowerImage.getCenterPixels()
 
                         if  math.floor(centerColorDif) not in indexDicCenter:
-                            centerPixels.append(PixelFlower(flowerPixels[i, j], math.floor(centerColorDif), (i, j)))
+                            centerPixels.append(PixelFlower(flowerPixels[i, j], math.floor(centerColorDif), (i, j), flowerNumber))
                             indexDicCenter[math.floor(centerColorDif)] = len(centerPixels) - 1 #last item inserted
                         else : # if key is inserted
                             index = indexDicCenter[math.floor(centerColorDif)]
@@ -127,7 +129,7 @@ class ImageConverter:
                         petalPixels = flowerImage.getPetalPixels()
 
                         if  math.floor(petalColorDif) not in indexDicPetals:
-                            petalPixels.append(PixelFlower(flowerPixels[i, j], math.floor(petalColorDif), (i, j)))
+                            petalPixels.append(PixelFlower(flowerPixels[i, j], math.floor(petalColorDif), (i, j), flowerNumber))
                             indexDicPetals[math.floor(petalColorDif)] = len(petalPixels) - 1 #last item inserted
                         else : # if key is inserted
                             index = indexDicPetals[math.floor(petalColorDif)]

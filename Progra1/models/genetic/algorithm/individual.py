@@ -22,6 +22,9 @@ class Individual:
 
     def getGene(self):
         return self.genes
+
+    def getFitness(self):
+        return self.fitness
     
     def getIntValue(self):
         exp = self.geneLength - 1

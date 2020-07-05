@@ -4,4 +4,4 @@ class ChromosomeConfig:
     OUTLINE = "outline"
     SHAPE = "shape"
     
-    DOMINANT_COLORS = 1
+    DOMINANT_COLORS = 2

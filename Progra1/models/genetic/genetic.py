@@ -8,23 +8,38 @@ class Genetic:
     def __init__(self):
         self.drawer = DrawFlower()
         self.flowerParts = {}
-        self.GAs = {}
+        self.GAs = {} # GA obj
 
     def setGenetic(self, analazyedFlowerParts):
         self.flowerParts = analazyedFlowerParts.copy()
 
 
     def start(self, flowerPart, chromosome):
-        if flowerPart in self.GAs:
+        print('MA A XIIIII')
+        if flowerPart in self.flowerParts: #self.GAs
+            
+            #if not exists create key
+            if flowerPart not in self.GAs:
+                    self.GAs[flowerPart] = GA(
+                    self.flowerParts[flowerPart].getChromosome(chromosome),
+                    flowerPart,
+                    100 #CAMBIAR ES SOLO DE PRUEBA
+                )
+
+            #Start run()
             if self.GAs[flowerPart].isRunning():
                 self.GAs[flowerPart].pause()
                 self.GAs.pop(flowerPart)
 
+            #Start new GA
             self.GAs[flowerPart] = GA(
-                self.flowerParts[flowerPart][chromosome],
+                self.flowerParts[flowerPart].getChromosome(chromosome),
                 flowerPart,
                 100 #CAMBIAR ES SOLO DE PRUEBA
             )
+
+            print("QUE E SOOOOO")
+            self.GAs[flowerPart].run()
             return "True"
 
         else:
