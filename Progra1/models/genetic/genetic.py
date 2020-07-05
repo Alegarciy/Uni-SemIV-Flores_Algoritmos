@@ -13,7 +13,6 @@ class Genetic:
     def setGenetic(self, analazyedFlowerParts):
         self.flowerParts = analazyedFlowerParts.copy()
 
-
     def start(self, flowerPart, chromosome):
         if flowerPart in self.GAs:
             if self.GAs[flowerPart].isRunning():
@@ -39,12 +38,13 @@ class Genetic:
 
     def draw(self):
         petal = self.flowerParts[FlowerPartConfig.PETAL]
-        petalShape = petal.chromosomes[ChromosomeConfig.SHAPE]
-        petalArea = petalShape.combinationOfAreas
-        qPetals = petal.quantity
-        #colors = ...
-        colors = [50,50,255]
-        petalDistance = petalShape.distance
-        flower = self.drawer.drawFlower(petalArea, qPetals, colors, petalDistance)
+        center = self.flowerParts[FlowerPartConfig.CENTER]
+
+        #Los colores se obtienen del gentico
+        petalColors = [255, 0, 0]
+        centerColors = [0, 0, 255]
+
+        flower = self.drawer.drawFlower(petal, petalColors, center, centerColors)
+
         plt.imshow(flower)
         plt.show()

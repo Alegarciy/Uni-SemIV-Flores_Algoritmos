@@ -158,10 +158,11 @@ class ImageConverter:
         images = [flowerImage.getFlower(), flowerImage.getPetal(), flowerImage.getCenter()]
         titles = ["Flower", "Petal", "Center"]
         fig, axs = plt.subplots(1, 3, figsize=(8, 4), constrained_layout=True)
+        fig.patch.set_visible(False)
         for ax, image, title in zip(axs, images, titles):
             ax.imshow(image)
             ax.set_title(title)
-
+            ax.axis('off')
 
         img = i_o.BytesIO()
         plt.savefig(img, format = "png")
