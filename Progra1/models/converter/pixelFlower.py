@@ -3,11 +3,12 @@
 
 class PixelFlower:
 
-    def __init__(self, rgb, idealDiferences, position):
+    def __init__(self, rgb, idealDiferences, position, flowerNumber):
         self.__rgb = rgb
         self.idealDiference = idealDiferences
         self.__position = position
         self.__quantity = 1
+        self.__flowerNum = flowerNumber
 
     #Functions
 
@@ -31,3 +32,6 @@ class PixelFlower:
 
     def getQuantity(self):
         return self.__quantity
+
+    def getFlowerNumber(self):
+        return self.__flowerNum

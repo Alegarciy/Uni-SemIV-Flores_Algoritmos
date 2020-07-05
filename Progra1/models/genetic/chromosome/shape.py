@@ -47,23 +47,23 @@ class Shape(Chromosome):
     #Obtiene el area de una parte de la flor indicandole el punto de inicio y fin a analizar
     def flowerPartArea(self, image, initPos, endPos, increaseInY):
         area = []
-        print("INCREASE: " +str(increaseInY))
+        #print("INCREASE: " +str(increaseInY))
         for y in range((initPos[self.I]), endPos[self.I], increaseInY):
             pixelsInY = 0
-            print("entro y")
+            #print("entro y")
             for xr in range(initPos[self.J], endPos[self.J]):
                 if np.all(image[y, xr][:3] == FlowerConfig.OUTLINE_COLOR):
                     break
                 pixelsInY += 1
                 image[y, xr] = FlowerConfig.HIGHLIGHT_COLOR
-                print("entro xr")
+                #print("entro xr")
 
             for xl in range(initPos[self.J], (initPos[self.J] - (endPos[self.J] - initPos[self.J])), -1):
                 if np.all(image[y, xl][:3] == FlowerConfig.OUTLINE_COLOR):
                     break
                 pixelsInY += 1
                 image[y, xl] = FlowerConfig.HIGHLIGHT_COLOR
-                print("entro xl")
+                #print("entro xl")
 
             area.append(pixelsInY)
 

@@ -8,5 +8,5 @@ class GeneticChromosome(Chromosome):
         self.chromosomeDistribution = {}  # Tabla de distribucion
 
     @abstractmethod
-    def fitness(self):
+    def fitness(self, individual):
         pass
