@@ -7,9 +7,11 @@ class PlotModelDrawer:
 
     @staticmethod
     def draw(image, title):
-        fig, ax = plt.subplots(figsize=(7,4))
+        fig, ax = plt.subplots(figsize=(7, 4))
         ax.imshow(image)
         ax.set_title(title)
+        fig.patch.set_visible(False)
+        ax.axis('off')
 
         img = i_o.BytesIO()
         plt.savefig(img, format="png")

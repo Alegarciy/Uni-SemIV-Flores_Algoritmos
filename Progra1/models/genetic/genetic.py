@@ -12,7 +12,6 @@ class Genetic:
 
     def setGenetic(self, analazyedFlowerParts):
         self.flowerParts = analazyedFlowerParts.copy()
-        self.draw()
 
     def start(self, flowerPart, chromosome):
         if flowerPart in self.GAs:
