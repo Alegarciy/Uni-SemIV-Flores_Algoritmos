@@ -8,12 +8,29 @@ class Population:
 
     #Generate inicial population
     def generatePopulation(self, popSize):
-        for i in range(0,popSize):
+        for i in range(0, popSize):
             self.individuals.append(Individual())
-    
+
+    def purgePopulation(self, deadRate):
+        self.sortPopulation()
+        deletePoint = int(len(self.individuals) * ((100-deadRate)/100))
+
+        print("--SELECT POPULATION--")
+        print("Delete point: " + str(deletePoint))
+        #self.printPopulation()
+        del self.individuals[deletePoint:]
+
+
+
     #Sort population by fitness
     def sortPopulation(self):
         self.individuals = sorted(self.individuals, key=attrgetter('fitness'))
+
+    def getIndividual(self, index):
+        return self.individuals[index]
+
+    def addOffsprings(self, offsprings):
+        self.individuals.extend(offsprings)
 
     #Simple test print
     def printPopulation(self):

@@ -83,13 +83,13 @@ class Color(GeneticChromosome):
         indexTemp = 0
         dominantsQuantity = dominantColorQuantity * flowerNumber
         memoryDic = {}
-	    #Read desired data from representation table
+        #Read desired data from representation table
         for element in self.__representationTable:
             distributionTable.append([element[0], element[1].getQuantity(), element[1].getFloweNumber()])
-	    #Sort base on second row(quantity)
+        #Sort base on second row(quantity)
         quantity = lambda distributionTable: distributionTable[1]
-        distributionTable.sort(key=quantity, reverse =True)
-	    #Set desired colors of dominance for each flower
+        distributionTable.sort(key=quantity, reverse=True)
+        #Set desired colors of dominance for each flower
         while(dominantsQuantity > 0):
 
             if distributionTable[indexTemp][2] not in memoryDic:
@@ -105,38 +105,40 @@ class Color(GeneticChromosome):
         #Get only dominant color
         for element in self.__dominantColors:
             colorList.append(element[0])
-            print("Dominant color:", element[0])
+            #print("Dominant color:", element[0])
         #Blend color
         self.__blendDominantColor = self.blendColors(colorList)
-        print("Dominant blend color:", self.__blendDominantColor)
+        #print("Dominant blend color:", self.__blendDominantColor)
 
     #Get data from distribution table
     def findRange(self, value):
         for rangedValue in self.__representationTable:
             if(rangedValue[1].getRangeMin() <= value and rangedValue[1].getRangeMax() >= value):
                 return rangedValue[0]
-        print('No se encontro rango')
+        #print('No se encontro rango')
         return self.__representationTable[0][0]
-        
 
     #Calcultated the fitness of an individual
     #Stores the resullt on individual
     def fitness(self, individual):
         range = individual.getIntValue()
-        print('Gene: ',individual.getGene())
-        print('Gene value: ',range)
+        #print('Gene: ',individual.getGene())
+        #print('Gene value: ',range)
         color = self.findRange(range)
-        print('Gene color: ',color)
+        #print('Gene color: ',color)
         fitnessValue = 0
         # Calculate fitness from dominant blend color
-        fitnessValue = Color.colorDifference(color,self.__blendDominantColor)
-        print('Fitness value: ', fitnessValue)
+        fitnessValue = Color.colorDifference(color, self.__blendDominantColor)
+        #print('Fitness value: ', fitnessValue)
         individual.setFitness(fitnessValue)
+        return fitnessValue, color
 
+    def getDominantColor(self):
+        return self.__blendDominantColor
 
     #define abstract method
     def analyzeDistribution(self, flowerPartPixels, flowerPartImageInfo): #Como creo la tabla de distribucion para los coleres
-        print("analyze COLOR")
+        #print("analyze COLOR")
         floweNumber = 0
         numElements = 0
         for colorList in flowerPartPixels:
@@ -149,26 +151,24 @@ class Color(GeneticChromosome):
         #Create distribution table
         self.__representationTable = self.createDistributionTable(self.__averageColorList, numElements, 65535) #Numero magico  
 
-        #Print the distribution table  
+        ##print the distribution table  
         for element in self.__representationTable:
-           print("Color:", element[0], end=" ")
+           #print("Color:", element[0], end=" ")
            element[1].print()
 
         #Get dominant colors or color
-        print("BROWN KNEE")
+        #print("BROWN KNEE")
         self.defineDominantColors(ChromosomeConfig.DOMINANT_COLORS, floweNumber)
 
         #Test individual
         individual = Individual()
-        print('LET FITNESS BEGIN')
+        #print('LET FITNESS BEGIN')
         self.fitness(individual)
-        print('LET FITNESS END')
+        #print('LET FITNESS END')
         
 
         self.setAnalyzeInfo()
         return self.analyzeInfo
-
-
 
     # Give the browser a representation of the flowerPart color
     def setAnalyzeInfo(self):

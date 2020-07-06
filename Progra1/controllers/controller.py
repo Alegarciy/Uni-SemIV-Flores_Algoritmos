@@ -98,10 +98,31 @@ class Controller:
         def pauseGenetic(flowerPartId):
             if flowerPartId == FlowerPartConfig.PETAL_ID:
                 return Controller.genetic.pause(FlowerPartConfig.PETAL)
-            if flowerPartId == FlowerPartConfig.CENTER_ID:
+            elif flowerPartId == FlowerPartConfig.CENTER_ID:
                 return Controller.genetic.pause(FlowerPartConfig.CENTER)
-            else:
-                return "False"
 
+            return "False"
 
+        @staticmethod
+        def showGenetic(flowerPartId):
+            print("SHOW GENETIC CONTROLLER")
+            if flowerPartId == FlowerPartConfig.PETAL_ID:
+                return Controller.genetic.drawProgress(FlowerPartConfig.PETAL)
+            elif flowerPartId == FlowerPartConfig.CENTER_ID:
+                return Controller.genetic.drawProgress(FlowerPartConfig.CENTER)
 
+            return "False"
+
+        @staticmethod
+        def showGeneticInfo(flowerPartId):
+            print("SHOW GENETIC INFO CONTROLLER")
+            if flowerPartId == FlowerPartConfig.PETAL_ID:
+                return Controller.genetic.getGeneticInfo(FlowerPartConfig.PETAL)
+            elif flowerPartId == FlowerPartConfig.CENTER_ID:
+                return Controller.genetic.getGeneticInfo(FlowerPartConfig.CENTER)
+
+            return "False"
+
+        @staticmethod
+        def newFlower():
+            return Controller.genetic.drawFlower()

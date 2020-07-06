@@ -19,6 +19,7 @@ class Shape(Chromosome):
         self.INFO = 1
         self.IMAGE = 0
         self.distance = 0
+        self.quantityPixels = 0
 
     #Combina los valores del area en pixeles de cada parte de la flor para obtener el area promedio
     def combineFlowerPartArea(self, flowersPartArea):
@@ -67,7 +68,6 @@ class Shape(Chromosome):
 
             area.append(pixelsInY)
 
-
         return area
 
     #Define abstract method
@@ -87,7 +87,15 @@ class Shape(Chromosome):
             self.combinationOfAreas = self.combineFlowerPartArea(self.flowersPartArea)
 
         self.setAnalyzeInfo()
+        self.setQuantityPixels()
         return self.analyzeInfo
+
+
+    def setQuantityPixels(self):
+        self.quantityPixels = max(self.combinationOfAreas)*self.distance
+
+    def getQuantityPixels(self):
+        return self.quantityPixels
 
     def setAnalyzeInfo(self):
         images = []

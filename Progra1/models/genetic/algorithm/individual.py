@@ -2,11 +2,15 @@ from models.genetic.algorithm.GAConfig import GAConfig
 import random
 class Individual:
 
-    def __init__(self):
+    def __init__(self, parent=None):
         self.fitness = 0 #updated with chromosome fitness
         self.genes = []
         self.geneLength = GAConfig.GENES_LENGTH
-        self.createIndividual()
+        if not parent:
+            self.createIndividual()
+        else:
+            self.genes = parent.genes.copy()
+
 
     def createIndividual(self):
 
