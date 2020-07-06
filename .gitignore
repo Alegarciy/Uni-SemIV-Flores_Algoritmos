@@ -4374,3 +4374,24 @@ Progra1/models/genetic/chromosome/__pycache__/color.cpython-38.pyc
 Progra1/models/genetic/chromosome/__pycache__/shape.cpython-38.pyc
 Progra1/models/genetic/flowerParts/__pycache__/flowerPartConfig.cpython-38.pyc
 >>>>>>> Stashed changes
+ImagenesDePrueba/.idea/encodings.xml
+ImagenesDePrueba/.idea/ImagenesDePrueba.iml
+ImagenesDePrueba/.idea/misc.xml
+ImagenesDePrueba/.idea/modules.xml
+ImagenesDePrueba/.idea/vcs.xml
+ImagenesDePrueba/.idea/workspace.xml
+Progra1/controllers/__pycache__/controller.cpython-38.pyc
+Progra1/controllers/__pycache__/routes.cpython-38.pyc
+Progra1/models/__pycache__/plotModelDrawer.cpython-38.pyc
+Progra1/models/analyzer/__pycache__/imageAnalyzer.cpython-38.pyc
+Progra1/models/converter/__pycache__/flowerConfig.cpython-38.pyc
+Progra1/models/converter/__pycache__/imageConverter.cpython-38.pyc
+Progra1/models/converter/__pycache__/pixelFlower.cpython-38.pyc
+Progra1/models/genetic/__pycache__/genetic.cpython-38.pyc
+Progra1/models/genetic/algorithm/__pycache__/ga.cpython-38.pyc
+Progra1/models/genetic/algorithm/__pycache__/GAConfig.cpython-38.pyc
+Progra1/models/genetic/chromosome/__pycache__/color.cpython-38.pyc
+Progra1/models/genetic/chromosome/__pycache__/Distribution.cpython-38.pyc
+Progra1/models/genetic/chromosome/__pycache__/shape.cpython-38.pyc
+Progra1/models/genetic/flowerParts/__pycache__/flowerPartConfig.cpython-38.pyc
+Progra1/models/genetic/process/__pycache__/drawFlower.cpython-38.pyc
