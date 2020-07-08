@@ -76,3 +76,27 @@
                 }
             });
     });
+
+
+    //GENERAR NUEVA FLOR
+        // INICIO DE GENETICO
+    $(".geneticNewFlower").on("click", ".newFlower",
+        function () {
+            url = $(this).attr("methodUrl");
+            flowerPartId = $(this).attr("flowerPartId");
+            newFlowerDiv = $(this).parent().children('.showNewFlower');
+            $.ajax({
+                url: url, //the page containing python script
+                type: "get", //request type,
+                success: function (plotModel) {
+                    if(plotModel === "False"){
+                        console.log("New flower error")
+                    }
+                    else{
+                        newFlowerDiv.empty();
+                        newFlowerDiv.append(plotModel);
+                        console.log("New flower");
+                    }
+                }
+            });
+    });
