@@ -1,4 +1,6 @@
 from matplotlib import pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
 import numpy as np
 from skimage import io
 import io as i_o
@@ -75,9 +77,11 @@ class ImageConverter:
     def convert(self):
         self.isRunning = True
         self.imageIndex = 0
+        flowerNumber = 0
         for flowerImage in self.userImages:
-            self.convertImage(flowerImage)
+            self.convertImage(flowerImage, flowerNumber)
             self.imageIndex += 1
+            flowerNumber += 1
 
         if(self.imageIndex>=len(self.userImages)>0):
             self.finished = True
@@ -89,11 +93,13 @@ class ImageConverter:
 
     #Algoritmo voraz
 
-    def convertImage(self, flowerImage):
+    def convertImage(self, flowerImage, flowerNumber):
         info = flowerImage.getJsonData()
         flowerPixels = flowerImage.getFlower() #Subestructura
         size_i = flowerImage.getSize_I()
         size_j = flowerImage.getSize_J()
+        indexDicPetals = {}
+        indexDicCenter = {}
         self.total = size_j*size_i
         for i in range(0,size_i-1):
             for j in range(0, size_j-1):
@@ -105,9 +111,14 @@ class ImageConverter:
                     if(centerColorDif <= FlowerConfig.DIFFERENCE_COLOR_LIMIT):
                         center = flowerImage.getCenter()
                         center[i, j] = flowerPixels[i, j]
-
                         centerPixels = flowerImage.getCenterPixels()
-                        centerPixels.append(PixelFlower(flowerPixels[i, j], math.floor(centerColorDif), (i, j)))
+
+                        if  math.floor(centerColorDif) not in indexDicCenter:
+                            centerPixels.append(PixelFlower(flowerPixels[i, j], math.floor(centerColorDif), (i, j), flowerNumber))
+                            indexDicCenter[math.floor(centerColorDif)] = len(centerPixels) - 1 #last item inserted
+                        else : # if key is inserted
+                            index = indexDicCenter[math.floor(centerColorDif)]
+                            centerPixels[index].incrementQuantity()
 
                 elif(self.isInPetal(i,j,info)): #Criterio
                     petalColorDif = self.getPetalColorDif(flowerPixels[i, j], info)
@@ -115,10 +126,15 @@ class ImageConverter:
                     if(petalColorDif <= FlowerConfig.DIFFERENCE_COLOR_LIMIT):
                         petal = flowerImage.getPetal()
                         petal[i, j] = flowerPixels[i, j]
-
                         petalPixels = flowerImage.getPetalPixels()
-                        petalPixels.append(PixelFlower(flowerPixels[i, j], math.floor(petalColorDif), (i, j)))
 
+                        if  math.floor(petalColorDif) not in indexDicPetals:
+                            petalPixels.append(PixelFlower(flowerPixels[i, j], math.floor(petalColorDif), (i, j), flowerNumber))
+                            indexDicPetals[math.floor(petalColorDif)] = len(petalPixels) - 1 #last item inserted
+                        else : # if key is inserted
+                            index = indexDicPetals[math.floor(petalColorDif)]
+                            petalPixels[index].incrementQuantity()
+                            
         flowerImage.sortByDifference()
     #Criterios espcificacion 
 

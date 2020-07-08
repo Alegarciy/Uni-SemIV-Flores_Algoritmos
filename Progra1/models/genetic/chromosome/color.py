@@ -4,6 +4,7 @@ from colormath.color_diff import delta_e_cie2000
 from models.genetic.chromosome.Chromosome import Chromosome
 from models.genetic.chromosome.GeneticChromosome import GeneticChromosome
 from models.genetic.chromosome.analyzeInfoConfig import AnalyzeInfoConfig
+from models.genetic.algorithm.individual import Individual
 import numpy as np
 
 from abc import ABC, abstractmethod
@@ -12,12 +13,17 @@ import webcolors
 import math
 from models.genetic.chromosome.Distribution import Distribution
 
+from models.genetic.chromosome.chromosomeConfig import ChromosomeConfig
+
 class Color(GeneticChromosome):
 
     def __init__(self):
         super().__init__()
         self.__averageColorList = [] # [0,0,0] list of rgb
         self.__representationTable = None #Distribution type
+        self.__idealFitness = None # Needed for fitness comparison
+        self.__dominantColors = [] #it can be just one color [[RGB], Quantity]
+        self.__blendDominantColor = [0,0,0] #RGB
 
     @staticmethod
     def colorDifference(color_rgb_1, color_rgb_2):
@@ -28,7 +34,9 @@ class Color(GeneticChromosome):
         d = delta_e_cie2000(color_lab_1, color_lab_2)
         return d
 
-    def calculateAverageColor(self, colorList):
+    @staticmethod
+    # https://www.colorhexa.com (formula)
+    def blendColors(colorList):
         size = len(colorList)
         accumulatedR = 0
         accumulatedG = 0
@@ -38,88 +46,157 @@ class Color(GeneticChromosome):
             accumulatedR += color[0]
             accumulatedG += color[1]
             accumulatedB += color[2]
-        
+
         resultRGB = [math.floor(accumulatedR/size), math.floor(accumulatedG/size), math.floor(accumulatedB/size)]
         return resultRGB
 
-    
-    def analyzeDistributionList(self, pixelList, flowerNumber):
-        
-        currentDifference = 0
-        currentList = []
-        for pixel in pixelList:
-            if(currentDifference != pixel.getIdealDiference()):
-                #averageColor = self.calculateAverageColor(currentList)
-                self.__averageColorList.append([currentList,len(currentList),flowerNumber, currentDifference])
-                currentList = []
-                currentDifference += 1
-            currentList.append(pixel.getRGB())
-        print(len(self.__averageColorList))
+    #Give formated information to class vatiable "averageColorList"
+    def analyzeDistributionList(self, colorList):
+        for colorPixel in colorList:
+            self.__averageColorList.append([colorPixel.getRGB(),colorPixel.getQuantity(),colorPixel.getFlowerNumber(),colorPixel.getIdealDiference()])
 
-
+    # Average color list compostion: [RGB Subgroup, times it appears, currentFlower,   ((x)) currentDifference]
+    # distributionTable : [RGB Subgroup, Distribution]
     def createDistributionTable(self, avergeColorList, numElements, binaryRepresentation):
-        # Average color list compostion: [RGB Subgroup, times it appears, currentFlower, currentDifference]
-        # distributionTable : [RGB Subgroup, Distribution]
         minimun = 0
         distributionTable = []
         currentDistribution = None
-        for subgroup in avergeColorList:
+        for color in avergeColorList:
             # Set distribution
             currentDistribution = Distribution()
             currentDistribution.setTotal(binaryRepresentation)
-            currentDistribution.setQuantity(subgroup[1]) # subgroup size
-            print(minimun)
+            currentDistribution.setQuantity(color[1]) # color size
             currentDistribution.setPercentage(numElements) # %
-            print(minimun)
+            currentDistribution.setFlowerNumber(color[2]) #Flower number of color
             currentDistribution.setRange(minimun) 
-            print(minimun)
-            minimun = math.floor((currentDistribution.getRangeMax()))
-            print(minimun)
+            minimun = math.floor((currentDistribution.getRangeMax())) + 1
+            if(color is avergeColorList[-1]):
+                currentDistribution.setMaxRange(binaryRepresentation)
             # Append to distribution table
-            distributionTable.append([subgroup[0], currentDistribution])
+            distributionTable.append([color[0], currentDistribution])
         return distributionTable
 
+    # Get dominant colors on the chromosome color
+    def defineDominantColors(self, dominantColorQuantity, flowerNumber):
+        distributionTable = []
+        colorList = []
+        indexTemp = 0
+        dominantsQuantity = dominantColorQuantity * flowerNumber
+        memoryDic = {}
+        #Read desired data from representation table
+        for element in self.__representationTable:
+            distributionTable.append([element[0], element[1].getQuantity(), element[1].getFloweNumber()])
+        #Sort base on second row(quantity)
+        quantity = lambda distributionTable: distributionTable[1]
+        distributionTable.sort(key=quantity, reverse=True)
+        #Set desired colors of dominance for each flower
+        while(dominantsQuantity > 0):
 
+            if distributionTable[indexTemp][2] not in memoryDic:
+                memoryDic[distributionTable[indexTemp][2]] = 1 #index = floweNumber
+                self.__dominantColors.append(distributionTable[indexTemp])
+                dominantsQuantity -= 1
+            elif memoryDic[distributionTable[indexTemp][2]] < dominantColorQuantity:
+                memoryDic[distributionTable[indexTemp][2]] += 1
+                self.__dominantColors.append(distributionTable[indexTemp])
+                dominantsQuantity -= 1
+            
+            indexTemp += 1
+        #Get only dominant color
+        for element in self.__dominantColors:
+            colorList.append(element[0])
+            #print("Dominant color:", element[0])
+        #Blend color
+        self.__blendDominantColor = self.blendColors(colorList)
+        #print("Dominant blend color:", self.__blendDominantColor)
+
+    #Get data from distribution table
+    def findRange(self, value):
+        for rangedValue in self.__representationTable:
+            if(rangedValue[1].getRangeMin() <= value and rangedValue[1].getRangeMax() >= value):
+                return rangedValue[0]
+        #print('No se encontro rango')
+        return self.__representationTable[0][0]
+
+    #Calcultated the fitness of an individual
+    #Stores the resullt on individual
+    def fitness(self, individual):
+        range = individual.getIntValue()
+        #print('Gene: ',individual.getGene())
+        #print('Gene value: ',range)
+        color = self.findRange(range)
+        #print('Gene color: ',color)
+        fitnessValue = 0
+        # Calculate fitness from dominant blend color
+        fitnessValue = Color.colorDifference(color, self.__blendDominantColor)
+        #print('Fitness value: ', fitnessValue)
+        individual.setFitness(fitnessValue)
+        return fitnessValue, color
+
+    def getDominantColor(self):
+        return self.__blendDominantColor
 
     #define abstract method
     def analyzeDistribution(self, flowerPartPixels, flowerPartImageInfo): #Como creo la tabla de distribucion para los coleres
-
-        print("analyze COLOR")
+        #print("analyze COLOR")
         floweNumber = 0
         numElements = 0
-        for pixelList in flowerPartPixels:
+        for colorList in flowerPartPixels:
             #Store data in variable self.__averageColorList
-            self.analyzeDistributionList(pixelList, floweNumber)
-            numElements += len(pixelList)
+            self.analyzeDistributionList(colorList)
+            for colorPixels in colorList:
+                numElements += colorPixels.getQuantity()
             floweNumber += 1
 
-        #Create a distribution table 
-        print('TACO MINIMO') 
-        print(numElements)     
-        self.__representationTable = self.createDistributionTable(self.__averageColorList, numElements, 65535) #Numero magico
-        print('TACO MEDIO')   
-        for element in self.__representationTable:
-           element[1].print()
-        #print(len(self.__representationTable))
-        print('TACO MAXIMO')   
+        #Create distribution table
+        self.__representationTable = self.createDistributionTable(self.__averageColorList, numElements, 65535) #Numero magico  
 
+        ##print the distribution table  
+        for element in self.__representationTable:
+           #print("Color:", element[0], end=" ")
+           element[1].print()
+
+        #Get dominant colors or color
+        #print("BROWN KNEE")
+        self.defineDominantColors(ChromosomeConfig.DOMINANT_COLORS, floweNumber)
+
+        #Test individual
+        individual = Individual()
+        #print('LET FITNESS BEGIN')
+        self.fitness(individual)
+        #print('LET FITNESS END')
         
-        #print('TACO MAXIMO')
-        #for element in self.__averageColorList:
-        #print(element[0], element[1], element[2], element[3])
-        #print(self.chromosomeDistribution)
 
         self.setAnalyzeInfo()
         return self.analyzeInfo
 
+    # Give the browser a representation of the flowerPart color
     def setAnalyzeInfo(self):
-        images = []
+        images = [] #array
         index = 1
-        images.append([np.zeros([1000, 1000, 3], dtype=np.uint8), "Colors"])
+        images.append([np.zeros([1000, 1000, 3], dtype=np.uint8), "Colors"]) #images[0]
+        distributionTemp = self.__representationTable
+        paintDistribution = []
+        totalLength = 1000 * 1000
+
+        #Make color distribution table for image
+        for element in distributionTemp:
+            paintDistribution.append([element[0],math.floor(totalLength * element[1].getPercentage() / 100)])
+
+        paintDistributionIndx = 0
+
+        # Fill with color mathplot representation      
+        for x in range(0,1000):
+            for y in range(0, 1000):
+                if(paintDistributionIndx < len(paintDistribution) - 1 and paintDistribution[paintDistributionIndx][1] <= 0):
+                    paintDistributionIndx += 1
+                images[0][0][y][x] = paintDistribution[paintDistributionIndx][0] #Blue
+                paintDistribution[paintDistributionIndx][1] -= 1
+                
+                
+
         self.analyzeInfo[AnalyzeInfoConfig.DESCRIPTION] = "Colores del "
         self.analyzeInfo[AnalyzeInfoConfig.IMAGES] = images
 
 
-    #Define abstract method
-    def fitness(self):
-        pass
+

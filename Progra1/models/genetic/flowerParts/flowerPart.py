@@ -22,3 +22,8 @@ class FlowerPart(ABC):
     @abstractmethod
     def analyzeChromosome(self, chromosome):
         pass
+
+    #Getter
+
+    def getChromosome(self, key):
+        return self.chromosomes[key]

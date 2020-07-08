@@ -117,3 +117,19 @@ def startGenetic(flowerPartId):
 @app.route("/pauseGenetic/<int:flowerPartId>", methods=["GET"])
 def pauseGenetic(flowerPartId):
     return Controller.pauseGenetic(flowerPartId)
+
+
+@app.route("/showGenetic/<int:flowerPartId>", methods=["GET"])
+def showGenetic(flowerPartId):
+    print("SHOW GENETIC")
+    return Controller.showGenetic(flowerPartId)
+
+@app.route("/showGeneticInfo/<int:flowerPartId>", methods=["GET"])
+def showGeneticInfo(flowerPartId):
+    print("SHOW GENETIC INFO")
+    return Controller.showGeneticInfo(flowerPartId)
+
+
+@app.route("/newFlower", methods=["GET"])
+def newFlower():
+    return Controller.newFlower()

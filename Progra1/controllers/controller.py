@@ -77,6 +77,7 @@ class Controller:
         @staticmethod
         def setGenetic():
             if Controller.imageAnalyzer.finished:
+                print('ahoyyyyy')
                 Controller.genetic.setGenetic(Controller.imageAnalyzer.getFlowerParts())
                 return "True"
             else:
@@ -85,8 +86,10 @@ class Controller:
         @staticmethod
         def startGenetic(flowerPartId):
             if flowerPartId == FlowerPartConfig.PETAL_ID:
-               return Controller.genetic.start(FlowerPartConfig.PETAL, ChromosomeConfig.COLOR)
+                print('PRA PRA')
+                return Controller.genetic.start(FlowerPartConfig.PETAL, ChromosomeConfig.COLOR)
             if flowerPartId == FlowerPartConfig.CENTER_ID:
+                print('PRRRRR')
                 return Controller.genetic.start(FlowerPartConfig.CENTER, ChromosomeConfig.COLOR)
             else:
                 return "False"
@@ -95,10 +98,31 @@ class Controller:
         def pauseGenetic(flowerPartId):
             if flowerPartId == FlowerPartConfig.PETAL_ID:
                 return Controller.genetic.pause(FlowerPartConfig.PETAL)
-            if flowerPartId == FlowerPartConfig.CENTER_ID:
+            elif flowerPartId == FlowerPartConfig.CENTER_ID:
                 return Controller.genetic.pause(FlowerPartConfig.CENTER)
-            else:
-                return "False"
 
+            return "False"
 
+        @staticmethod
+        def showGenetic(flowerPartId):
+            print("SHOW GENETIC CONTROLLER")
+            if flowerPartId == FlowerPartConfig.PETAL_ID:
+                return Controller.genetic.drawProgress(FlowerPartConfig.PETAL)
+            elif flowerPartId == FlowerPartConfig.CENTER_ID:
+                return Controller.genetic.drawProgress(FlowerPartConfig.CENTER)
 
+            return "False"
+
+        @staticmethod
+        def showGeneticInfo(flowerPartId):
+            print("SHOW GENETIC INFO CONTROLLER")
+            if flowerPartId == FlowerPartConfig.PETAL_ID:
+                return Controller.genetic.getGeneticInfo(FlowerPartConfig.PETAL)
+            elif flowerPartId == FlowerPartConfig.CENTER_ID:
+                return Controller.genetic.getGeneticInfo(FlowerPartConfig.CENTER)
+
+            return "False"
+
+        @staticmethod
+        def newFlower():
+            return Controller.genetic.drawFlower()
