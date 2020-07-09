@@ -33,7 +33,7 @@ class ImageConverter:
             return True
         return False
 
-
+    #El usuario agrega una nueva flor
     def addImage(self, image, jsonData, filename, extension):
         numberFlower = len(self.userImages)
         flowerDirectory = Config.DATADIRECTORY + "/" + filename
@@ -65,6 +65,7 @@ class ImageConverter:
 
         self.finished = False
 
+    #El usuario elimina una imagen que subió
     def deleteImage(self, position):
         flower = self.userImages[position]
         FileManager.removeDirectory(flower.getFlowerDirectory())
@@ -73,8 +74,9 @@ class ImageConverter:
 
 
     #Recorre las imagenes del usuario (numpy arrays) y llama al voraz
-
     def convert(self):
+        #image index indica la flor que se esta procesando con el voraz
+        #is running indica que el voraz está trabajando
         self.isRunning = True
         self.imageIndex = 0
         flowerNumber = 0
@@ -83,6 +85,7 @@ class ImageConverter:
             self.imageIndex += 1
             flowerNumber += 1
 
+        #Verifica si el proceso voraz terminó con exito
         if(self.imageIndex>=len(self.userImages)>0):
             self.finished = True
         else:
@@ -94,18 +97,23 @@ class ImageConverter:
     #Algoritmo voraz
 
     def convertImage(self, flowerImage, flowerNumber):
+        #Datos de la flor
         info = flowerImage.getJsonData()
         flowerPixels = flowerImage.getFlower() #Subestructura
         size_i = flowerImage.getSize_I()
         size_j = flowerImage.getSize_J()
+
         indexDicPetals = {}
         indexDicCenter = {}
         self.total = size_j*size_i
-        for i in range(0,size_i-1):
+
+        for i in range(0, size_i-1):
             for j in range(0, size_j-1):
-                self.step = (i*size_i + (j+1))
-                self.progress = (self.step / self.total)*100
-                if(self.isInCenter(i,j,info)):
+                self.step = (i*size_i + (j+1)) #Etapa
+                self.progress = (self.step / self.total)*100 #Porcentaje del proceso
+                #Se verfica que esté dentro del area requerida
+                if self.isInCenter(i, j, info):
+                    #Se obtiene la diferencia de color
                     centerColorDif = self.getCenterColorDif(flowerPixels[i, j], info)
 
                     if(centerColorDif <= FlowerConfig.DIFFERENCE_COLOR_LIMIT):
@@ -113,10 +121,10 @@ class ImageConverter:
                         center[i, j] = flowerPixels[i, j]
                         centerPixels = flowerImage.getCenterPixels()
 
-                        if  math.floor(centerColorDif) not in indexDicCenter:
+                        if math.floor(centerColorDif) not in indexDicCenter:
                             centerPixels.append(PixelFlower(flowerPixels[i, j], math.floor(centerColorDif), (i, j), flowerNumber))
                             indexDicCenter[math.floor(centerColorDif)] = len(centerPixels) - 1 #last item inserted
-                        else : # if key is inserted
+                        else:# if key is inserted
                             index = indexDicCenter[math.floor(centerColorDif)]
                             centerPixels[index].incrementQuantity()
 
@@ -128,16 +136,16 @@ class ImageConverter:
                         petal[i, j] = flowerPixels[i, j]
                         petalPixels = flowerImage.getPetalPixels()
 
-                        if  math.floor(petalColorDif) not in indexDicPetals:
+                        if math.floor(petalColorDif) not in indexDicPetals:
                             petalPixels.append(PixelFlower(flowerPixels[i, j], math.floor(petalColorDif), (i, j), flowerNumber))
                             indexDicPetals[math.floor(petalColorDif)] = len(petalPixels) - 1 #last item inserted
-                        else : # if key is inserted
+                        else: # if key is inserted
                             index = indexDicPetals[math.floor(petalColorDif)]
                             petalPixels[index].incrementQuantity()
                             
         flowerImage.sortByDifference()
-    #Criterios espcificacion 
 
+    #Verifica si el pixel está dentro del area requerida para el centro
     def isInCenter(self, i, j, info):
         minI = info[FlowerConfig.PIXEL_CENTRAL][self.I] - info[FlowerConfig.PIXEL_CENTER_LIMIT][self.I]
         maxI = info[FlowerConfig.PIXEL_CENTRAL][self.I] + info[FlowerConfig.PIXEL_CENTER_LIMIT][self.I]
@@ -146,6 +154,7 @@ class ImageConverter:
 
         return (minI < i < maxI and minJ < j < maxJ)
 
+    #Verifica si el pixel esta dentro del area requerida para el petalo
     def isInPetal(self, i, j, info):
         minI = info[FlowerConfig.PIXEL_CENTRAL][self.I] - info[FlowerConfig.PIXEL_PETAL_LIMIT][self.I]
         maxI = info[FlowerConfig.PIXEL_CENTRAL][self.I] + info[FlowerConfig.PIXEL_PETAL_LIMIT][self.I]
@@ -154,12 +163,23 @@ class ImageConverter:
 
         return (minI < i < maxI and minJ < j < maxJ)
 
+    #Diferencia de color para el petalo
     def getPetalColorDif(self, pixel, info):
-        return Color.colorDifference(pixel, info[FlowerConfig.COLOR_PETAL_PREF])
+        listOfColors = info[FlowerConfig.COLOR_PETAL_PREF]
+        differences = []
+        for color in listOfColors:
+            differences.append(Color.colorDifference(pixel, color))
+        return min(differences)
 
+    #Diferencia de color para el petalo
     def getCenterColorDif(self, pixel, info):
-        return Color.colorDifference(pixel, info[FlowerConfig.COLOR_CENTER_PREF])
+        listOfColors = info[FlowerConfig.COLOR_CENTER_PREF]
+        differences = []
+        for color in listOfColors:
+            differences.append(Color.colorDifference(pixel, color))
+        return min(differences)
 
+    #Muestra el proceso del voraz creando una imagen
     def getConvertProcess(self):
         if(self.imageIndex >= len(self.userImages)):
             return "False"
@@ -175,7 +195,7 @@ class ImageConverter:
             ax.axis('off')
 
         img = i_o.BytesIO()
-        plt.savefig(img, format = "png")
+        plt.savefig(img, format="png")
         img.seek(0)
         base64_plot = base64.b64encode(img.getvalue()).decode()
         plt.clf()

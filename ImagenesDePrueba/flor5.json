@@ -1,8 +1,8 @@
 {
   "pixelCentral": [107,107],
   "pixelPetaloMasAlejado":[120,114],
-  "colorPetaloPreferido":[157,39,99],
-  "colorCentroPreferido":[248 ,218, 0],
+  "colorPetaloPreferido":[[157,39,99]],
+  "colorCentroPreferido":[[248 ,218, 0]],
   "pixelCentroMasAlejado":[31, 31],
   "petalOutlineIncreaseY" :  -1,
   "centerOutlineIncreaseY" :  -1,

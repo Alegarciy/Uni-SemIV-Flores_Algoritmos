@@ -4354,3 +4354,5 @@ Progra1/models/genetic/flowerParts/__pycache__/petal.cpython-38.pyc
 Progra1/models/genetic/process/__pycache__/drawFlower.cpython-38.pyc
 Progra1/models/genetic/process/__pycache__/outline.cpython-38.pyc
 *.pyc
+*.pyc
+*.pyc

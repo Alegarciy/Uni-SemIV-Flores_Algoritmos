@@ -143,3 +143,26 @@
             });
     });
 
+        //GENERAR NUEVA FLOR
+    $(".modifyGenetic").on("click", ".mutationButton",
+        function () {
+            url = $(this).attr("methodUrl");
+            flowerPartId = $(this).attr("flowerPartId");
+            mutationInput =  $(this).parent().children(".mutationValue");
+            mutationValue = mutationInput.val();
+            if(mutationValue !== ""){
+                $.ajax({
+                url: url + "/" + flowerPartId + "/" + mutationValue, //the page containing python script
+                type: "get", //request type,
+                success: function (value) {
+                    if(value === "False"){
+                        console.log("modify genetic error")
+                    }
+                    else{
+                        console.log("modify value");
+                        mutationInput.text("");
+                    }
+                }
+            });
+            }
+    });

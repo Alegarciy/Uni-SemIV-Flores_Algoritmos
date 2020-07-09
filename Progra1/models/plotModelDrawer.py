@@ -18,7 +18,6 @@ class PlotModelDrawer:
         img.seek(0)
         base64_plot = base64.b64encode(img.getvalue()).decode()
         plt.clf()
-        print("SHOW GENETIC DRAW")
         return base64_plot
 
     @staticmethod
@@ -34,7 +33,6 @@ class PlotModelDrawer:
             images += "\n"
 
         markup = divInit + "\n" + title + "\n" + divImageInit + "\n" + images + "\n" + divEnd + "\n" + divEnd + "\n"
-        print("SHOW GENETIC PLOT")
         return markup
 
     @staticmethod

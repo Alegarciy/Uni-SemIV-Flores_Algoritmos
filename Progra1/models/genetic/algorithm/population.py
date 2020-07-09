@@ -29,6 +29,9 @@ class Population:
     def getIndividual(self, index):
         return self.individuals[index]
 
+    def setIndividuals(self, individuals):
+        self.individuals = individuals.copy()
+
     def addOffsprings(self, offsprings):
         self.individuals.extend(offsprings)
 

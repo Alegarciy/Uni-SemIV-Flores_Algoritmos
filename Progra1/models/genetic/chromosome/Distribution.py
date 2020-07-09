@@ -4,7 +4,7 @@ class Distribution:
     def __init__(self):
         self.quantity = 0
         self.percentage = 0
-        self.range = [0,0]
+        self.range = [0, 0]
         self.totalBits = 0
         self.flowerNumber = 0
 
@@ -12,7 +12,6 @@ class Distribution:
         self.quantity += 1
 
     #Setter
-
     def setQuantity(self, total):
         self.quantity = total
 
@@ -33,7 +32,6 @@ class Distribution:
         self.flowerNumber = num
 
     #Getter
-
     def getRangeMin(self):
         return self.range[0]
 

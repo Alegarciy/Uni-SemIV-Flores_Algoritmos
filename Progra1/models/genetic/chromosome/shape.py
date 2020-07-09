@@ -36,10 +36,11 @@ class Shape(Chromosome):
         for row in range(0, maxLength - 1):
             areaOfRow = 0
             for area in flowersPartArea:
-                if row > len(area) - 1:
-                    areaOfRow += (area[-1])
-                else:
-                    areaOfRow += (area[row])
+                if len(area) > 0:
+                    if row > len(area) - 1:
+                        areaOfRow += (area[-1])
+                    else:
+                        areaOfRow += (area[row])
 
             newFlowerPartArea.append(int(areaOfRow / len(flowersPartArea)))
 
@@ -90,13 +91,14 @@ class Shape(Chromosome):
         self.setQuantityPixels()
         return self.analyzeInfo
 
-
+    #Aproxima la cantidad de pixeles que se necesitaran para dibujar la forma
     def setQuantityPixels(self):
         self.quantityPixels = max(self.combinationOfAreas)*self.distance
 
     def getQuantityPixels(self):
         return self.quantityPixels
 
+    #Representacion del proceso realizado
     def setAnalyzeInfo(self):
         images = []
         index = 1

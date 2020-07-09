@@ -16,7 +16,6 @@ class Genetic:
         self.flowerParts = analazyedFlowerParts.copy()
 
     def start(self, flowerPart, chromosome):
-        print('MA A XIIIII')
         if flowerPart in self.flowerParts: #self.GAs
             
             #if not exists create key
@@ -47,7 +46,6 @@ class Genetic:
 
     def drawProgress(self, flowerPartKey):
         if flowerPartKey in self.GAs and self.GAs[flowerPartKey].isStarted():
-            print("SHOW GENETIC DRAW PROGRESS")
             colors = self.GAs[flowerPartKey].getColors()
             flowerPart = self.flowerParts[flowerPartKey]
             flowerPartShape = flowerPart.chromosomes[ChromosomeConfig.SHAPE]
@@ -56,7 +54,6 @@ class Genetic:
             position = [int(canvasSize/2), int(canvasSize/2)]
 
             if flowerPartKey == FlowerPartConfig.PETAL:
-                print("SHOW GENETIC PETAL")
                 self.drawer.drawPetal(
                     flowerPartShape.combinationOfAreas,
                     canvas,
@@ -75,7 +72,6 @@ class Genetic:
             images = []
             images.append(PlotModelDrawer.draw(canvas, "Colores"))
             plotModel = PlotModelDrawer.createMarkup(images, "", "")
-            print(plotModel)
             return plotModel
 
     def getGeneticInfo(self, flowerPart):
@@ -95,6 +91,12 @@ class Genetic:
 
         return plotModel
 
+    def modifyMutationRate(self, flowerPart, mutationValue):
+        if flowerPart in self.GAs and self.GAs[flowerPart].isStarted():
+            self.GAs[flowerPart].setMutationValue(mutationValue)
+            return "True"
+        else:
+            return "False"
 
     def drawFlower(self):
         petal = self.flowerParts[FlowerPartConfig.PETAL]

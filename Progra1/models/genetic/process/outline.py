@@ -13,6 +13,7 @@ class Outline:
         self.I = 0
         self.J = 1
 
+    #Verifica que el pixel este dentro del area requerida
     def isInflowerPart(self, i, j, info):
         minI = info[FlowerPartConfig.PIXEL_CENTRAL][self.I] - info[FlowerPartConfig.FLOWERPART_LIMIT][self.I]
         maxI = info[FlowerPartConfig.PIXEL_CENTRAL][self.I] + info[FlowerPartConfig.FLOWERPART_LIMIT][self.I]
@@ -21,6 +22,7 @@ class Outline:
 
         return (minI < i < maxI and minJ < j < maxJ)
 
+    #Crea la imagne del contorno
     def outlineProcess(self, flowerImageInfo):
         info = flowerImageInfo[self.INFO]
         flowerPart = flowerImageInfo[self.IMAGE]

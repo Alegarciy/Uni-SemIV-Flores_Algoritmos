@@ -18,12 +18,13 @@ static_dir = os.path.join(template_dir, Config.STATICFOLDER)
 app = Flask(__name__, template_folder=template_view_dir, static_folder=static_dir)
 app.config['SECRET_KEY'] = 'eb289e8e6629dd79004bf93963dc2933'
 
+#DIRECTORIES
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 uploads_dir = os.path.join(template_dir, Config.STATICFOLDER)
 uploads_dir = os.path.join(uploads_dir, Config.USERINPUTFOLDER)
-
 Config.DATADIRECTORY = uploads_dir
 
+#----RENDER VIEWS----
 @app.route("/")
 @app.route("/home")
 def home():
@@ -61,6 +62,7 @@ def upload():
 
 
 # ----- IMAGE CONVERT ---------
+
 @app.route("/isConvertRunning", methods=["GET"])
 def isConvertRunning():
     return str(Controller.isConvertRunning())
@@ -82,6 +84,7 @@ def showConvertProcess():
     if(plot_url == "False") :
         return "False"
 
+    #HTML element
     model_plot = Markup('<img src="data:image/png;base64,{}" class="img-fluid" alt="Responsive image" width: 360px; height: 288px>'.format(plot_url))
     return model_plot
 
@@ -121,15 +124,17 @@ def pauseGenetic(flowerPartId):
 
 @app.route("/showGenetic/<int:flowerPartId>", methods=["GET"])
 def showGenetic(flowerPartId):
-    print("SHOW GENETIC")
     return Controller.showGenetic(flowerPartId)
 
 @app.route("/showGeneticInfo/<int:flowerPartId>", methods=["GET"])
 def showGeneticInfo(flowerPartId):
-    print("SHOW GENETIC INFO")
     return Controller.showGeneticInfo(flowerPartId)
 
 
 @app.route("/newFlower", methods=["GET"])
 def newFlower():
     return Controller.newFlower()
+
+@app.route("/modifyMutation/<int:flowerPartId>/<int:mutationValue>", methods=["GET"])
+def modifyMutation(flowerPartId, mutationValue):
+    return Controller.modifyMutation(flowerPartId, mutationValue)

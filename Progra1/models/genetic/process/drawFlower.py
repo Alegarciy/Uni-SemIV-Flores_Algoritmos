@@ -11,10 +11,13 @@ class DrawFlower:
         self.randomRotationRange = [-10, 10]
         self.randomPositionRange = [-10, 10]
         self.margin = 25
-    
+
+    #Agrega un petalo  dado un su tamaño a una imagen
     def drawPetal(self, petalArea, canvas, position, colors):
+        petalArea.sort()
         center = [int(canvas.shape[self.I] / 2), int(canvas.shape[self.J] / 2)]
 
+        #Pinta el numero de pixeles de cada fila
         Iy = position[self.I]
         for size in petalArea:
             area = int(size / 2)
@@ -30,6 +33,7 @@ class DrawFlower:
 
             Iy += 1
 
+        #Si aun no ha llegado al centro sigue pintando
         if (Iy < center[self.I]):
             index = -1
             for y in range(Iy, int(center[self.I])):
@@ -47,6 +51,7 @@ class DrawFlower:
                 Iy += 1
                 index -= 1
 
+    #Dibuja el conjunto de petalos de la flor
     def drawFlowerPetals(self, petalArea, qPetals, colors, petalDistance, canvas, canvasSize):
         rotation = 360 / qPetals
         posI = int((canvasSize/2) - petalDistance) + random.randint(self.randomPositionRange[self.I], self.randomPositionRange[self.J])
@@ -59,6 +64,7 @@ class DrawFlower:
 
         return canvas
 
+    #Dibuja el centro de una flor
     def drawCenter(self, flowerCenterArea, colors, canvas, canvasSize):
         canvasCenter = [int(canvasSize/2), int(canvasSize/2)]
         flowerCenterSize = len(flowerCenterArea)
@@ -79,11 +85,13 @@ class DrawFlower:
 
             Iy += 1
 
+    #Dibuja la flor
     def drawFlower(self, petal, petalColors, center, centerColors):
         petalShape = petal.chromosomes[ChromosomeConfig.SHAPE]
-        canvasSize = int((petalShape.distance+self.margin)*2)
+        canvasSize = int((petalShape.distance+self.margin)*3)
         canvas = np.zeros([canvasSize, canvasSize, 3], dtype=np.uint8)
 
+        #LLama a dibujar los petalos
         canvas = self.drawFlowerPetals(
             petalShape.combinationOfAreas,
             petal.quantity,
@@ -93,8 +101,8 @@ class DrawFlower:
             canvasSize
         )
 
+        #Llama a dibujar el centro
         centerShape = center.chromosomes[ChromosomeConfig.SHAPE]
-
         self.drawCenter(
             centerShape.combinationOfAreas,
             centerColors,

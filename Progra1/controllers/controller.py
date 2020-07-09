@@ -10,7 +10,7 @@ class Controller:
         imageAnalyzer = ImageAnalyzer()
         genetic = Genetic()
 
-        #Image Converted methods
+        #----CONVERTE-----
         @staticmethod
         def loadImage(image, jsonData, filename, ext):
             Controller.imageConverter.addImage(image, jsonData, filename, ext)
@@ -74,26 +74,27 @@ class Controller:
 
 
         #------GENETIC-------
+
+        #Crear estructura con los analizado de las flores
         @staticmethod
         def setGenetic():
             if Controller.imageAnalyzer.finished:
-                print('ahoyyyyy')
                 Controller.genetic.setGenetic(Controller.imageAnalyzer.getFlowerParts())
                 return "True"
             else:
                 return "False"
 
+        #Iniciar o Reiniciar el genetico
         @staticmethod
         def startGenetic(flowerPartId):
             if flowerPartId == FlowerPartConfig.PETAL_ID:
-                print('PRA PRA')
                 return Controller.genetic.start(FlowerPartConfig.PETAL, ChromosomeConfig.COLOR)
             if flowerPartId == FlowerPartConfig.CENTER_ID:
-                print('PRRRRR')
                 return Controller.genetic.start(FlowerPartConfig.CENTER, ChromosomeConfig.COLOR)
             else:
                 return "False"
 
+        #Pausar o continuar el genetico
         @staticmethod
         def pauseGenetic(flowerPartId):
             if flowerPartId == FlowerPartConfig.PETAL_ID:
@@ -103,9 +104,9 @@ class Controller:
 
             return "False"
 
+        #Retorna representacion de la poblacion del genetico
         @staticmethod
         def showGenetic(flowerPartId):
-            print("SHOW GENETIC CONTROLLER")
             if flowerPartId == FlowerPartConfig.PETAL_ID:
                 return Controller.genetic.drawProgress(FlowerPartConfig.PETAL)
             elif flowerPartId == FlowerPartConfig.CENTER_ID:
@@ -113,9 +114,9 @@ class Controller:
 
             return "False"
 
+        #Muestra los datos del proceso genetico
         @staticmethod
         def showGeneticInfo(flowerPartId):
-            print("SHOW GENETIC INFO CONTROLLER")
             if flowerPartId == FlowerPartConfig.PETAL_ID:
                 return Controller.genetic.getGeneticInfo(FlowerPartConfig.PETAL)
             elif flowerPartId == FlowerPartConfig.CENTER_ID:
@@ -123,6 +124,17 @@ class Controller:
 
             return "False"
 
+        #Crea la flor nueva con base en la población del genetico
         @staticmethod
         def newFlower():
             return Controller.genetic.drawFlower()
+
+
+        #Modifica el porcentaje de mutacion
+        @staticmethod
+        def modifyMutation(flowerPartId, mutationValue):
+            if flowerPartId == FlowerPartConfig.PETAL_ID:
+                return Controller.genetic.modifyMutationRate(FlowerPartConfig.PETAL, mutationValue)
+            elif flowerPartId == FlowerPartConfig.CENTER_ID:
+                return Controller.genetic.modifyMutationRate(FlowerPartConfig.CENTER, mutationValue)
+            return "False"

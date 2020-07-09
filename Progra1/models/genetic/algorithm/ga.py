@@ -9,7 +9,8 @@ class GA:
         self.__flowerPart = flowerPart
         self.__populationSize = int(populationSize)
         self.__mutationRate = GAConfig.MUTATION_RATE
-        self.__deadRate = 30  #Variable?
+        self.__deadRate = GAConfig.DEAD_RATE  #Variable?
+        self.__restartPopulation = False
 
         #Init Population
         self.__population = Population() #Population obj
@@ -17,7 +18,6 @@ class GA:
 
         self.__isRunning = False
         self.__started = False
-
 
         self.__mutations = 0
         self.__generation = 1
@@ -37,7 +37,7 @@ class GA:
                 self.reproduce()
                 self.__generation += 1
 
-            time.sleep(1)
+            time.sleep(0.5)
 
     def calcFitness(self):
         print("--FITNESS--")
@@ -59,11 +59,16 @@ class GA:
 
     def reproduce(self):
         quantityIndividuals = len(self.__population.individuals)
-        quanityOffspring = int(self.__populationSize - quantityIndividuals)
+        restartPopulation = self.__restartPopulation
+
+        if restartPopulation:
+            quanityOffspring = quantityIndividuals
+        else:
+            quanityOffspring = int(self.__populationSize - quantityIndividuals)
+
         offspringList = []
         print("--REPRODUCE--")
         for offSpringNumber in range(0, quanityOffspring):
-            #print("NEW OFFSPRING")
             parent1 = self.__population.getIndividual(
                 random.randint(0, quantityIndividuals-1)
             )
@@ -79,7 +84,10 @@ class GA:
             offspringList.append(offspring)
 
         #Merge population with offsprings
-        self.__population.addOffsprings(offspringList)
+        if restartPopulation:
+            self.__population.setIndividuals(offspringList)
+        else:
+            self.__population.addOffsprings(offspringList)
 
 
     def mutate(self, ind):
@@ -90,8 +98,7 @@ class GA:
             elif ind.genes[bit] == 1:
                 ind.genes[bit] = 0
             self.__mutations += 1
-            #print("MUTACION en " + str(bit))
-            #print(ind.genes)
+
 
     def crossover(self, parent1, parent2):
         bitP1 = random.randint(0, GAConfig.GENES_LENGTH)
@@ -102,14 +109,10 @@ class GA:
         else:
             offspring.genes[bitP2:bitP1] = parent2.genes[bitP2:bitP1]
 
-        #print("Parent1: ")
-        #print(parent1.genes)
-        #print("Parent2: ")
-        #print(parent2.genes)
-        #print("Offspring: crossover" + str(bitP1) + " - " + str(bitP2))
-        #print(offspring.genes)
-        #print(" ")
         return offspring
+
+    def setMutationValue(self, mutationValue):
+        self.__mutationRate = mutationValue
 
     def getColors(self):
         return self.__colors.copy()
@@ -125,7 +128,6 @@ class GA:
 
     def getPopulation(self):
         return self.__population
-
 
     def getMutationsInfo(self):
         return self.__mutations
