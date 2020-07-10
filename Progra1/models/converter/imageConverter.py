@@ -103,6 +103,11 @@ class ImageConverter:
         size_i = flowerImage.getSize_I()
         size_j = flowerImage.getSize_J()
 
+        # Dictionaries of colors
+        # Inside is indexDic for each color
+        colorDicPetal = {}
+        colorDicCenter {}
+
         indexDicPetals = {}
         indexDicCenter = {}
         self.total = size_j*size_i
@@ -129,18 +134,23 @@ class ImageConverter:
                             centerPixels[index].incrementQuantity()
 
                 elif(self.isInPetal(i,j,info)): #Criterio
-                    petalColorDif = self.getPetalColorDif(flowerPixels[i, j], info)[0]
+                    petalColorDif = self.getPetalColorDif(flowerPixels[i, j], info) # [dif, clrIndex]
 
-                    if(petalColorDif <= FlowerConfig.DIFFERENCE_COLOR_LIMIT):
+                    if(petalColorDif[0] <= FlowerConfig.DIFFERENCE_COLOR_LIMIT):
                         petal = flowerImage.getPetal()
                         petal[i, j] = flowerPixels[i, j]
                         petalPixels = flowerImage.getPetalPixels()
 
-                        if math.floor(petalColorDif) not in indexDicPetals:
+                        #If there is no color dic of clrIndex (COLOR)
+                        if colorDicPetals[petalColorDif[1]] not in colorDicPetal:
+                            colorDicPetals[petalColorDif[1]] = {} 
+
+                        # (COLOR DIFFERENCE)
+                        if math.floor(petalColorDif[0]) not in colorDicPetals[petalColorDif[1]]:
                             petalPixels.append(PixelFlower(flowerPixels[i, j], math.floor(petalColorDif), (i, j), flowerNumber))
-                            indexDicPetals[math.floor(petalColorDif)] = len(petalPixels) - 1 #last item inserted
+                            indexDicPetals[math.floor(petalColorDif[0])] = len(petalPixels) - 1 #last item inserted
                         else:# if key is inserted
-                            index = indexDicPetals[math.floor(petalColorDif)]
+                            index = indexDicPetals[math.floor(petalColorDif[0])]
                             petalPixels[index].incrementQuantity()
                             
         flowerImage.sortByDifference()
