@@ -16,7 +16,8 @@ class Center(FlowerPart):
                     FlowerPartConfig.FLOWERPART_LIMIT: jsonData[FlowerConfig.PIXEL_CENTER_LIMIT],
                     FlowerPartConfig.FLOWERPART_OUTLINE_INIT_POS: jsonData[FlowerConfig.CENTER_OUTLINE_INIT_POS],
                     FlowerPartConfig.FLOWERPART_OUTLINE_END_POS: jsonData[FlowerConfig.CENTER_OUTLINE_END_POS],
-                    FlowerPartConfig.FLOWERPART_OUTLINE_INCREASEY: jsonData[FlowerConfig.CENTER_OUTLINE_INCREASEY]
+                    FlowerPartConfig.FLOWERPART_OUTLINE_INCREASE: jsonData[FlowerConfig.CENTER_OUTLINE_INCREASE],
+                    FlowerPartConfig.FLOWERPART_OUTLINE_AXIS: jsonData[FlowerConfig.CENTER_OUTLINE_AXIS]
                 }
 
             self.flowerPartImageInfo.append([flower.getCenter(), info])

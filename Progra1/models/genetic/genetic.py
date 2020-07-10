@@ -62,7 +62,7 @@ class Genetic:
                 )
 
             elif flowerPartKey == FlowerPartConfig.CENTER:
-                self.drawer.drawCenter(
+                canvas = self.drawer.drawCenter(
                     flowerPartShape.combinationOfAreas,
                     colors,
                     canvas,

@@ -47,27 +47,47 @@ class Shape(Chromosome):
         return newFlowerPartArea
 
     #Obtiene el area de una parte de la flor indicandole el punto de inicio y fin a analizar
-    def flowerPartArea(self, image, initPos, endPos, increaseInY):
+    def flowerPartArea(self, image, initPos, endPos, increaseInAxis, axis):
         area = []
-        #print("INCREASE: " +str(increaseInY))
-        for y in range((initPos[self.I]), endPos[self.I], increaseInY):
-            pixelsInY = 0
-            #print("entro y")
-            for xr in range(initPos[self.J], endPos[self.J]):
-                if np.all(image[y, xr][:3] == FlowerConfig.OUTLINE_COLOR):
-                    break
-                pixelsInY += 1
-                image[y, xr] = FlowerConfig.HIGHLIGHT_COLOR
-                #print("entro xr")
 
-            for xl in range(initPos[self.J], (initPos[self.J] - (endPos[self.J] - initPos[self.J])), -1):
-                if np.all(image[y, xl][:3] == FlowerConfig.OUTLINE_COLOR):
-                    break
-                pixelsInY += 1
-                image[y, xl] = FlowerConfig.HIGHLIGHT_COLOR
-                #print("entro xl")
+        mainAxis = axis
+        if(mainAxis == self.J):
+            secondAxis = self.I
+        else:
+            secondAxis = self.J
 
-            area.append(pixelsInY)
+        #print("INCREASE: " +str(increaseInAxis))
+        for posMainAxis in range((initPos[mainAxis]), endPos[mainAxis], increaseInAxis):
+            pixelsInAxis = 0
+            for posSecondnAxisR in range(initPos[secondAxis], endPos[secondAxis]):
+
+                if mainAxis == self.I:
+                    axisI = posMainAxis
+                    axisJ = posSecondnAxisR
+                else:
+                    axisI = posSecondnAxisR
+                    axisJ = posMainAxis
+
+                if np.all(image[axisI, axisJ][:3] == FlowerConfig.OUTLINE_COLOR):
+                    break
+                pixelsInAxis += 1
+                image[axisI, axisJ] = FlowerConfig.HIGHLIGHT_COLOR
+
+            for posSecondnAxisL in range(initPos[secondAxis], (initPos[secondAxis] - (endPos[secondAxis] - initPos[secondAxis])), -1):
+
+                if mainAxis == self.I:
+                    axisI = posMainAxis
+                    axisJ = posSecondnAxisL
+                else:
+                    axisI = posSecondnAxisL
+                    axisJ = posMainAxis
+
+                if np.all(image[axisI, axisJ][:3] == FlowerConfig.OUTLINE_COLOR):
+                    break
+                pixelsInAxis += 1
+                image[axisI, axisJ] = FlowerConfig.HIGHLIGHT_COLOR
+
+            area.append(pixelsInAxis)
 
         return area
 
@@ -83,7 +103,9 @@ class Shape(Chromosome):
                 outlineImg,
                 flowerImageInfo[self.INFO][FlowerPartConfig.FLOWERPART_OUTLINE_INIT_POS],
                 flowerImageInfo[self.INFO][FlowerPartConfig.FLOWERPART_OUTLINE_END_POS],
-                flowerImageInfo[self.INFO][FlowerPartConfig.FLOWERPART_OUTLINE_INCREASEY]))
+                flowerImageInfo[self.INFO][FlowerPartConfig.FLOWERPART_OUTLINE_INCREASE],
+                flowerImageInfo[self.INFO][FlowerPartConfig.FLOWERPART_OUTLINE_AXIS]
+            ))
 
             self.combinationOfAreas = self.combineFlowerPartArea(self.flowersPartArea)
 
