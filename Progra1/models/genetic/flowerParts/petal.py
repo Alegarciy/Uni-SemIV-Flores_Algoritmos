@@ -17,8 +17,9 @@ class Petal(FlowerPart):
                     FlowerPartConfig.FLOWERPART_LIMIT: jsonInfo[FlowerConfig.PIXEL_PETAL_LIMIT],
                     FlowerPartConfig.FLOWERPART_OUTLINE_INIT_POS: jsonInfo[FlowerConfig.PETAL_OUTLINE_INIT_POS],
                     FlowerPartConfig.FLOWERPART_OUTLINE_END_POS: jsonInfo[FlowerConfig.PETAL_OUTLINE_END_POS],
-                    FlowerPartConfig.FLOWERPART_OUTLINE_INCREASEY: jsonInfo[FlowerConfig.PETAL_OUTLINE_INCREASEY],
-                    FlowerPartConfig.QUANTITY_FLOWERPART: jsonInfo[FlowerConfig.CTD_PETALOS]
+                    FlowerPartConfig.FLOWERPART_OUTLINE_INCREASE: jsonInfo[FlowerConfig.PETAL_OUTLINE_INCREASE],
+                    FlowerPartConfig.QUANTITY_FLOWERPART: jsonInfo[FlowerConfig.CTD_PETALOS],
+                    FlowerPartConfig.FLOWERPART_OUTLINE_AXIS: jsonInfo[FlowerConfig.PETAL_OUTLINE_AXIS]
                 }
             self.flowerPartImageInfo.append([flower.getPetal(), info])
 

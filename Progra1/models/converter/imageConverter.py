@@ -106,7 +106,7 @@ class ImageConverter:
         # Dictionaries of colors
         # Inside is indexDic for each color
         colorDicPetal = {}
-        colorDicCenter {}
+        colorDicCenter = {}
 
         indexDicPetals = {}
         indexDicCenter = {}
@@ -119,35 +119,35 @@ class ImageConverter:
                 #Se verfica que esté dentro del area requerida
                 if self.isInCenter(i, j, info):
                     #Se obtiene la diferencia de color
-                    centerColorDif = self.getCenterColorDif(flowerPixels[i, j], info)[0]
+                    centerColorDif = self.getCenterColorDif(flowerPixels[i, j], info)
 
-                    if(centerColorDif <= FlowerConfig.DIFFERENCE_COLOR_LIMIT):
+                    if(centerColorDif[0] <= info[FlowerConfig.CENTER_DIFFERENCE_COLOR_LIMIT]):
                         center = flowerImage.getCenter()
                         center[i, j] = flowerPixels[i, j]
                         centerPixels = flowerImage.getCenterPixels()
 
-                        if math.floor(centerColorDif) not in indexDicCenter:
-                            centerPixels.append(PixelFlower(flowerPixels[i, j], math.floor(centerColorDif), (i, j), flowerNumber))
-                            indexDicCenter[math.floor(centerColorDif)] = len(centerPixels) - 1 #last item inserted
+                        if math.floor(centerColorDif[0]) not in indexDicCenter:
+                            centerPixels.append(PixelFlower(flowerPixels[i, j], math.floor(centerColorDif[0]), (i, j), flowerNumber))
+                            indexDicCenter[math.floor(centerColorDif[0])] = len(centerPixels) - 1 #last item inserted
                         else:# if key is inserted
-                            index = indexDicCenter[math.floor(centerColorDif)]
+                            index = indexDicCenter[math.floor(centerColorDif[0])]
                             centerPixels[index].incrementQuantity()
 
                 elif(self.isInPetal(i,j,info)): #Criterio
                     petalColorDif = self.getPetalColorDif(flowerPixels[i, j], info) # [dif, clrIndex]
 
-                    if(petalColorDif[0] <= FlowerConfig.DIFFERENCE_COLOR_LIMIT):
+                    if(petalColorDif[0] <= info[FlowerConfig.PETAL_DIFFERENCE_COLOR_LIMIT]):
                         petal = flowerImage.getPetal()
                         petal[i, j] = flowerPixels[i, j]
                         petalPixels = flowerImage.getPetalPixels()
 
                         #If there is no color dic of clrIndex (COLOR)
-                        if colorDicPetals[petalColorDif[1]] not in colorDicPetal:
-                            colorDicPetals[petalColorDif[1]] = {} 
+                        if petalColorDif[1] not in colorDicPetal:
+                            colorDicPetal[petalColorDif[1]] = {}
 
                         # (COLOR DIFFERENCE)
-                        if math.floor(petalColorDif[0]) not in colorDicPetals[petalColorDif[1]]:
-                            petalPixels.append(PixelFlower(flowerPixels[i, j], math.floor(petalColorDif), (i, j), flowerNumber))
+                        if math.floor(petalColorDif[0]) not in colorDicPetal[petalColorDif[1]]:
+                            petalPixels.append(PixelFlower(flowerPixels[i, j], math.floor(petalColorDif[0]), (i, j), flowerNumber))
                             indexDicPetals[math.floor(petalColorDif[0])] = len(petalPixels) - 1 #last item inserted
                         else:# if key is inserted
                             index = indexDicPetals[math.floor(petalColorDif[0])]

@@ -9,5 +9,6 @@ class FlowerPartConfig:
     FLOWERPART_LIMIT = "flowerPartLimit"
     FLOWERPART_OUTLINE_INIT_POS = "flowerPartOutlineInitPos"
     FLOWERPART_OUTLINE_END_POS = "flowerPartOutlineEndPos"
-    FLOWERPART_OUTLINE_INCREASEY = "flowerPartIncreaseY"
+    FLOWERPART_OUTLINE_INCREASE = "flowerPartIncrease"
+    FLOWERPART_OUTLINE_AXIS = "flowerPartOutlineAxis"
     QUANTITY_FLOWERPART = "quantityFlowerPart"

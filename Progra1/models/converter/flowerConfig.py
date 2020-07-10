@@ -2,6 +2,8 @@ class FlowerConfig:
     #(R,G,B)
     COLOR_PETAL_PREF = "colorPetaloPreferido"
     COLOR_CENTER_PREF = "colorCentroPreferido"
+    PETAL_DIFFERENCE_COLOR_LIMIT = "petalColorDifference"
+    CENTER_DIFFERENCE_COLOR_LIMIT = "centerColorDifference"
     CTD_PETALOS = "numeroPetalos"
 
     #(i,j)
@@ -16,12 +18,13 @@ class FlowerConfig:
     #outline positions end
     PETAL_OUTLINE_END_POS = "petalOutlineEndPos"
     CENTER_OUTLINE_END_POS = "centerOutlineEndPos"
-    PETAL_OUTLINE_INCREASEY = "petalOutlineIncreaseY"
-    CENTER_OUTLINE_INCREASEY = "centerOutlineIncreaseY"
+    PETAL_OUTLINE_INCREASE = "petalOutlineIncrease"
+    CENTER_OUTLINE_INCREASE = "centerOutlineIncrease"
+    PETAL_OUTLINE_AXIS = "petalOutlineAxix"
+    CENTER_OUTLINE_AXIS = "centerOutlineAxix"
 
 
     #Convert image
     BACKGROUND_COLOR = (0,0,0) #Black
     OUTLINE_COLOR = (255,255,255) #White
     HIGHLIGHT_COLOR = (75, 119, 115)
-    DIFFERENCE_COLOR_LIMIT = 45
