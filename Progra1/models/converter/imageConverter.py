@@ -106,7 +106,7 @@ class ImageConverter:
         # Dictionaries of colors
         # Inside is indexDic for each color
         colorDicPetal = {}
-        colorDicCenter {}
+        colorDicCenter = {}
 
         indexDicPetals = {}
         indexDicCenter = {}
@@ -142,16 +142,19 @@ class ImageConverter:
                         petalPixels = flowerImage.getPetalPixels()
 
                         #If there is no color dic of clrIndex (COLOR)
-                        if colorDicPetals[petalColorDif[1]] not in colorDicPetal:
-                            colorDicPetals[petalColorDif[1]] = {} 
+                        if petalColorDif[1] not in colorDicPetal:
+                            print(petalColorDif[1])
+                            colorDicPetal[petalColorDif[1]] = {} 
 
                         # (COLOR DIFFERENCE)
-                        if math.floor(petalColorDif[0]) not in colorDicPetals[petalColorDif[1]]:
-                            petalPixels.append(PixelFlower(flowerPixels[i, j], math.floor(petalColorDif), (i, j), flowerNumber))
-                            indexDicPetals[math.floor(petalColorDif[0])] = len(petalPixels) - 1 #last item inserted
+                        if math.floor(petalColorDif[0]) not in colorDicPetal[petalColorDif[1]]:
+                            petalPixels.append(PixelFlower(flowerPixels[i, j], math.floor(petalColorDif[0]), (i, j), flowerNumber))
+                            colorDicPetal[petalColorDif[1]][math.floor(petalColorDif[0])] = len(petalPixels) - 1 #last item inserted
+                            #print(colorDicPetal)
                         else:# if key is inserted
-                            index = indexDicPetals[math.floor(petalColorDif[0])]
+                            index = colorDicPetal[petalColorDif[1]][math.floor(petalColorDif[0])]
                             petalPixels[index].incrementQuantity()
+                            #print(colorDicPetal)
                             
         flowerImage.sortByDifference()
 
@@ -186,6 +189,8 @@ class ImageConverter:
                 colorSelected = selected
                 minDifference = dif
             index += 1
+        colorSelected[1] = math.floor(colorSelected[1])
+        colorSelected[0] = math.floor(colorSelected[0])
         return colorSelected
 
     #Diferencia de color para el petalo
