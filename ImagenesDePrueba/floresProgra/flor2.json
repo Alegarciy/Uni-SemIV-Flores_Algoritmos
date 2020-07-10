@@ -1,0 +1,14 @@
+{
+  "pixelCentral": [1077,1501],
+  "pixelPetaloMasAlejado":[991,1499],
+  "colorPetaloPreferido":[[33,113,244],[129,166,254]],
+  "colorCentroPreferido":[[219,204,0],[164,181,235]],
+  "pixelCentroMasAlejado":[332,360],
+  "petalOutlineIncreaseY" :  1,
+  "centerOutlineIncreaseY" :  -1,
+  "petalOutlineInitPos": [5, 1521],
+  "centerOutlineInitPos": [1353,1490],
+  "petalOutlineEndPos": [837, 1805],
+  "centerOutlineEndPos": [362, 400],
+  "numeroPetalos": 4
+}

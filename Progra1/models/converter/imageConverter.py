@@ -139,7 +139,7 @@ class ImageConverter:
                         if math.floor(petalColorDif) not in indexDicPetals:
                             petalPixels.append(PixelFlower(flowerPixels[i, j], math.floor(petalColorDif), (i, j), flowerNumber))
                             indexDicPetals[math.floor(petalColorDif)] = len(petalPixels) - 1 #last item inserted
-                        else: # if key is inserted
+                        else:# if key is inserted
                             index = indexDicPetals[math.floor(petalColorDif)]
                             petalPixels[index].incrementQuantity()
                             
