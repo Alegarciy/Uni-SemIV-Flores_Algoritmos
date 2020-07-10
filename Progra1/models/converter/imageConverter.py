@@ -166,10 +166,15 @@ class ImageConverter:
     #Diferencia de color para el petalo
     def getPetalColorDif(self, pixel, info):
         listOfColors = info[FlowerConfig.COLOR_PETAL_PREF]
-        differences = []
+        colorSelected = []
+        minDifference = 0
         for color in listOfColors:
-            differences.append(Color.colorDifference(pixel, color))
-        return min(differences)
+            dif = Color.colorDifference(pixel, color)
+            selected = [dif, color]
+            if(minDifference == 0 or dif <= minDifference):
+                colorSelected = selected
+
+        return colorSelected
 
     #Diferencia de color para el petalo
     def getCenterColorDif(self, pixel, info):
