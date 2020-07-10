@@ -114,7 +114,7 @@ class ImageConverter:
                 #Se verfica que esté dentro del area requerida
                 if self.isInCenter(i, j, info):
                     #Se obtiene la diferencia de color
-                    centerColorDif = self.getCenterColorDif(flowerPixels[i, j], info)
+                    centerColorDif = self.getCenterColorDif(flowerPixels[i, j], info)[0]
 
                     if(centerColorDif <= FlowerConfig.DIFFERENCE_COLOR_LIMIT):
                         center = flowerImage.getCenter()
@@ -129,7 +129,7 @@ class ImageConverter:
                             centerPixels[index].incrementQuantity()
 
                 elif(self.isInPetal(i,j,info)): #Criterio
-                    petalColorDif = self.getPetalColorDif(flowerPixels[i, j], info)
+                    petalColorDif = self.getPetalColorDif(flowerPixels[i, j], info)[0]
 
                     if(petalColorDif <= FlowerConfig.DIFFERENCE_COLOR_LIMIT):
                         petal = flowerImage.getPetal()
@@ -168,21 +168,30 @@ class ImageConverter:
         listOfColors = info[FlowerConfig.COLOR_PETAL_PREF]
         colorSelected = []
         minDifference = 0
+        index = 0
         for color in listOfColors:
             dif = Color.colorDifference(pixel, color)
-            selected = [dif, color]
+            selected = [dif, index]
             if(minDifference == 0 or dif <= minDifference):
                 colorSelected = selected
-
+                minDifference = dif
+            index += 1
         return colorSelected
 
     #Diferencia de color para el petalo
     def getCenterColorDif(self, pixel, info):
         listOfColors = info[FlowerConfig.COLOR_CENTER_PREF]
-        differences = []
+        colorSelected = []
+        minDifference = 0
+        index = 0
         for color in listOfColors:
-            differences.append(Color.colorDifference(pixel, color))
-        return min(differences)
+            dif = Color.colorDifference(pixel, color)
+            selected = [dif, index]
+            if (minDifference == 0 or dif <= minDifference):
+                colorSelected = selected
+                minDifference = dif
+            index += 1
+        return colorSelected
 
     #Muestra el proceso del voraz creando una imagen
     def getConvertProcess(self):
