@@ -20,8 +20,8 @@ class FlowerConfig:
     CENTER_OUTLINE_END_POS = "centerOutlineEndPos"
     PETAL_OUTLINE_INCREASE = "petalOutlineIncrease"
     CENTER_OUTLINE_INCREASE = "centerOutlineIncrease"
-    PETAL_OUTLINE_AXIS = "petalOutlineAxix"
-    CENTER_OUTLINE_AXIS = "centerOutlineAxix"
+    PETAL_OUTLINE_AXIS = "petalOutlineAxis"
+    CENTER_OUTLINE_AXIS = "centerOutlineAxis"
 
 
     #Convert image

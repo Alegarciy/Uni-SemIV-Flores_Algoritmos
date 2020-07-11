@@ -1,0 +1,4 @@
+class DrawFlowerConfig:
+    MARGIN = 25
+    CENTER_DISTANCE_PROPORTION = 0.3
+    CANVAS_MULTIPLY_SIZE = 3

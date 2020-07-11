@@ -4,6 +4,7 @@ from models.genetic.chromosome.chromosomeConfig import ChromosomeConfig
 from models.genetic.algorithm.ga import GA
 from matplotlib import pyplot as plt
 from models.plotModelDrawer import PlotModelDrawer
+from models.genetic.process.drawFlowerConfig import DrawFlowerConfig
 import numpy as np
 class Genetic:
 
@@ -49,7 +50,7 @@ class Genetic:
             colors = self.GAs[flowerPartKey].getColors()
             flowerPart = self.flowerParts[flowerPartKey]
             flowerPartShape = flowerPart.chromosomes[ChromosomeConfig.SHAPE]
-            canvasSize = int((flowerPartShape.distance) * 3)
+            canvasSize = int((flowerPartShape.distance+DrawFlowerConfig.MARGIN) * DrawFlowerConfig.CANVAS_MULTIPLY_SIZE)
             canvas = np.zeros([canvasSize, canvasSize, 3], dtype=np.uint8)
             position = [int(canvasSize/2), int(canvasSize/2)]
 

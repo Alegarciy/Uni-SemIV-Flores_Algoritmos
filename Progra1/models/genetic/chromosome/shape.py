@@ -20,6 +20,10 @@ class Shape(Chromosome):
         self.IMAGE = 0
         self.distance = 0
         self.quantityPixels = 0
+    def sharp(self, flowePartArea):
+        minRow = min(flowePartArea)
+        for row in range(int(minRow/4), minRow):
+            flowePartArea.append(row)
 
     #Combina los valores del area en pixeles de cada parte de la flor para obtener el area promedio
     def combineFlowerPartArea(self, flowersPartArea):
@@ -44,6 +48,7 @@ class Shape(Chromosome):
 
             newFlowerPartArea.append(int(areaOfRow / len(flowersPartArea)))
 
+        self.sharp(newFlowerPartArea)
         return newFlowerPartArea
 
     #Obtiene el area de una parte de la flor indicandole el punto de inicio y fin a analizar

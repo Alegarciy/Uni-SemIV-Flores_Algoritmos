@@ -5,17 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8e0719f0-2ea9-41f6-8e3b-dece70138e1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Progra1/models/genetic/process/drawFlowerConfig.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor3.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor3.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor3.json" beforeDir="false" afterPath="$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor3.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Progra1/app/templates/static/userInput/flor3/image.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/Progra1/app/templates/static/userInput/flor3/image.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImagenesDePrueba/flor1.json" beforeDir="false" afterPath="$PROJECT_DIR$/ImagenesDePrueba/flor1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor2.json" beforeDir="false" afterPath="$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor2Progra.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor3.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor4.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progra1/app/templates/static/userInput/flor1/json.json" beforeDir="false" afterPath="$PROJECT_DIR$/Progra1/app/templates/static/userInput/flor1/json.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Progra1/app/templates/static/userInput/flor3/json.json" beforeDir="false" afterPath="$PROJECT_DIR$/Progra1/app/templates/static/userInput/flor3/json.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Progra1/models/converter/flowerConfig.py" beforeDir="false" afterPath="$PROJECT_DIR$/Progra1/models/converter/flowerConfig.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Progra1/models/converter/imageConverter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Progra1/models/converter/imageConverter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Progra1/models/genetic/chromosome/shape.py" beforeDir="false" afterPath="$PROJECT_DIR$/Progra1/models/genetic/chromosome/shape.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Progra1/models/genetic/flowerParts/center.py" beforeDir="false" afterPath="$PROJECT_DIR$/Progra1/models/genetic/flowerParts/center.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Progra1/models/genetic/flowerParts/flowerPartConfig.py" beforeDir="false" afterPath="$PROJECT_DIR$/Progra1/models/genetic/flowerParts/flowerPartConfig.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Progra1/models/genetic/flowerParts/petal.py" beforeDir="false" afterPath="$PROJECT_DIR$/Progra1/models/genetic/flowerParts/petal.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Progra1/models/genetic/genetic.py" beforeDir="false" afterPath="$PROJECT_DIR$/Progra1/models/genetic/genetic.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Progra1/models/genetic/process/drawFlower.py" beforeDir="false" afterPath="$PROJECT_DIR$/Progra1/models/genetic/process/drawFlower.py" afterDir="false" />
     </list>
@@ -26,7 +27,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Flores_Algoritmos$run.coverage" NAME="run Coverage Results" MODIFIED="1594418657718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Progra1" />
+    <SUITE FILE_PATH="coverage/Flores_Algoritmos$run.coverage" NAME="run Coverage Results" MODIFIED="1594427015937" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Progra1" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -42,38 +43,16 @@
     <expand />
     <select />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/Progra1/app/templates/view/home.html">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="360">
-                    <caret line="80" column="126" selection-start-line="80" selection-start-column="112" selection-end-line="80" selection-end-column="126" />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="FavoritesManager">
     <favorites_list name="Flores_Algoritmos" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Progra1/models/converter/imageConverter.py">
+        <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor2.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
-              <folding>
-                <element signature="e#0#36#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="296">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
             </state>
           </provider>
         </entry>
@@ -81,46 +60,25 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/process/drawFlower.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="77" column="12" selection-start-line="77" selection-start-column="12" selection-end-line="77" selection-end-column="12" />
+            <state relative-caret-position="141">
+              <caret line="20" column="48" lean-forward="true" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#489#1743#0" />
-                <element signature="e#1894#2496#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/flowerParts/petal.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#60#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor2.jpeg">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/flowerParts/center.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="17" lean-forward="true" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#60#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/chromosome/shape.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="49" column="67" selection-start-line="49" selection-start-column="53" selection-end-line="49" selection-end-column="67" />
+            <state relative-caret-position="238">
+              <caret line="25" column="37" lean-forward="true" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
               <folding>
                 <element signature="e#0#59#0" expanded="true" />
                 <element signature="e#428#723#0" />
@@ -130,38 +88,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Progra1/models/converter/flowerConfig.py">
+        <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/genetic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="21" column="53" lean-forward="true" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor3.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/flowerParts/flowerPartConfig.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="31" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/flowerParts/flowerPart.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="167">
+              <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
               <folding>
-                <element signature="e#0#35#0" expanded="true" />
+                <element signature="e#0#56#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -200,6 +132,7 @@
       <find>drawCenter</find>
       <find>increaseInY</find>
       <find>pixelsInY</find>
+      <find>3</find>
     </findStrings>
     <replaceStrings>
       <replace>j</replace>
@@ -220,8 +153,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Progra1/models/fileManager.py" />
-        <option value="$PROJECT_DIR$/Progra1/models/color.py" />
         <option value="$PROJECT_DIR$/Progra1/models/genetic/petalData.py" />
         <option value="$PROJECT_DIR$/Progra1/models/genetic/centerData.py" />
         <option value="$PROJECT_DIR$/Progra1/models/genetic/flowerParts.py" />
@@ -243,7 +174,6 @@
         <option value="$PROJECT_DIR$/Progra1/app/templates/static/convertProcess.js" />
         <option value="$PROJECT_DIR$/Progra1/models/genetic/algorithm/individual.py" />
         <option value="$PROJECT_DIR$/Progra1/models/genetic/chromosome/color.py" />
-        <option value="$PROJECT_DIR$/ImagenesDePrueba/flor1.json" />
         <option value="$PROJECT_DIR$/ImagenesDePrueba/flor4.json" />
         <option value="$PROJECT_DIR$/ImagenesDePrueba/flor5.json" />
         <option value="$PROJECT_DIR$/ImagenesDePrueba/flor3.json" />
@@ -260,22 +190,25 @@
         <option value="$PROJECT_DIR$/Progra1/models/analyzer/imageAnalyzer.py" />
         <option value="$PROJECT_DIR$/Progra1/models/genetic/process/outline.py" />
         <option value="$PROJECT_DIR$/Progra1/models/genetic/chromosome/Distribution.py" />
-        <option value="$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor2.json" />
         <option value="$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor4.json" />
-        <option value="$PROJECT_DIR$/Progra1/models/genetic/genetic.py" />
-        <option value="$PROJECT_DIR$/Progra1/models/genetic/process/drawFlower.py" />
         <option value="$PROJECT_DIR$/Progra1/models/converter/imageConverter.py" />
         <option value="$PROJECT_DIR$/Progra1/models/genetic/flowerParts/flowerPartConfig.py" />
-        <option value="$PROJECT_DIR$/Progra1/models/converter/flowerConfig.py" />
-        <option value="$PROJECT_DIR$/Progra1/models/genetic/chromosome/shape.py" />
         <option value="$PROJECT_DIR$/Progra1/models/genetic/flowerParts/petal.py" />
         <option value="$PROJECT_DIR$/Progra1/models/genetic/flowerParts/center.py" />
+        <option value="$PROJECT_DIR$/Progra1/models/converter/flowerConfig.py" />
+        <option value="$PROJECT_DIR$/ImagenesDePrueba/flor1.json" />
         <option value="$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor3.json" />
+        <option value="$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor5.json" />
+        <option value="$PROJECT_DIR$/Progra1/models/genetic/process/drawFlowerConfig.py" />
+        <option value="$PROJECT_DIR$/Progra1/models/genetic/genetic.py" />
+        <option value="$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor2.json" />
+        <option value="$PROJECT_DIR$/Progra1/models/genetic/process/drawFlower.py" />
+        <option value="$PROJECT_DIR$/Progra1/models/genetic/chromosome/shape.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="675" />
     <option name="y" value="-8" />
     <option name="width" value="699" />
     <option name="height" value="784" />
@@ -349,12 +282,6 @@
             <path>
               <item name="Flores_Algoritmos" type="b2602c69:ProjectViewProjectNode" />
               <item name="Flores_Algoritmos" type="462c0819:PsiDirectoryNode" />
-              <item name="ImagenesDePrueba" type="462c0819:PsiDirectoryNode" />
-              <item name="floresProgra" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Flores_Algoritmos" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Flores_Algoritmos" type="462c0819:PsiDirectoryNode" />
               <item name="Progra1" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -362,20 +289,6 @@
               <item name="Flores_Algoritmos" type="462c0819:PsiDirectoryNode" />
               <item name="Progra1" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Flores_Algoritmos" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Flores_Algoritmos" type="462c0819:PsiDirectoryNode" />
-              <item name="Progra1" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-              <item name="analyzer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Flores_Algoritmos" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Flores_Algoritmos" type="462c0819:PsiDirectoryNode" />
-              <item name="Progra1" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-              <item name="converter" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Flores_Algoritmos" type="b2602c69:ProjectViewProjectNode" />
@@ -391,14 +304,6 @@
               <item name="models" type="462c0819:PsiDirectoryNode" />
               <item name="genetic" type="462c0819:PsiDirectoryNode" />
               <item name="chromosome" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Flores_Algoritmos" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Flores_Algoritmos" type="462c0819:PsiDirectoryNode" />
-              <item name="Progra1" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-              <item name="genetic" type="462c0819:PsiDirectoryNode" />
-              <item name="flowerParts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Flores_Algoritmos" type="b2602c69:ProjectViewProjectNode" />
@@ -526,7 +431,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="284288000" />
+    <option name="totallyTimeSpent" value="292818000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -538,14 +443,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <frame x="675" y="-8" width="699" height="784" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49923196" weight="0.23676248" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49923196" weight="0.26928896" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.50076807" side_tool="true" weight="0.22239032" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32872504" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33640552" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2749616" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.37480798" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -590,30 +496,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/flor4.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/flor4.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Progra1/app/templates/view/layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="592">
-          <caret line="59" column="23" lean-forward="true" selection-start-line="59" selection-start-column="23" selection-end-line="59" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/flor2.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="35" lean-forward="true" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/flor2.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -671,13 +553,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/chromosome/chromosomeConfig.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/chromosome/Chromosome.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -719,34 +594,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor2Progra.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor4.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="36" lean-forward="true" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor2.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="33" lean-forward="true" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Progra1/models/forms.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Progra1/models/converter/flowerImage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Progra1/models/converter/pixelFlower.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -820,9 +669,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor4.jpeg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Progra1/controllers/controller.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="122">
@@ -853,35 +699,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/genetic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="64" column="22" selection-start-line="64" selection-start-column="16" selection-end-line="64" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/flor1.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="36" lean-forward="true" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/process/drawFlower.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="77" column="12" selection-start-line="77" selection-start-column="12" selection-end-line="77" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#489#1743#0" />
-            <element signature="e#1894#2496#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Progra1/models/converter/imageConverter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="331">
@@ -906,22 +723,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/flowerParts/center.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="17" lean-forward="true" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/flowerParts/petal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#0#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/flowerParts/flowerPart.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <folding>
             <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/chromosome/shape.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="49" column="67" selection-start-line="49" selection-start-column="53" selection-end-line="49" selection-end-column="67" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-            <element signature="e#428#723#0" />
           </folding>
         </state>
       </provider>
@@ -933,40 +759,114 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/flowerParts/petal.py">
+    <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/chromosome/chromosomeConfig.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#60#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="102">
+          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/flowerParts/center.py">
+    <entry file="file://$PROJECT_DIR$/Progra1/models/converter/flowerImage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="17" lean-forward="true" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+        <state>
           <folding>
-            <element signature="e#0#60#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Progra1/models/converter/flowerConfig.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="21" column="53" lean-forward="true" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
+        <state relative-caret-position="129">
+          <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor3.jpeg">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/flor1.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="36" lean-forward="true" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor3.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="85">
+          <caret line="5" column="62" lean-forward="true" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor2Progra.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor4.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor1.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor4.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="36" lean-forward="true" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor5.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/process/drawFlowerConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/genetic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor2.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ImagenesDePrueba/floresProgra/flor2.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/process/drawFlower.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="20" column="48" lean-forward="true" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Progra1/models/genetic/chromosome/shape.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="25" column="37" lean-forward="true" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+            <element signature="e#428#723#0" />
+          </folding>
         </state>
       </provider>
     </entry>

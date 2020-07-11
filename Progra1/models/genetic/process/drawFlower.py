@@ -4,14 +4,14 @@ import numpy as np
 from scipy import ndimage
 from matplotlib import pyplot as plt
 from models.genetic.chromosome.chromosomeConfig import ChromosomeConfig
+from models.genetic.process.drawFlowerConfig import DrawFlowerConfig
 
 class DrawFlower:
     def __init__(self):
         self.I = 0
         self.J = 1
-        self.randomRotationRange = [-10, 10]
-        self.randomPositionRange = [-10, 10]
-        self.margin = 25
+        self.randomRotationRange = [-5, 5]
+        self.randomPositionRange = [-5, 5]
 
     #Agrega un petalo  dado un su tamaño a una imagen
     def drawPetal(self, petalArea, canvas, position, colors):
@@ -22,7 +22,6 @@ class DrawFlower:
         Iy = position[self.I]
         for size in petalArea:
             area = int(size / 2)
-
             Ix = position[self.J]
             for xr in range(1, area):
                 canvas[Iy, (Ix + xr)] = colors[
@@ -55,8 +54,10 @@ class DrawFlower:
     #Dibuja el conjunto de petalos de la flor
     def drawFlowerPetals(self, petalArea, qPetals, colors, petalDistance, canvas, canvasSize):
         rotation = 360 / qPetals
-        posI = int((canvasSize/2) - petalDistance) + random.randint(self.randomPositionRange[self.I], self.randomPositionRange[self.J])
-        posJ = int(canvasSize/2) + random.randint(self.randomPositionRange[self.I], self.randomPositionRange[self.J])
+        posI = int((canvasSize/2) - petalDistance) + \
+               random.randint(self.randomPositionRange[self.I], self.randomPositionRange[self.J])
+        posJ = int(canvasSize/2) + \
+               random.randint(self.randomPositionRange[self.I], self.randomPositionRange[self.J])
 
         for i in range(0, qPetals):
             self.drawPetal(petalArea, canvas, [posI, posJ], colors)
@@ -67,21 +68,23 @@ class DrawFlower:
 
     #Dibuja el centro de una flor
     def drawCenter(self, flowerCenterArea, colors, canvas, canvasSize):
-        #((petalShape.distance+self.margin)*3)
         flowerCenterAreaCopy = flowerCenterArea.copy()
         canvasCenter = [int(canvasSize/2), int(canvasSize/2)]
         flowerCenterSize = len(flowerCenterAreaCopy)
         initPosition = [int(canvasCenter[self.I]-flowerCenterSize/2), canvasCenter[self.J]]
         disminucionAlto = 0
-        distance = canvasSize/3-self.margin
-        distanciaIdeal = distance * 0.3
+        distance = canvasSize/DrawFlowerConfig.CANVAS_MULTIPLY_SIZE-DrawFlowerConfig.MARGIN
+        distanciaIdeal = distance * DrawFlowerConfig.CENTER_DISTANCE_PROPORTION
+
         if len(flowerCenterAreaCopy) > distanciaIdeal:
-            disminucionAlto = int(((len(flowerCenterAreaCopy)-distanciaIdeal)/len(flowerCenterArea))*100)
-            print(str(disminucionAlto))
+            disminucionAlto = \
+                int(((len(flowerCenterAreaCopy)-distanciaIdeal)/len(flowerCenterArea))*100)
 
         indexSize=0
         while(indexSize < len(flowerCenterAreaCopy)-1):
-            flowerCenterAreaCopy[indexSize] = int(((flowerCenterAreaCopy[indexSize]/distance)*distance * 0.3))
+            flowerCenterAreaCopy[indexSize] = \
+                int(((flowerCenterAreaCopy[indexSize]/distance)*distance * DrawFlowerConfig.CENTER_DISTANCE_PROPORTION))
+
             if disminucionAlto > 1 and random.randint(0, 100) < disminucionAlto:
                 del flowerCenterAreaCopy[indexSize]
             else:
@@ -122,7 +125,7 @@ class DrawFlower:
     #Dibuja la flor
     def drawFlower(self, petal, petalColors, center, centerColors):
         petalShape = petal.chromosomes[ChromosomeConfig.SHAPE]
-        canvasSize = int((petalShape.distance+self.margin)*3)
+        canvasSize = int((petalShape.distance+DrawFlowerConfig.MARGIN)*DrawFlowerConfig.CANVAS_MULTIPLY_SIZE)
         canvas = np.zeros([canvasSize, canvasSize, 3], dtype=np.uint8)
 
         #LLama a dibujar los petalos
