@@ -49,6 +49,7 @@ class Shape(Chromosome):
 
             newFlowerPartArea.append(int(areaOfRow / len(flowersPartArea)))
         if flowerDescription == FlowerPartConfig.PETAL:
+            print("SHARP de " + flowerDescription)
             self.sharp(newFlowerPartArea)
 
         return newFlowerPartArea

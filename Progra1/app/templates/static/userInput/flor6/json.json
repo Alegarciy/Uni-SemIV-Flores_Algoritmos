@@ -1,0 +1,22 @@
+{
+  "pixelCentral": [184,201],
+  "pixelPetaloMasAlejado":[179,182],
+  "pixelCentroMasAlejado":[68,64],
+
+  "colorPetaloPreferido":[[227,183,0]],
+  "colorCentroPreferido":[[80,33,0],[219,204,77]],
+  "petalColorDifference": 30,
+  "centerColorDifference": 65,
+
+  "petalOutlineIncrease" :  -1,
+  "centerOutlineIncrease" :  -1,
+  "petalOutlineAxis": 0,
+  "centerOutlineAxis": 0,
+
+  "petalOutlineInitPos": [325, 212],
+  "petalOutlineEndPos": [258,230],
+  "centerOutlineInitPos": [240, 201],
+  "centerOutlineEndPos": [185, 257],
+
+  "numeroPetalos": 20
+}

@@ -1,22 +1,22 @@
 {
-  "pixelCentral": [181,251],
-  "pixelPetaloMasAlejado":[152,249],
-  "pixelCentroMasAlejado":[97,91],
+  "pixelCentral": [272,220],
+  "pixelPetaloMasAlejado":[224,257],
+  "pixelCentroMasAlejado":[36,45],
 
-  "colorPetaloPreferido":[[20,84,234],[156,173,253]],
-  "colorCentroPreferido":[[198,176,4]],
-  "petalColorDifference": 40,
-  "centerColorDifference": 50,
+  "colorPetaloPreferido":[[66,3,107],[11,8,25],[255,250,255],[184,197,229],[140,176,190]],
+  "colorCentroPreferido":[[206,213,21],[13,14,8]],
+  "petalColorDifference": 43,
+  "centerColorDifference": 55,
 
-  "petalOutlineIncrease" :  -1,
+  "petalOutlineIncrease" :  1,
   "centerOutlineIncrease" :  -1,
   "petalOutlineAxis": 1,
   "centerOutlineAxis": 0,
 
-  "petalOutlineInitPos": [202, 497],
-  "petalOutlineEndPos": [239, 405],
-  "centerOutlineInitPos": [208, 258],
-  "centerOutlineEndPos": [174, 300],
+  "petalOutlineInitPos": [272, 19],
+  "petalOutlineEndPos": [239, 159],
+  "centerOutlineInitPos": [303, 227],
+  "centerOutlineEndPos": [274, 258],
 
-  "numeroPetalos": 10
+  "numeroPetalos": 5
 }

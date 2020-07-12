@@ -69,9 +69,7 @@ class DrawFlower:
     #Dibuja el centro de una flor
     def drawCenter(self, flowerCenterArea, colors, canvas, canvasSize):
         flowerCenterAreaCopy = flowerCenterArea.copy()
-        canvasCenter = [int(canvasSize/2), int(canvasSize/2)]
-        flowerCenterSize = len(flowerCenterAreaCopy)
-        initPosition = [int(canvasCenter[self.I]-flowerCenterSize/2), canvasCenter[self.J]]
+        canvasCenter = [int(canvas.shape[self.I] / 2), int(canvas.shape[self.J] / 2)]
         disminucionAlto = 0
         distance = canvasSize/DrawFlowerConfig.CANVAS_MULTIPLY_SIZE-DrawFlowerConfig.MARGIN
         distanciaIdeal = distance * DrawFlowerConfig.CENTER_DISTANCE_PROPORTION
@@ -81,7 +79,7 @@ class DrawFlower:
                 int(((len(flowerCenterAreaCopy)-distanciaIdeal)/len(flowerCenterArea))*100)
 
         indexSize=0
-        while(indexSize < len(flowerCenterAreaCopy)-1):
+        while(indexSize < len(flowerCenterAreaCopy)):
             flowerCenterAreaCopy[indexSize] = \
                 int(((flowerCenterAreaCopy[indexSize]/distance)*distance * DrawFlowerConfig.CENTER_DISTANCE_PROPORTION))
 
@@ -89,6 +87,9 @@ class DrawFlower:
                 del flowerCenterAreaCopy[indexSize]
             else:
                 indexSize += 1
+
+        flowerCenterSize = len(flowerCenterAreaCopy)
+        initPosition = [int(canvasCenter[self.I]-flowerCenterSize), canvasCenter[self.J]]
 
         Iy = initPosition[self.I]
         for size in flowerCenterAreaCopy:
