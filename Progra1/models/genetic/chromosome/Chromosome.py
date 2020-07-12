@@ -9,5 +9,5 @@ class Chromosome(ABC):
         }
 
     @abstractmethod
-    def analyzeDistribution(self, flowerPartPixels, flowerPartImageInfo):
+    def analyzeDistribution(self, flowerPartPixels, flowerPartImageInfo, flowerDescription):
         pass

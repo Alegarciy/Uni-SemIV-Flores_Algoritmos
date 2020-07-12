@@ -137,7 +137,7 @@ class Color(GeneticChromosome):
         return self.__blendDominantColor
 
     #define abstract method
-    def analyzeDistribution(self, flowerPartPixels, flowerPartImageInfo): #Como creo la tabla de distribucion para los coleres
+    def analyzeDistribution(self, flowerPartPixels, flowerPartImageInfo, flowerDescription): #Como creo la tabla de distribucion para los coleres
         #print("analyze COLOR")
         floweNumber = 0
         numElements = 0

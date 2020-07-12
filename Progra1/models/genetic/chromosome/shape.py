@@ -20,13 +20,14 @@ class Shape(Chromosome):
         self.IMAGE = 0
         self.distance = 0
         self.quantityPixels = 0
+
     def sharp(self, flowePartArea):
         minRow = min(flowePartArea)
         for row in range(int(minRow/4), minRow):
             flowePartArea.append(row)
 
     #Combina los valores del area en pixeles de cada parte de la flor para obtener el area promedio
-    def combineFlowerPartArea(self, flowersPartArea):
+    def combineFlowerPartArea(self, flowersPartArea, flowerDescription):
         newFlowerPartArea = []
         areasLength = []
         self.distance = 0
@@ -47,8 +48,9 @@ class Shape(Chromosome):
                         areaOfRow += (area[row])
 
             newFlowerPartArea.append(int(areaOfRow / len(flowersPartArea)))
+        if flowerDescription == FlowerPartConfig.PETAL:
+            self.sharp(newFlowerPartArea)
 
-        self.sharp(newFlowerPartArea)
         return newFlowerPartArea
 
     #Obtiene el area de una parte de la flor indicandole el punto de inicio y fin a analizar
@@ -97,7 +99,7 @@ class Shape(Chromosome):
         return area
 
     #Define abstract method
-    def analyzeDistribution(self, flowerPartPixels, flowerPartImageInfo):
+    def analyzeDistribution(self, flowerPartPixels, flowerPartImageInfo, flowerDescription):
         self.outlineImages = []
         self.flowersPartArea = []
 
@@ -112,7 +114,7 @@ class Shape(Chromosome):
                 flowerImageInfo[self.INFO][FlowerPartConfig.FLOWERPART_OUTLINE_AXIS]
             ))
 
-            self.combinationOfAreas = self.combineFlowerPartArea(self.flowersPartArea)
+            self.combinationOfAreas = self.combineFlowerPartArea(self.flowersPartArea, flowerDescription)
 
         self.setAnalyzeInfo()
         self.setQuantityPixels()

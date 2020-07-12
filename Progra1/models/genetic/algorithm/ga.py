@@ -4,13 +4,13 @@ from models.genetic.algorithm.population import Population
 from models.genetic.algorithm.individual import Individual
 import time
 class GA:
+
     def __init__(self, chromosome, flowerPart, populationSize):
         self.__chromosome = chromosome
         self.__flowerPart = flowerPart
         self.__populationSize = int(populationSize)
         self.__mutationRate = GAConfig.MUTATION_RATE
-        self.__deadRate = GAConfig.DEAD_RATE  #Variable?
-        self.__restartPopulation = False
+        self.__deadRate = GAConfig.DEAD_RATE  #Variable
 
         #Init Population
         self.__population = Population() #Population obj
@@ -36,7 +36,6 @@ class GA:
                 self.selectPopulation()
                 self.reproduce()
                 self.__generation += 1
-
             time.sleep(0.5)
 
     def calcFitness(self):
@@ -58,15 +57,13 @@ class GA:
         self.__population.purgePopulation(self.__deadRate)
 
     def reproduce(self):
+        #Tamaño de la poblacion
         quantityIndividuals = len(self.__population.individuals)
-        restartPopulation = self.__restartPopulation
-
-        if restartPopulation:
-            quanityOffspring = quantityIndividuals
-        else:
-            quanityOffspring = int(self.__populationSize - quantityIndividuals)
-
+        #Individuos faltantes para completar el tamaño necesario de la poblacion
+        quanityOffspring = int(self.__populationSize - quantityIndividuals)
+        #Lista de nuevos individuos
         offspringList = []
+        
         print("--REPRODUCE--")
         for offSpringNumber in range(0, quanityOffspring):
             parent1 = self.__population.getIndividual(
@@ -78,16 +75,13 @@ class GA:
 
             #Reproducir
             offspring = self.crossover(parent1, parent2)
-            #Mutar
+            #Mutate
             self.mutate(offspring)
             #Add
             offspringList.append(offspring)
 
         #Merge population with offsprings
-        if restartPopulation:
-            self.__population.setIndividuals(offspringList)
-        else:
-            self.__population.addOffsprings(offspringList)
+        self.__population.addOffsprings(offspringList)
 
 
     def mutate(self, ind):
@@ -101,13 +95,22 @@ class GA:
 
 
     def crossover(self, parent1, parent2):
-        bitP1 = random.randint(0, GAConfig.GENES_LENGTH)
-        bitP2 = random.randint(0, GAConfig.GENES_LENGTH)
+        #Puntos aleatorios de la lista de genes del indivio
+        #[  0  1  1  0  0  1  0  1  0  0  0  1  0  1  0  ]
+        #         P1 - - - P2
+        #[  0  0  1  1  0  0  1  0  1  0  1  1  0  0  0  ]
+        #               Offspring
+        #[  0  1  1  1  0  0  0  1  0  0  0  1  0  1  0  ]
+
+
+        P1 = random.randint(0, GAConfig.GENES_LENGTH)
+        P2 = random.randint(0, GAConfig.GENES_LENGTH)
+        
         offspring = Individual(parent1)
-        if bitP1 <= bitP2:
-            offspring.genes[bitP1:bitP2] = parent2.genes[bitP1:bitP2]
+        if P1 <= P2:
+            offspring.genes[P1:P2] = parent2.genes[P1:P2]
         else:
-            offspring.genes[bitP2:bitP1] = parent2.genes[bitP2:bitP1]
+            offspring.genes[P2:P1] = parent2.genes[P2:P1]
 
         return offspring
 

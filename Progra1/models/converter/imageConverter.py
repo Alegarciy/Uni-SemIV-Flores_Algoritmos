@@ -95,7 +95,6 @@ class ImageConverter:
 
 
     #Algoritmo voraz
-
     def convertImage(self, flowerImage, flowerNumber):
         #Datos de la flor
         info = flowerImage.getJsonData()
@@ -114,6 +113,7 @@ class ImageConverter:
 
         for i in range(0, size_i-1):
             for j in range(0, size_j-1):
+
                 self.step = (i*size_i + (j+1)) #Etapa
                 self.progress = (self.step / self.total)*100 #Porcentaje del proceso
                 #Se verfica que esté dentro del area requerida
@@ -144,8 +144,7 @@ class ImageConverter:
                         #If there is no color dic of clrIndex (COLOR)
                         if petalColorDif[1] not in colorDicPetal:
                             print(petalColorDif[1])
-                            colorDicPetal[petalColorDif[1]] = {} 
-
+                            colorDicPetal[petalColorDif[1]] = {}
 
                         # (COLOR DIFFERENCE)
                         if math.floor(petalColorDif[0]) not in colorDicPetal[petalColorDif[1]]:

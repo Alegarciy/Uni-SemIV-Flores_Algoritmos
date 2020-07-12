@@ -4,7 +4,7 @@ from models.converter.flowerConfig import FlowerConfig
 
 class Center(FlowerPart):
     def __init__(self):
-        super().__init__()
+        super().__init__(FlowerPartConfig.CENTER)
 
     def setFlowerPartImages(self, flowerImages):
         for flower in flowerImages:
@@ -23,4 +23,9 @@ class Center(FlowerPart):
             self.flowerPartImageInfo.append([flower.getCenter(), info])
 
     def analyzeChromosome(self, chromosome):
-        return self.chromosomes[chromosome].analyzeDistribution(self.flowerPartPixels, self.flowerPartImageInfo)
+        return self.chromosomes[chromosome].analyzeDistribution\
+            (
+                self.flowerPartPixels,
+                self.flowerPartImageInfo,
+                self.description
+            )

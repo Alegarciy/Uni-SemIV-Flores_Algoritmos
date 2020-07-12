@@ -6,7 +6,8 @@ from models.genetic.chromosome.shape import Shape
 
 class FlowerPart(ABC):
 
-    def __init__(self):
+    def __init__(self, _description):
+        self.description = _description
         self.flowerPartPixels = []
         self.flowerPartImageInfo = []
         self.chromosomes = \
@@ -24,6 +25,5 @@ class FlowerPart(ABC):
         pass
 
     #Getter
-
     def getChromosome(self, key):
         return self.chromosomes[key]

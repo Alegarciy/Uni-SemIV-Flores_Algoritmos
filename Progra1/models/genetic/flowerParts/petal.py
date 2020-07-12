@@ -4,7 +4,7 @@ from models.converter.flowerConfig import FlowerConfig
 
 class Petal(FlowerPart):
     def __init__(self):
-        super().__init__()
+        super().__init__(FlowerPartConfig.PETAL)
         self.quantity = 0
 
     def setFlowerPartImages(self, flowerImages):
@@ -32,6 +32,12 @@ class Petal(FlowerPart):
 
 
     def analyzeChromosome(self, chromosome):
-        analysisInfo = self.chromosomes[chromosome].analyzeDistribution(self.flowerPartPixels, self.flowerPartImageInfo)
+        analysisInfo = self.chromosomes[chromosome].analyzeDistribution\
+        (
+            self.flowerPartPixels,
+            self.flowerPartImageInfo,
+            self.description
+        )
+
         self.analyzeQuantityOfPetals()
         return analysisInfo

@@ -13,14 +13,15 @@ class Population:
 
     def purgePopulation(self, deadRate):
         self.sortPopulation()
+        # Tamaño de Poblacion * 70/100
+        #    mas aptos      deletePoint
+        # [. . . . . . . . . . 70%. . . . . . .]
+        #[. . . . . . . . . . .. [ offspring ]]
         deletePoint = int(len(self.individuals) * ((100-deadRate)/100))
 
         print("--SELECT POPULATION--")
         print("Delete point: " + str(deletePoint))
-        #self.printPopulation()
         del self.individuals[deletePoint:]
-
-
 
     #Sort population by fitness
     def sortPopulation(self):

@@ -50,7 +50,8 @@ class Genetic:
             colors = self.GAs[flowerPartKey].getColors()
             flowerPart = self.flowerParts[flowerPartKey]
             flowerPartShape = flowerPart.chromosomes[ChromosomeConfig.SHAPE]
-            canvasSize = int((flowerPartShape.distance+DrawFlowerConfig.MARGIN) * DrawFlowerConfig.CANVAS_MULTIPLY_SIZE)
+            petalDistance = self.flowerParts[FlowerPartConfig.PETAL].chromosomes[ChromosomeConfig.SHAPE].distance
+            canvasSize = int((petalDistance+DrawFlowerConfig.MARGIN) * DrawFlowerConfig.CANVAS_MULTIPLY_SIZE)
             canvas = np.zeros([canvasSize, canvasSize, 3], dtype=np.uint8)
             position = [int(canvasSize/2), int(canvasSize/2)]
 
