@@ -4,9 +4,11 @@ from models.converter.flowerConfig import FlowerConfig
 
 class Petal(FlowerPart):
     def __init__(self):
+        #LLama al constructor de la clase FlowerPart
         super().__init__(FlowerPartConfig.PETAL)
         self.quantity = 0
 
+    #Toma los datos necesarios para hacer el analisis del petalo
     def setFlowerPartImages(self, flowerImages):
         for flower in flowerImages:
             self.flowerPartPixels.append(flower.getPetalPixels())
@@ -23,6 +25,7 @@ class Petal(FlowerPart):
                 }
             self.flowerPartImageInfo.append([flower.getPetal(), info])
 
+    #Analiza el promedio de la cantidad de petalos
     def analyzeQuantityOfPetals(self):
         self.quantity = 0
         for flowerInfo in self.flowerPartImageInfo:

@@ -18,10 +18,14 @@ class ImageAnalyzer:
     def getUserImages(self):
         return self.__userImages
 
-    def setAnalyzer(self, userImages): #Reinicia los datos
+    #Recibe los datos del voraz y crea los objetos FlowerPart
+    def setAnalyzer(self, userImages):
+        #Establece los datos inciales
         self.finished = False
         self.__userImages = userImages
         self.__markup = ""
+
+        #Crea los objetos flowerPart
         petal = Petal()
         petal.setFlowerPartImages(userImages)
         center = Center()
@@ -32,12 +36,6 @@ class ImageAnalyzer:
             FlowerPartConfig.PETAL: petal,
             FlowerPartConfig.CENTER: center
         }
-
-    def setFlowerPartToAnalyze(self, FLOWERPART):
-        self.__flowerPartToAnalyze = self.__flowerParts[FLOWERPART]
-
-    def setChromosomeToAnalyze(self, CHROMOSOME):
-        self.__chromosomeToAnalyze = CHROMOSOME
 
     #Analiza los datos obtenido del voraz
     def analyze(self):
@@ -61,15 +59,23 @@ class ImageAnalyzer:
                 image_title[AnalyzeInfoConfig.IMAGE_PIXELS],
                 image_title[AnalyzeInfoConfig.IMAGE_TITLE]))
 
-        #Agrega las imagenes en conjunto de elementos Html
+        #Agrega las imagenes en un conjunto de elementos Html
         self.__markup += \
-            PlotModelDrawer.createMarkup(
-            base64_plots,
-            analysisInfo[AnalyzeInfoConfig.DESCRIPTION] + flowerPart,
-            classname)
+            PlotModelDrawer.createMarkup\
+            (
+                base64_plots,
+                analysisInfo[AnalyzeInfoConfig.DESCRIPTION] + flowerPart,
+                classname
+            )
 
     def getFlowerParts(self):
         return self.__flowerParts
 
     def getMarkup(self):
         return self.__markup
+
+    def setFlowerPartToAnalyze(self, FLOWERPART):
+        self.__flowerPartToAnalyze = self.__flowerParts[FLOWERPART]
+
+    def setChromosomeToAnalyze(self, CHROMOSOME):
+        self.__chromosomeToAnalyze = CHROMOSOME

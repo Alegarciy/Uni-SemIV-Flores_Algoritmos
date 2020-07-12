@@ -17,10 +17,12 @@ class FlowerPart(ABC):
         }
 
     @abstractmethod
-    def setFlowerPartImages(self, flowerImages): #Yo le paso las datos del voraz, y este obtiene los que ocupa
+    #Se define en cada clase los datos de la flor que le sean necesarios
+    def setFlowerPartImages(self, flowerImages):
         pass
 
     @abstractmethod
+    #Analiza de forma sistematica el cromosoma que se le indique como argumento
     def analyzeChromosome(self, chromosome):
         pass
 

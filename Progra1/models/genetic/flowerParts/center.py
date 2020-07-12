@@ -4,8 +4,10 @@ from models.converter.flowerConfig import FlowerConfig
 
 class Center(FlowerPart):
     def __init__(self):
+        #LLama al constructor de la clase FlowerPart
         super().__init__(FlowerPartConfig.CENTER)
 
+    #Toma los datos necesarios para hacer el analisis del centro
     def setFlowerPartImages(self, flowerImages):
         for flower in flowerImages:
             self.flowerPartPixels.append(flower.getCenterPixels())

@@ -9,6 +9,8 @@ class Controller:
         imageConverter = ImageConverter()
         imageAnalyzer = ImageAnalyzer()
         genetic = Genetic()
+        true = "True"
+        false = "False"
 
         #----CONVERTE-----
         @staticmethod
@@ -58,6 +60,7 @@ class Controller:
         #------ANALYZER-------
         #Image analyzer method
         @staticmethod
+        #Agrega los datos del voraz al annalizador que trabaja de forma sistematica
         def setImageAnayzer():
             if(Controller.imageConverter.finished):
                 Controller.imageAnalyzer.setAnalyzer(Controller.imageConverter.userImages)
@@ -65,7 +68,7 @@ class Controller:
                 return markup
 
             else:
-                return "False"
+                return Controller.false
 
 
         @staticmethod
@@ -75,14 +78,14 @@ class Controller:
 
         #------GENETIC-------
 
-        #Crear estructura con los analizado de las flores
+        #Crear estructura del genetico y 'setear' los datos necesarios de las flores
         @staticmethod
         def setGenetic():
             if Controller.imageAnalyzer.finished:
                 Controller.genetic.setGenetic(Controller.imageAnalyzer.getFlowerParts())
-                return "True"
+                return Controller.true
             else:
-                return "False"
+                return Controller.false
 
         #Iniciar o Reiniciar el genetico
         @staticmethod
@@ -92,7 +95,7 @@ class Controller:
             if flowerPartId == FlowerPartConfig.CENTER_ID:
                 return Controller.genetic.start(FlowerPartConfig.CENTER, ChromosomeConfig.COLOR)
             else:
-                return "False"
+                return Controller.false
 
         #Pausar o continuar el genetico
         @staticmethod
@@ -102,7 +105,7 @@ class Controller:
             elif flowerPartId == FlowerPartConfig.CENTER_ID:
                 return Controller.genetic.pause(FlowerPartConfig.CENTER)
 
-            return "False"
+            return Controller.false
 
         #Retorna representacion de la poblacion del genetico
         @staticmethod
@@ -112,7 +115,7 @@ class Controller:
             elif flowerPartId == FlowerPartConfig.CENTER_ID:
                 return Controller.genetic.drawProgress(FlowerPartConfig.CENTER)
 
-            return "False"
+            return Controller.false
 
         #Muestra los datos del proceso genetico
         @staticmethod
@@ -122,7 +125,7 @@ class Controller:
             elif flowerPartId == FlowerPartConfig.CENTER_ID:
                 return Controller.genetic.getGeneticInfo(FlowerPartConfig.CENTER)
 
-            return "False"
+            return Controller.false
 
         #Crea la flor nueva con base en la población del genetico
         @staticmethod
@@ -137,4 +140,4 @@ class Controller:
                 return Controller.genetic.modifyMutationRate(FlowerPartConfig.PETAL, mutationValue)
             elif flowerPartId == FlowerPartConfig.CENTER_ID:
                 return Controller.genetic.modifyMutationRate(FlowerPartConfig.CENTER, mutationValue)
-            return "False"
+            return Controller.false

@@ -22,7 +22,7 @@ class Outline:
 
         return (minI < i < maxI and minJ < j < maxJ)
 
-    #Crea la imagne del contorno
+    #Crea la imagen del contorno
     def outlineProcess(self, flowerImageInfo):
         info = flowerImageInfo[self.INFO]
         flowerPart = flowerImageInfo[self.IMAGE]
@@ -30,8 +30,10 @@ class Outline:
         size_j = flowerPart.shape[1]
         outlineImage = np.zeros([size_i, size_j, 3], dtype=np.uint8)
 
+        #Recorre los pixeles de la imagen de la flor
         for i in range(0, size_i - 1):
             for j in range(0, size_j - 1):
+                #Si el pixel esta dentro del area requerida y que no sea un pixel del fondo
                 if(self.isInflowerPart(i,j,info) and np.all(flowerPart[i,j] != FlowerConfig.BACKGROUND_COLOR)):
                     if ((i - 1 >= 0 and np.all(flowerPart[i - 1, j] == FlowerConfig.BACKGROUND_COLOR)) or
                         (i + 1 <= size_i and np.all(flowerPart[i + 1, j] == FlowerConfig.BACKGROUND_COLOR)) or

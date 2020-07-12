@@ -75,14 +75,14 @@ def isConvertFinished():
 def startConvertProcess():
     if Controller.isReadyToConvert():
         Controller.startProcess()
-        return "True"
-    return "False"
+        return Controller.true
+    return Controller.false
 
 @app.route("/convertProcess", methods=["GET"])
 def showConvertProcess():
     plot_url = Controller.getConvertProcess()
-    if(plot_url == "False") :
-        return "False"
+    if plot_url == Controller.false:
+        return Controller.false
 
     #HTML element
     model_plot = Markup('<img src="data:image/png;base64,{}" class="img-fluid" alt="Responsive image" width: 360px; height: 288px>'.format(plot_url))

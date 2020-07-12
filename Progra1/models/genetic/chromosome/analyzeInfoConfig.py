@@ -5,5 +5,3 @@ class AnalyzeInfoConfig:
 
     IMAGE_PIXELS = 0
     IMAGE_TITLE = 1
-
-    

@@ -72,7 +72,6 @@ class ImageConverter:
         self.userImages.remove(flower)
         self.finished = False
 
-
     #Recorre las imagenes del usuario (numpy arrays) y llama al voraz
     def convert(self):
         #image index indica la flor que se esta procesando con el voraz
@@ -92,7 +91,6 @@ class ImageConverter:
             self.finished = False
         self.isRunning = False
         plt.close('all')
-
 
     #Algoritmo voraz
     def convertImage(self, flowerImage, flowerNumber):
@@ -116,6 +114,8 @@ class ImageConverter:
 
                 self.step = (i*size_i + (j+1)) #Etapa
                 self.progress = (self.step / self.total)*100 #Porcentaje del proceso
+
+                #SI ES UN PIXEL DE CENTRO
                 #Se verfica que esté dentro del area requerida
                 if self.isInCenter(i, j, info):
                     #Se obtiene la diferencia de color
@@ -133,6 +133,7 @@ class ImageConverter:
                             index = indexDicCenter[math.floor(centerColorDif[0])]
                             centerPixels[index].incrementQuantity()
 
+                #SI ES UN PIXEL DEL PETALO
                 elif(self.isInPetal(i,j,info)): #Criterio
                     petalColorDif = self.getPetalColorDif(flowerPixels[i, j], info) # [dif, clrIndex]
 
@@ -182,18 +183,23 @@ class ImageConverter:
         colorSelected = []
         minDifference = 0
         index = 0
+
+        #Calcula la diferencia con cada color que venga en el .Json
         for color in listOfColors:
             dif = Color.colorDifference(pixel, color)
             selected = [dif, index]
+
+            #Siempre busca el color con el que tenga la menor diferencia
             if(minDifference == 0 or dif <= minDifference):
                 colorSelected = selected
                 minDifference = dif
             index += 1
+
         colorSelected[1] = math.floor(colorSelected[1])
         colorSelected[0] = math.floor(colorSelected[0])
         return colorSelected
 
-    #Diferencia de color para el petalo
+    #Diferencia de color para el centro
     def getCenterColorDif(self, pixel, info):
         listOfColors = info[FlowerConfig.COLOR_CENTER_PREF]
         colorSelected = []
@@ -213,6 +219,7 @@ class ImageConverter:
         if(self.imageIndex >= len(self.userImages)):
             return "False"
 
+        #Configura el subplot
         flowerImage = self.userImages[self.imageIndex]
         images = [flowerImage.getFlower(), flowerImage.getPetal(), flowerImage.getCenter()]
         titles = ["Flower", "Petal", "Center"]
@@ -223,6 +230,7 @@ class ImageConverter:
             ax.set_title(title)
             ax.axis('off')
 
+        #convierte la imagen a base 64
         img = i_o.BytesIO()
         plt.savefig(img, format="png")
         img.seek(0)

@@ -115,7 +115,6 @@ class Color(GeneticChromosome):
         for rangedValue in self.__representationTable:
             if(rangedValue[1].getRangeMin() <= value and rangedValue[1].getRangeMax() >= value):
                 return rangedValue[0]
-        #print('No se encontro rango')
         return self.__representationTable[0][0]
 
     #Calcultated the fitness of an individual
@@ -157,15 +156,12 @@ class Color(GeneticChromosome):
            element[1].print()
 
         #Get dominant colors or color
-        #print("BROWN KNEE")
         self.defineDominantColors(ChromosomeConfig.DOMINANT_COLORS, floweNumber)
 
         #Test individual
         individual = Individual()
-        #print('LET FITNESS BEGIN')
         self.fitness(individual)
-        #print('LET FITNESS END')
-        
+
 
         self.setAnalyzeInfo()
         return self.analyzeInfo
