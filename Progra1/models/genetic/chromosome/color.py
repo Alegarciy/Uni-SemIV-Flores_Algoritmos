@@ -121,14 +121,11 @@ class Color(GeneticChromosome):
     #Stores the resullt on individual
     def fitness(self, individual):
         range = individual.getIntValue()
-        #print('Gene: ',individual.getGene())
-        #print('Gene value: ',range)
         color = self.findRange(range)
-        #print('Gene color: ',color)
         fitnessValue = 0
+
         # Calculate fitness from dominant blend color
         fitnessValue = Color.colorDifference(color, self.__blendDominantColor)
-        #print('Fitness value: ', fitnessValue)
         individual.setFitness(fitnessValue)
         return fitnessValue, color
 

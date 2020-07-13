@@ -3,10 +3,10 @@
   "pixelPetaloMasAlejado":[224,257],
   "pixelCentroMasAlejado":[36,45],
 
-  "colorPetaloPreferido":[[66,3,107],[11,8,25],[255,250,255],[184,197,229],[140,176,190]],
-  "colorCentroPreferido":[[206,213,21],[13,14,8]],
-  "petalColorDifference": 43,
-  "centerColorDifference": 55,
+  "colorPetaloPreferido":[[48,9,118],[125,87,160],[255,253,255],[145,167,131]],
+  "colorCentroPreferido":[[206,213,21],[13,14,8],[97,95,21]],
+  "petalColorDifference": 60,
+  "centerColorDifference": 80,
 
   "petalOutlineIncrease" :  1,
   "centerOutlineIncrease" :  -1,
@@ -14,7 +14,7 @@
   "centerOutlineAxis": 0,
 
   "petalOutlineInitPos": [272, 19],
-  "petalOutlineEndPos": [239, 159],
+  "petalOutlineEndPos": [335, 160],
   "centerOutlineInitPos": [303, 227],
   "centerOutlineEndPos": [274, 258],
 

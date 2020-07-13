@@ -6,14 +6,15 @@ class Individual:
         self.fitness = 0 #updated with chromosome fitness
         self.genes = []
         self.geneLength = GAConfig.GENES_LENGTH
+
+        #Si el individuo se crea como offsrping
+        #Toma los genes del padre
         if not parent:
             self.createIndividual()
         else:
             self.genes = parent.genes.copy()
 
-
     def createIndividual(self):
-
         for i in range(0, self.geneLength):
             self.genes.append(random.randint(0, 1))
 

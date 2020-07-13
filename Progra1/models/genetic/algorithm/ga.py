@@ -31,7 +31,7 @@ class GA:
         while True:
             while(self.__isRunning):
                 time.sleep(0.01)
-                print(" ** GENERATION #" + str(self.__generation) +"  "+ str(self.__populationSize)+ " **")
+                print(" ** GENERATION #" + str(self.__generation) + "  " + str(self.__populationSize) + " **")
                 self.__fitnessAverage = self.calcFitness()
                 self.selectPopulation()
                 self.reproduce()
@@ -54,7 +54,7 @@ class GA:
         return sumOfFitness/self.__populationSize
 
     def selectPopulation(self):
-        self.__population.purgePopulation(self.__deadRate)
+        self.__population.selectPopulation(self.__deadRate)
 
     def reproduce(self):
         #Tamaño de la poblacion
@@ -95,13 +95,15 @@ class GA:
 
 
     def crossover(self, parent1, parent2):
-        #Puntos aleatorios de la lista de genes del indivio
-        #[  0  1  1  0  0  1  0  1  0  0  0  1  0  1  0  ]
-        #         P1 - - - P2
-        #[  0  0  1  1  0  0  1  0  1  0  1  1  0  0  0  ]
-        #               Offspring
-        #[  0  1  1  1  0  0  0  1  0  0  0  1  0  1  0  ]
 
+        '''
+        Puntos aleatorios de la lista de genes del indivio
+        [  0  1  1  0  0  1  0  1  0  0  0  1  0  1  0  ]
+                P1 - - - - - P2
+        [  0  0  1  1  0  0  1  0  1  0  1  1  0  0  0  ]
+                       Offspring
+        [  0  1  1  1  0  0  0  1  0  0  0  1  0  1  0  ]
+        '''
 
         P1 = random.randint(0, GAConfig.GENES_LENGTH)
         P2 = random.randint(0, GAConfig.GENES_LENGTH)

@@ -11,12 +11,17 @@ class Population:
         for i in range(0, popSize):
             self.individuals.append(Individual())
 
-    def purgePopulation(self, deadRate):
+    def selectPopulation(self, deadRate):
+        '''
+            mas aptos      deletePoint
+         [. . . . . . . . . . 70%. . . . . . .]
+         [. . . . . . . . . . . .]
+                                      30%
+         [. . . . . . . . . . . . [ offspring ]]
+        '''
+
         self.sortPopulation()
-        # Tamaño de Poblacion * 70/100
-        #    mas aptos      deletePoint
-        # [. . . . . . . . . . 70%. . . . . . .]
-        #[. . . . . . . . . . .. [ offspring ]]
+        #Tamaño de Poblacion * 0.70
         deletePoint = int(len(self.individuals) * ((100-deadRate)/100))
 
         print("--SELECT POPULATION--")
