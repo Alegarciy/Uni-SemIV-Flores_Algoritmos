@@ -69,6 +69,7 @@ class GA:
             parent1 = self.__population.getIndividual(
                 random.randint(0, quantityIndividuals-1)
             )
+
             parent2 = self.__population.getIndividual(
                 random.randint(0, quantityIndividuals-1)
             )
@@ -83,7 +84,6 @@ class GA:
         #Merge population with offsprings
         self.__population.addOffsprings(offspringList)
 
-
     def mutate(self, ind):
         if random.randint(1, 100) < self.__mutationRate:
             bit = random.randint(0, GAConfig.GENES_LENGTH-1)
@@ -92,7 +92,6 @@ class GA:
             elif ind.genes[bit] == 1:
                 ind.genes[bit] = 0
             self.__mutations += 1
-
 
     def crossover(self, parent1, parent2):
 

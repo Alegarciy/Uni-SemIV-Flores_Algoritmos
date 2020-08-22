@@ -7,6 +7,7 @@ from models.genetic.chromosome.chromosomeConfig import ChromosomeConfig
 from models.genetic.process.drawFlowerConfig import DrawFlowerConfig
 
 class DrawFlower:
+
     def __init__(self):
         self.I = 0
         self.J = 1

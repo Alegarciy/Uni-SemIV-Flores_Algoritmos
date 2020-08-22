@@ -19,12 +19,11 @@ class Genetic:
     def start(self, flowerPart, chromosome):
         if flowerPart in self.flowerParts: #self.GAs
             
-            #if not exists create key
+            #If not exists create key
             if flowerPart in self.GAs:
                 if self.GAs[flowerPart].isRunning():
                     self.GAs[flowerPart].pause()
                     self.GAs.pop(flowerPart)
-
 
             self.GAs[flowerPart] = GA(
                 self.flowerParts[flowerPart].getChromosome(chromosome),

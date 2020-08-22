@@ -129,6 +129,7 @@ class ImageConverter:
                         if math.floor(centerColorDif[0]) not in indexDicCenter:
                             centerPixels.append(PixelFlower(flowerPixels[i, j], math.floor(centerColorDif[0]), (i, j), flowerNumber))
                             indexDicCenter[math.floor(centerColorDif[0])] = len(centerPixels) - 1 #last item inserted
+
                         else:# if key is inserted
                             index = indexDicCenter[math.floor(centerColorDif[0])]
                             centerPixels[index].incrementQuantity()
